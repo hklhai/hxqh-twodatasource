@@ -38,5 +38,11 @@ public class ApplicationTests {
         SecondUser hk = userSecondRepository.findUserById("hk");
         Assert.assertEquals("hk", hk.getName());
 
+
+
     }
 }
+
+
+
+

@@ -15,3 +15,4 @@ public interface UserSecondRepository extends JpaRepository<SecondUser, Long> {
     @Query("select u from SecondUser u where u.name=:name")
     SecondUser findUserById(@Param("name") String name);
 }
+
