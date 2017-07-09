@@ -1,6 +1,7 @@
 package com.hxqh.twodatasource.repository.primary;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.*;
 
 
@@ -9,11 +10,15 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="tb_Iocticketscreen100")
+@Table(name="TB_IOCTICKETSCREEN100")
 public class Iocticketscreen100 implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "TB_IOCTICKETSCREEN100_IOCTICKETSCREEN100ID_GENERATOR", sequenceName = "SEQ_TB_IOCTICKETSCREEN100")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOCTICKETSCREEN100_IOCTICKETSCREEN100ID_GENERATOR")
+	private BigDecimal iocticketscreen100id;
+
 	@Column(name="BULAN_INI_GOLD")
 	private String bulanIniGold;
 
@@ -67,6 +72,14 @@ public class Iocticketscreen100 implements Serializable {
 	private String ts;
 
 	public Iocticketscreen100() {
+	}
+
+	public BigDecimal getIocticketscreen100id() {
+		return iocticketscreen100id;
+	}
+
+	public void setIocticketscreen100id(BigDecimal iocticketscreen100id) {
+		this.iocticketscreen100id = iocticketscreen100id;
 	}
 
 	public String getBulanIniGold() {

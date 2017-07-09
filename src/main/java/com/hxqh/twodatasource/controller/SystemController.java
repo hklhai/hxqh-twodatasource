@@ -29,18 +29,18 @@ public class SystemController {
         return "user/index";
     }
 
-    /**
-     * 数据接口
-     * http://127.0.0.1:8080/system/userData?name=xdm
-     *
-     * @param name 用户名
-     * @return
-     */
-    @RequestMapping("userData")
-    @ResponseBody
-    public PrimaryUser userData(@RequestParam(value = "name") String name) {
-        return systemService.findUserById(name);
-    }
+//    /**
+//     * 数据接口
+//     * http://127.0.0.1:8080/system/userData?name=xdm
+//     *
+//     * @param name 用户名
+//     * @return
+//     */
+//    @RequestMapping("userData")
+//    @ResponseBody
+//    public PrimaryUser userData(@RequestParam(value = "name") String name) {
+//        return systemService.findUserById(name);
+//    }
 
 
 }

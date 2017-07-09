@@ -1,6 +1,7 @@
 package com.hxqh.twodatasource.repository.primary;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.*;
 
 
@@ -9,9 +10,14 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="tb_IOCENTERPRISEEVENT_SOURCE")
+@Table(name="TB_IOCENTERPRISEEVENT_SOURCE")
 public class IocenterpriseeventSource implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@SequenceGenerator(name = "TB_IOCENTERPRISEEVENT_SOURCE_IOCENTERPRISEEVENTSOURCEID_GENERATOR", sequenceName = "SEQ_TB_IOCENTERPRISEEVENT")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOCENTERPRISEEVENT_SOURCE_IOCENTERPRISEEVENTSOURCEID_GENERATOR")
+	private BigDecimal iocenterpriseeventsourceid;
 
 	private String detekakhir;
 
@@ -24,12 +30,20 @@ public class IocenterpriseeventSource implements Serializable {
 
 	private String msgalrm;
 
-	@Id
+
 	private String node;
 
 	private String ts;
 
 	public IocenterpriseeventSource() {
+	}
+
+	public BigDecimal getIocenterpriseeventsourceid() {
+		return iocenterpriseeventsourceid;
+	}
+
+	public void setIocenterpriseeventsourceid(BigDecimal iocenterpriseeventsourceid) {
+		this.iocenterpriseeventsourceid = iocenterpriseeventsourceid;
 	}
 
 	public String getDetekakhir() {

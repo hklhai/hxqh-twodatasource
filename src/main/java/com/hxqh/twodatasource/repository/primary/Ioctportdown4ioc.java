@@ -2,6 +2,7 @@ package com.hxqh.twodatasource.repository.primary;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -10,11 +11,15 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="tb_Ioctportdown4ioc")
+@Table(name="TB_IOCTPORTDOWN4IOC")
 public class Ioctportdown4ioc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "TB_IOCTPORTDOWN4IOC_IOCTPORTDOWN4IOCID_GENERATOR", sequenceName = "SEQ_TB_IOCTPORTDOWN4IOC")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOCTPORTDOWN4IOC_IOCTPORTDOWN4IOCID_GENERATOR")
+	private BigDecimal Ioctportdown4iocid;
+
 	private String agg;
 
 	private String descp;
@@ -39,6 +44,14 @@ public class Ioctportdown4ioc implements Serializable {
 	private String ts;
 
 	public Ioctportdown4ioc() {
+	}
+
+	public BigDecimal getIoctportdown4iocid() {
+		return Ioctportdown4iocid;
+	}
+
+	public void setIoctportdown4iocid(BigDecimal ioctportdown4iocid) {
+		Ioctportdown4iocid = ioctportdown4iocid;
 	}
 
 	public String getAgg() {

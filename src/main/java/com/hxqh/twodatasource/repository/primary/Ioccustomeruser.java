@@ -1,6 +1,7 @@
 package com.hxqh.twodatasource.repository.primary;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.*;
 
 
@@ -9,11 +10,15 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name = "tb_Ioccustomeruser")
+@Table(name = "TB_IOCCUSTOMERUSER")
 public class Ioccustomeruser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "TB_IOCCUSTOMERUSER_IOCCUSTOMERUSERID_GENERATOR", sequenceName = "SEQ_TB_IOCCUSTOMERUSER")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOCCUSTOMERUSER_IOCCUSTOMERUSERID_GENERATOR")
+	private BigDecimal ioccustomeruserid;
+
 	private String custid;
 
 	private String custname;
@@ -27,6 +32,14 @@ public class Ioccustomeruser implements Serializable {
 	private String ts;
 
 	public Ioccustomeruser() {
+	}
+
+	public BigDecimal getIoccustomeruserid() {
+		return ioccustomeruserid;
+	}
+
+	public void setIoccustomeruserid(BigDecimal ioccustomeruserid) {
+		this.ioccustomeruserid = ioccustomeruserid;
 	}
 
 	public String getCustid() {

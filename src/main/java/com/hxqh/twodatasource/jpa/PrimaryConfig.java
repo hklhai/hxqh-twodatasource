@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -48,13 +49,20 @@ public class PrimaryConfig {
                 .dataSource(primaryDataSource)
                 .properties(getVendorProperties(primaryDataSource))
                 .packages("com.hxqh.twodatasource.repository.primary") //设置实体类所在位置
-                .persistenceUnit("primaryPersistenceUnit")
+                .persistenceUnit("oraclePU")
                 .build();
     }
 
 
 
     private Map<String, String> getVendorProperties(DataSource dataSource) {
+        Map<String, String> properties = new HashMap<>();
+//        properties.put("hibernate.hbm2ddl.auto","update");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
+
+        jpaProperties.setProperties(properties);
         return jpaProperties.getHibernateProperties(dataSource);
     }
 

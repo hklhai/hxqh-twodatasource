@@ -2,15 +2,24 @@ package com.hxqh.twodatasource.common;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Ocean lin on 2017/7/9.
  */
-public class DateUtils {
+public class StaticUtils {
 
     // 时间格式化
     private static DateFormat dateTimeFormat = null;
 
+    static Map<String, String> map = new HashMap();
+
+    static {
+        map.put("METRO", "1");
+        map.put("PE", "2");
+        map.put("TERA", "3");
+    }
     /**
      * 日期格式化yyyy-MM-dd HH:mm:ss
      *
@@ -20,4 +29,11 @@ public class DateUtils {
     public static String getDateTimeFormat(Date date) {
         return dateTimeFormat.format(date);
     }
+
+
+    public static Map<String, String> getMap()
+    {
+        return map;
+    }
+
 }

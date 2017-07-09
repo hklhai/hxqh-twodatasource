@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by Ocean lin on 2017/7/7.
@@ -40,18 +42,26 @@ public class SecondaryConfig {
         return entityManagerFactorySecondary(builder).getObject().createEntityManager();
     }
 
+
     @Bean(name = "entityManagerFactorySecondary")
     public LocalContainerEntityManagerFactoryBean entityManagerFactorySecondary (EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(secondaryDataSource)
                 .properties(getVendorProperties(secondaryDataSource))
                 .packages("com.hxqh.twodatasource.repository.second") //设置实体类所在位置
-                .persistenceUnit("secondaryPersistenceUnit")
+                .persistenceUnit("mysqlPU")
                 .build();
     }
 
 
     private Map<String, String> getVendorProperties(DataSource dataSource) {
+        Map<String, String> properties = new HashMap<>();
+//        properties.put("hibernate.hbm2ddl.auto","update");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
+
+        jpaProperties.setProperties(properties);
         return jpaProperties.getHibernateProperties(dataSource);
     }
 
