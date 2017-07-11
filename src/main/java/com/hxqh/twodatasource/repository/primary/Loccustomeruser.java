@@ -3,6 +3,7 @@ package com.hxqh.twodatasource.repository.primary;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 /**
@@ -24,12 +25,24 @@ public class Loccustomeruser implements Serializable {
     @Column(name = "GRP_CUST")
     private String grpCust;
 
-
+    @Id
+    @SequenceGenerator(name = "TB_IOCCUSTOMERUSER_IOCCUSTOMERUSERID_GENERATOR", sequenceName = "SEQ_TB_IOCCUSTOMERUSER")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOCCUSTOMERUSER_IOCCUSTOMERUSERID_GENERATOR")
     private BigDecimal ioccustomeruserid;
 
     private String lvl;
 
+    private Date adddate;
+
     public Loccustomeruser() {
+    }
+
+    public Date getAdddate() {
+        return adddate;
+    }
+
+    public void setAdddate(Date adddate) {
+        this.adddate = adddate;
     }
 
     public String getCustAbbrev() {

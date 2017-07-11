@@ -5,12 +5,13 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the T_PERF_ENTERPRISE_4TIOC1_VW_5MINS database table.
+ * The persistent class for the v_perf_enterprise_4tioc1 database table.
  * 
  */
 @Entity
-@Table(name="T_PERF_ENTERPRISE_4TIOC1_VW_5MINS")
-public class TPerfEnterprise4tioc1Vw5min implements Serializable {
+@Table(name="v_perf_enterprise_4tioc1")
+@NamedQuery(name="VPerfEnterprise4tioc1.findAll", query="SELECT v FROM VPerfEnterprise4tioc1 v")
+public class VPerfEnterprise4tioc1 implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="cust_name")
@@ -46,7 +47,7 @@ public class TPerfEnterprise4tioc1Vw5min implements Serializable {
 
 	private String treg;
 
-	public TPerfEnterprise4tioc1Vw5min() {
+	public VPerfEnterprise4tioc1() {
 	}
 
 	public String getCustName() {

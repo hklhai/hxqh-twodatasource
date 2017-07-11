@@ -10,7 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by Ocean lin on 2017/7/9.
  */
-@Component
+//@Component
 public class HxqhTimer {
 
     @Autowired

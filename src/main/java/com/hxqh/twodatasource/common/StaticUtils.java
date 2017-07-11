@@ -39,7 +39,6 @@ public class StaticUtils {
         return dateTimeFormat.format(date);
     }
 
-
     public static Map<String, String> getMap()
     {
         return map;

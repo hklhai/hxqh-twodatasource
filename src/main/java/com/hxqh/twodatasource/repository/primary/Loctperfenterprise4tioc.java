@@ -3,6 +3,7 @@ package com.hxqh.twodatasource.repository.primary;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 /**
@@ -39,6 +40,11 @@ public class Loctperfenterprise4tioc implements Serializable {
 	@Column(name="GRP_CUST")
 	private String grpCust;
 
+	private Date adddate;
+
+	@Id
+	@SequenceGenerator(name = "TB_IOCTPERFENTERPRISE4TIOC_IOCTPERFENTERPRISEID_GENERATOR", sequenceName = "SEQ_TB_IOCTPERFENTERPRISE4TIOC")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOCTPERFENTERPRISE4TIOC_IOCTPERFENTERPRISEID_GENERATOR")
 	private BigDecimal ioctperfenterpriseid;
 
 	private String n1sap;
@@ -53,6 +59,46 @@ public class Loctperfenterprise4tioc implements Serializable {
 	private String treg;
 
 	public Loctperfenterprise4tioc() {
+	}
+
+	public BigDecimal geteRsiBitspersecondin() {
+		return eRsiBitspersecondin;
+	}
+
+	public void seteRsiBitspersecondin(BigDecimal eRsiBitspersecondin) {
+		this.eRsiBitspersecondin = eRsiBitspersecondin;
+	}
+
+	public BigDecimal geteRsiBitspersecondout() {
+		return eRsiBitspersecondout;
+	}
+
+	public void seteRsiBitspersecondout(BigDecimal eRsiBitspersecondout) {
+		this.eRsiBitspersecondout = eRsiBitspersecondout;
+	}
+
+	public String geteRsiTimedata() {
+		return eRsiTimedata;
+	}
+
+	public void seteRsiTimedata(String eRsiTimedata) {
+		this.eRsiTimedata = eRsiTimedata;
+	}
+
+	public BigDecimal geteRsiUtilization() {
+		return eRsiUtilization;
+	}
+
+	public void seteRsiUtilization(BigDecimal eRsiUtilization) {
+		this.eRsiUtilization = eRsiUtilization;
+	}
+
+	public Date getAdddate() {
+		return adddate;
+	}
+
+	public void setAdddate(Date adddate) {
+		this.adddate = adddate;
 	}
 
 	public String getCustName() {

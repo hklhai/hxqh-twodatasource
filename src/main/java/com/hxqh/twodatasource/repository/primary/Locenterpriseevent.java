@@ -3,6 +3,7 @@ package com.hxqh.twodatasource.repository.primary;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 /**
@@ -18,6 +19,11 @@ public class Locenterpriseevent implements Serializable {
 
 	private String dtnya;
 
+	private Date adddate;
+
+	@Id
+	@SequenceGenerator(name = "TB_IOCENTERPRISEEVENT_IOCENTERPRISEEVENTID_GENERATOR", sequenceName = "SEQ_TB_IOCENTERPRISEEVENT")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOCENTERPRISEEVENT_IOCENTERPRISEEVENTID_GENERATOR")
 	private BigDecimal iocenterpriseeventid;
 
 	@Column(name="JML_5MNT")
@@ -28,6 +34,14 @@ public class Locenterpriseevent implements Serializable {
 	private String node;
 
 	public Locenterpriseevent() {
+	}
+
+	public Date getAdddate() {
+		return adddate;
+	}
+
+	public void setAdddate(Date adddate) {
+		this.adddate = adddate;
 	}
 
 	public String getDetekakhir() {

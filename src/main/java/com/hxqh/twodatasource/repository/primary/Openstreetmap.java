@@ -3,6 +3,7 @@ package com.hxqh.twodatasource.repository.primary;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 /**
@@ -36,7 +37,17 @@ public class Openstreetmap implements Serializable {
 
 	private String treg;
 
+	private Date adddate;
+
 	public Openstreetmap() {
+	}
+
+	public Date getAdddate() {
+		return adddate;
+	}
+
+	public void setAdddate(Date adddate) {
+		this.adddate = adddate;
 	}
 
 	public String getFunct() {

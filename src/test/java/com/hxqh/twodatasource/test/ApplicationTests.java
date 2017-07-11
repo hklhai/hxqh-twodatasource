@@ -1,21 +1,13 @@
 package com.hxqh.twodatasource.test;
 
-import com.hxqh.twodatasource.common.StaticUtils;
-import com.hxqh.twodatasource.repository.primary.Openstreetmap;
-import com.hxqh.twodatasource.repository.second.TStoKoordinat;
-import com.hxqh.twodatasource.repository.second.TStoKoordinatRepository;
+import com.hxqh.twodatasource.repository.second.*;
 import com.hxqh.twodatasource.service.SystemService;
-import org.apache.commons.beanutils.BeanUtils;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,39 +18,66 @@ import java.util.List;
 public class ApplicationTests {
 
     @Autowired
-    private TStoKoordinatRepository tStoKoordinatRepository;
-    @Autowired
     private SystemService systemService;
+    @Autowired
+    private TAlertEnvRepository alertEnvRepository;
+    @Autowired
+    private TLvlEnterpriseCustRepository tLvlEnterpriseCustRepository;
+    @Autowired
+    private TtwifiMonitorRepository ttwifiMonitorRepository;
+    @Autowired
+    private TPortdown4iocRepository tPortdown4iocRepository;
+    @Autowired
+    private TtwifiMttrProactiveRepository ttwifiMttrProactiveRepository;
+    @Autowired
+    private TStoKoordinatRepository tStoKoordinatRepository;
 
-    @Before
-    public void setUp() {
-
-    }
-
-    @Test
-    public void testInsert() throws Exception {
-//        Openstreetmap openstreetmap = new Openstreetmap();
-//        openstreetmap.setName("XXX");
-//        systemService.saveOpenstreetmap(openstreetmap);
-
-//        List<TStoKoordinat> stoKoordinatList = tStoKoordinatRepository.getData();
-//        Assert.assertTrue(stoKoordinatList.size()>10);
-    }
 
 
     @Test
-    public void test() throws Exception {
-
-//        PrimaryUser primaryUser = new PrimaryUser("dd","12345");
-//        userPrimaryRepository.save(primaryUser);
-//        Assert.assertTrue(userPrimaryRepository.findAll().size()>1);
-//
-//        SecondUser hk = userSecondRepository.findUserById("hk");
-//        Assert.assertEquals("hk", hk.getName());
-
-
-
+    public void testTAlertEnv() throws Exception {
+        List<TAlertEnv> tAlertEnvs = alertEnvRepository.findAll();
+        systemService.saveAlertEnvs(tAlertEnvs);
     }
+
+    @Test
+    public void testSaveTLvlEnterpriseCust() throws Exception {
+        List<TLvlEnterpriseCust> tLvlEnterpriseCusts = tLvlEnterpriseCustRepository.findAll();
+        if (tLvlEnterpriseCusts != null) {
+            systemService.saveEnterpriseCusts(tLvlEnterpriseCusts);
+        }
+    }
+
+    @Test
+    public void testProactive() throws Exception {
+        List<TtwifiMonitorMttrProactive> monitorMttrProactiveList = ttwifiMonitorRepository.findAll();
+        systemService.saveTtwifiMonitor(monitorMttrProactiveList);
+    }
+
+    @Test
+    public void testTPortdown4ioc() throws Exception {
+        List<TPortdown4ioc> tPortdown4iocRepositoryAll = tPortdown4iocRepository.findAll();
+        systemService.saveTPortdown(tPortdown4iocRepositoryAll);
+    }
+
+    @Test
+    public void testTtwifiMttr() throws Exception {
+        List<TtwifiMttrProactiveLastMonth> mttrProactiveLastMonthList = ttwifiMttrProactiveRepository.findAll();
+        systemService.saveTtwifiMttr(mttrProactiveLastMonthList);
+    }
+
+    @Test
+    public void testTStoKoordinat() throws Exception {
+        List<TStoKoordinat> tStoKoordinatList = tStoKoordinatRepository.findAll();
+        systemService.saveTStoKoordinat(tStoKoordinatList);
+    }
+
+    @Test
+    public void testTPerfEnterprise4tiocRepository() throws Exception {
+        systemService.saveTPerfEnterprise4tiocRepository();
+    }
+
+
 }
 
 

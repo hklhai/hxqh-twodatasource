@@ -3,6 +3,7 @@ package com.hxqh.twodatasource.repository.primary;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 /**
@@ -64,9 +65,22 @@ public class Locticketscreen100 implements Serializable {
 	@Column(name="H_2_TOTAL")
 	private BigDecimal h2Total;
 
+	@Id
+	@SequenceGenerator(name = "TB_IOCTICKETSCREEN100_IOCTICKETSCREEN100ID_GENERATOR", sequenceName = "SEQ_TB_IOCTICKETSCREEN100")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOCTICKETSCREEN100_IOCTICKETSCREEN100ID_GENERATOR")
 	private BigDecimal iocticketscreen100id;
 
+	private Date adddate;
+
 	public Locticketscreen100() {
+	}
+
+	public Date getAdddate() {
+		return adddate;
+	}
+
+	public void setAdddate(Date adddate) {
+		this.adddate = adddate;
 	}
 
 	public BigDecimal getBulanIniGold() {

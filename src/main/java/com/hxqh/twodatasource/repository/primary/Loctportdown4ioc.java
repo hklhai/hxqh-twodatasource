@@ -18,6 +18,9 @@ public class Loctportdown4ioc implements Serializable {
 
     private String descp;
 
+    @Id
+    @SequenceGenerator(name = "TB_IOCTPORTDOWN4IOC_IOCTPORTDOWN4IOCID_GENERATOR", sequenceName = "SEQ_TB_IOCTPORTDOWN4IOC")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOCTPORTDOWN4IOC_IOCTPORTDOWN4IOCID_GENERATOR")
     private BigDecimal ioctportdown4iocid;
 
     private String nbr;
@@ -36,7 +39,17 @@ public class Loctportdown4ioc implements Serializable {
 
     private String timemesin;
 
+    private Date adddate;
+
     public Loctportdown4ioc() {
+    }
+
+    public Date getAdddate() {
+        return adddate;
+    }
+
+    public void setAdddate(Date adddate) {
+        this.adddate = adddate;
     }
 
     public String getAgg() {
