@@ -41,8 +41,8 @@ public class ApplicationTests {
 //        openstreetmap.setName("XXX");
 //        systemService.saveOpenstreetmap(openstreetmap);
 
-        List<TStoKoordinat> stoKoordinatList = tStoKoordinatRepository.getData();
-        Assert.assertTrue(stoKoordinatList.size()>10);
+//        List<TStoKoordinat> stoKoordinatList = tStoKoordinatRepository.getData();
+//        Assert.assertTrue(stoKoordinatList.size()>10);
     }
 
 
@@ -55,25 +55,7 @@ public class ApplicationTests {
 //
 //        SecondUser hk = userSecondRepository.findUserById("hk");
 //        Assert.assertEquals("hk", hk.getName());
-        List<TStoKoordinat> stoKoordinatList = tStoKoordinatRepository.getData();
-        List<Openstreetmap> openstreetmapList = new ArrayList<>();
-        for (TStoKoordinat koordinat : stoKoordinatList) {
-            Openstreetmap openstreetmap = new Openstreetmap();
-            BeanUtils.copyProperties(openstreetmap, koordinat);
-            //设置特定值
-            openstreetmap.setName(koordinat.getNodeId());
-            openstreetmap.setDescription(koordinat.getManufacture());
-            openstreetmap.setMapy(String.valueOf(koordinat.getLat()));
-            openstreetmap.setMapx(String.valueOf(koordinat.getLong_()));
-            openstreetmap.setOpentype(StaticUtils.getMap().get(koordinat.getFunct()));
 
-            openstreetmap.setShow(1);
-            openstreetmap.setTs(StaticUtils.getDateTimeFormat(new Date()));
-            //加入List
-            openstreetmapList.add(openstreetmap);
-        }
-        Assert.assertTrue(openstreetmapList.size() > 10);
-        //openstreetmapRepository.save(openstreetmapList);
 
 
     }

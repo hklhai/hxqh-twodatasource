@@ -9,7 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="T_STO_KOORDINAT")
+@Table(name="t_sto_koordinat")
 public class TStoKoordinat implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,6 @@ public class TStoKoordinat implements Serializable {
 
 	private String manufacture;
 
-	@Id
 	@Column(name="node_id")
 	private String nodeId;
 

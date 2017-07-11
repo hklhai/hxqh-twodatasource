@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 
-//@EnableScheduling
+@EnableScheduling
 @SpringBootApplication
 @ComponentScan(basePackages = "com.hxqh.twodatasource")
 public class HxqhTwodatasourceApplication extends SpringBootServletInitializer {
@@ -25,3 +25,6 @@ public class HxqhTwodatasourceApplication extends SpringBootServletInitializer {
 		return application.sources(HxqhTwodatasourceApplication.class);
 	}
 }
+
+
+

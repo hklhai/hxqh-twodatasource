@@ -11,4 +11,5 @@ public interface TStoKoordinatRepository extends CrudRepository<TStoKoordinat,St
 
 	@Query("select o from TStoKoordinat o where o.funct is not null and o.funct <> ''")
 	List<TStoKoordinat> getData();
+
 }

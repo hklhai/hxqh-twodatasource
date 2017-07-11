@@ -6,126 +6,109 @@ import java.math.BigDecimal;
 
 
 /**
- * The persistent class for the OPENSTREETMAP database table.
+ * The persistent class for the TB_OPENSTREETMAP database table.
+ * 
  */
 @Entity
-@Table(name = "TB_OPENSTREETMAP")
+@Table(name="TB_OPENSTREETMAP")
 public class Openstreetmap implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @SequenceGenerator(name = "TB_OPENSTREETMAP_OPENSTREETMAPID_GENERATOR", sequenceName = "SEQ_TB_OPENSTREETMAP")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_OPENSTREETMAP_OPENSTREETMAPID_GENERATOR")
-    private BigDecimal openstreetmapid;
+	private String funct;
 
-    private String description;
+	private String ipadd;
 
-    private String ipadd;
+	private BigDecimal latitude;
 
-    private String mapx;
+	private BigDecimal longitude;
 
-    private String mapy;
+	private String manufacture;
 
-    private String name;
+	@Column(name="NODE_ID")
+	private String nodeId;
 
-    private Integer show;
+	@Id
+	@SequenceGenerator(name = "TB_OPENSTREETMAP_OPENSTREETMAPID_GENERATOR", sequenceName = "SEQ_TB_OPENSTREETMAP")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_OPENSTREETMAP_OPENSTREETMAPID_GENERATOR")
+	private BigDecimal openstreetmapid;
 
-    private String sto;
+	private String sto;
 
-    private Integer treg;
+	private String treg;
 
-    private String ts;
+	public Openstreetmap() {
+	}
 
-    private String opentype;
+	public String getFunct() {
+		return this.funct;
+	}
 
-    public Openstreetmap() {
-    }
+	public void setFunct(String funct) {
+		this.funct = funct;
+	}
 
-    public BigDecimal getOpenstreetmapid() {
-        return openstreetmapid;
-    }
+	public String getIpadd() {
+		return this.ipadd;
+	}
 
-    public void setOpenstreetmapid(BigDecimal openstreetmapid) {
-        this.openstreetmapid = openstreetmapid;
-    }
+	public void setIpadd(String ipadd) {
+		this.ipadd = ipadd;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public BigDecimal getLatitude() {
+		return this.latitude;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
+	}
 
-    public String getIpadd() {
-        return ipadd;
-    }
+	public BigDecimal getLongitude() {
+		return this.longitude;
+	}
 
-    public void setIpadd(String ipadd) {
-        this.ipadd = ipadd;
-    }
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
+	}
 
-    public String getMapx() {
-        return mapx;
-    }
+	public String getManufacture() {
+		return this.manufacture;
+	}
 
-    public void setMapx(String mapx) {
-        this.mapx = mapx;
-    }
+	public void setManufacture(String manufacture) {
+		this.manufacture = manufacture;
+	}
 
-    public String getMapy() {
-        return mapy;
-    }
+	public String getNodeId() {
+		return this.nodeId;
+	}
 
-    public void setMapy(String mapy) {
-        this.mapy = mapy;
-    }
+	public void setNodeId(String nodeId) {
+		this.nodeId = nodeId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public BigDecimal getOpenstreetmapid() {
+		return this.openstreetmapid;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setOpenstreetmapid(BigDecimal openstreetmapid) {
+		this.openstreetmapid = openstreetmapid;
+	}
 
-    public Integer getShow() {
-        return show;
-    }
+	public String getSto() {
+		return this.sto;
+	}
 
-    public void setShow(Integer show) {
-        this.show = show;
-    }
+	public void setSto(String sto) {
+		this.sto = sto;
+	}
 
-    public String getSto() {
-        return sto;
-    }
+	public String getTreg() {
+		return this.treg;
+	}
 
-    public void setSto(String sto) {
-        this.sto = sto;
-    }
+	public void setTreg(String treg) {
+		this.treg = treg;
+	}
 
-    public Integer getTreg() {
-        return treg;
-    }
-
-    public void setTreg(Integer treg) {
-        this.treg = treg;
-    }
-
-    public String getTs() {
-        return ts;
-    }
-
-    public void setTs(String ts) {
-        this.ts = ts;
-    }
-
-    public String getOpentype() {
-        return opentype;
-    }
-
-    public void setOpentype(String opentype) {
-        this.opentype = opentype;
-    }
 }

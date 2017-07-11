@@ -1,57 +1,41 @@
-package com.hxqh.twodatasource.repository.primary;
+package com.hxqh.twodatasource.repository.second;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
 
 /**
- * The persistent class for the IOCTPORTDOWN4IOC database table.
+ * The persistent class for the T_PORTDOWN_4IOC database table.
  * 
  */
 @Entity
-@Table(name="TB_IOCTPORTDOWN4IOC")
-public class Ioctportdown4ioc implements Serializable {
+@Table(name="T_PORTDOWN_4IOC")
+public class TPortdown4ioc implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@SequenceGenerator(name = "TB_IOCTPORTDOWN4IOC_IOCTPORTDOWN4IOCID_GENERATOR", sequenceName = "SEQ_TB_IOCTPORTDOWN4IOC")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOCTPORTDOWN4IOC_IOCTPORTDOWN4IOCID_GENERATOR")
-	private BigDecimal Ioctportdown4iocid;
 
 	private String agg;
 
 	private String descp;
 
-	@Column(name="\"INTERFACE\"")
+	@Column(name="interface")
 	private String interface_;
 
 	private String nbr;
 
-	@Column(name="NODE_IP")
+	@Column(name="node_ip")
 	private String nodeIp;
 
 	private String operstatus;
 
 	private String ruas;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date timedata;
 
 	private String timemesin;
 
-	private String ts;
-
-	public Ioctportdown4ioc() {
-	}
-
-	public BigDecimal getIoctportdown4iocid() {
-		return Ioctportdown4iocid;
-	}
-
-	public void setIoctportdown4iocid(BigDecimal ioctportdown4iocid) {
-		Ioctportdown4iocid = ioctportdown4iocid;
+	public TPortdown4ioc() {
 	}
 
 	public String getAgg() {
@@ -124,14 +108,6 @@ public class Ioctportdown4ioc implements Serializable {
 
 	public void setTimemesin(String timemesin) {
 		this.timemesin = timemesin;
-	}
-
-	public String getTs() {
-		return this.ts;
-	}
-
-	public void setTs(String ts) {
-		this.ts = ts;
 	}
 
 }
