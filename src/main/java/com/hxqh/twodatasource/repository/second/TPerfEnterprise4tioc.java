@@ -16,7 +16,19 @@ public class TPerfEnterprise4tioc implements Serializable {
 	@Id
 	private TPerfEnterprise4tiocKey tPerfEnterprise4tiocKey;
 
+	@Column(name="e_rsi_timedata")
+	private String eRsiTimedata;
+
+
 	public TPerfEnterprise4tioc() {
+	}
+
+	public String geteRsiTimedata() {
+		return eRsiTimedata;
+	}
+
+	public void seteRsiTimedata(String eRsiTimedata) {
+		this.eRsiTimedata = eRsiTimedata;
 	}
 
 	public TPerfEnterprise4tiocKey gettPerfEnterprise4tiocKey() {

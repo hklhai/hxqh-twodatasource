@@ -10,28 +10,46 @@ import java.io.Serializable;
 @Embeddable
 public class TtwifiMttrProactiveKey implements Serializable {
 
-    @Column(name="pencapaian_silver")
+    @Column(name = "pencapaian_silver")
     private int pencapaianSilver;
 
-    @Column(name="realisasi_gold")
+    @Column(name = "realisasi_gold")
     private int realisasiGold;
 
-    @Column(name="realisasi_platinum")
+    @Column(name = "realisasi_platinum")
     private int realisasiPlatinum;
 
-    @Column(name="realisasi_silver")
+    @Column(name = "realisasi_silver")
     private int realisasiSilver;
 
-    @Column(name="target_gold")
+    @Column(name = "target_gold")
     private int targetGold;
 
-    @Column(name="target_platinum")
+    @Column(name = "target_platinum")
     private int targetPlatinum;
 
-    @Column(name="target_silver")
+    @Column(name = "target_silver")
     private int targetSilver;
 
     private String ym;
+
+    private String divre;
+
+    @Column(name = "jumlah_tiket_gold")
+    private int jumlahTiketGold;
+
+    @Column(name = "jumlah_tiket_platinum")
+    private int jumlahTiketPlatinum;
+
+    @Column(name = "jumlah_tiket_silver")
+    private int jumlahTiketSilver;
+
+    @Column(name = "pencapaian_gold")
+    private int pencapaianGold;
+
+    @Column(name = "pencapaian_platinum")
+    private int pencapaianPlatinum;
+
 
     public TtwifiMttrProactiveKey() {
     }
@@ -98,6 +116,54 @@ public class TtwifiMttrProactiveKey implements Serializable {
 
     public void setYm(String ym) {
         this.ym = ym;
+    }
+
+    public String getDivre() {
+        return divre;
+    }
+
+    public void setDivre(String divre) {
+        this.divre = divre;
+    }
+
+    public int getJumlahTiketGold() {
+        return jumlahTiketGold;
+    }
+
+    public void setJumlahTiketGold(int jumlahTiketGold) {
+        this.jumlahTiketGold = jumlahTiketGold;
+    }
+
+    public int getJumlahTiketPlatinum() {
+        return jumlahTiketPlatinum;
+    }
+
+    public void setJumlahTiketPlatinum(int jumlahTiketPlatinum) {
+        this.jumlahTiketPlatinum = jumlahTiketPlatinum;
+    }
+
+    public int getJumlahTiketSilver() {
+        return jumlahTiketSilver;
+    }
+
+    public void setJumlahTiketSilver(int jumlahTiketSilver) {
+        this.jumlahTiketSilver = jumlahTiketSilver;
+    }
+
+    public int getPencapaianGold() {
+        return pencapaianGold;
+    }
+
+    public void setPencapaianGold(int pencapaianGold) {
+        this.pencapaianGold = pencapaianGold;
+    }
+
+    public int getPencapaianPlatinum() {
+        return pencapaianPlatinum;
+    }
+
+    public void setPencapaianPlatinum(int pencapaianPlatinum) {
+        this.pencapaianPlatinum = pencapaianPlatinum;
     }
 
     @Override

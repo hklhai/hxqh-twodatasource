@@ -19,11 +19,11 @@ public interface SystemService {
 
     void save(List<Openstreetmap> openstreetmapList);
 
-    void saveAlertEnvs(List<TAlertEnv> tAlertEnvs) throws InvocationTargetException, IllegalAccessException;
+    void saveAlertEnvs() throws InvocationTargetException, IllegalAccessException;
 
     void saveEnterpriseCusts(List<TLvlEnterpriseCust> tLvlEnterpriseCusts) throws Exception;
 
-    void saveTtwifiMonitor(List<TtwifiMonitorMttrProactive> monitorMttrProactiveList) throws Exception;
+    void saveTtwifiMonitor() throws Exception;
 
     void saveTPortdown(List<TPortdown4ioc> tPortdown4iocRepositoryAll) throws Exception;
 

@@ -36,9 +36,14 @@ public class ApplicationTests {
 
     @Test
     public void testTAlertEnv() throws Exception {
-        List<TAlertEnv> tAlertEnvs = alertEnvRepository.findAll();
-        systemService.saveAlertEnvs(tAlertEnvs);
+        systemService.saveAlertEnvs();
     }
+
+    @Test
+    public void testProactive() throws Exception {
+        systemService.saveTtwifiMonitor();
+    }
+
 
     @Test
     public void testSaveTLvlEnterpriseCust() throws Exception {
@@ -48,11 +53,7 @@ public class ApplicationTests {
         }
     }
 
-    @Test
-    public void testProactive() throws Exception {
-        List<TtwifiMonitorMttrProactive> monitorMttrProactiveList = ttwifiMonitorRepository.findAll();
-        systemService.saveTtwifiMonitor(monitorMttrProactiveList);
-    }
+
 
     @Test
     public void testTPortdown4ioc() throws Exception {

@@ -11,17 +11,16 @@ import java.io.Serializable;
 public class TPerfEnterprise4tiocKey implements Serializable {
 
 
+
     @Column(name="cust_name")
     private String custName;
 
-    private String custType;
+    @Column(name="custtype")
+    private String custtype;
 
-    private double e_rsi_BitsPerSecondIn;
+    private double ersibitspersecondin;
 
-    private double e_rsi_BitsPerSecondOut;
-
-    @Column(name="e_rsi_timedata")
-    private String eRsiTimedata;
+    private double ersibitspersecondout;
 
     private double e_rsi_Utilization;
 
@@ -55,36 +54,28 @@ public class TPerfEnterprise4tiocKey implements Serializable {
         this.custName = custName;
     }
 
-    public String getCustType() {
-        return custType;
+    public String getCusttype() {
+        return custtype;
     }
 
-    public void setCustType(String custType) {
-        this.custType = custType;
+    public void setCusttype(String custtype) {
+        this.custtype = custtype;
     }
 
-    public double getE_rsi_BitsPerSecondIn() {
-        return e_rsi_BitsPerSecondIn;
+    public double getErsibitspersecondin() {
+        return ersibitspersecondin;
     }
 
-    public void setE_rsi_BitsPerSecondIn(double e_rsi_BitsPerSecondIn) {
-        this.e_rsi_BitsPerSecondIn = e_rsi_BitsPerSecondIn;
+    public void setErsibitspersecondin(double ersibitspersecondin) {
+        this.ersibitspersecondin = ersibitspersecondin;
     }
 
-    public double getE_rsi_BitsPerSecondOut() {
-        return e_rsi_BitsPerSecondOut;
+    public double getErsibitspersecondout() {
+        return ersibitspersecondout;
     }
 
-    public void setE_rsi_BitsPerSecondOut(double e_rsi_BitsPerSecondOut) {
-        this.e_rsi_BitsPerSecondOut = e_rsi_BitsPerSecondOut;
-    }
-
-    public String geteRsiTimedata() {
-        return eRsiTimedata;
-    }
-
-    public void seteRsiTimedata(String eRsiTimedata) {
-        this.eRsiTimedata = eRsiTimedata;
+    public void setErsibitspersecondout(double ersibitspersecondout) {
+        this.ersibitspersecondout = ersibitspersecondout;
     }
 
     public double getE_rsi_Utilization() {
@@ -166,12 +157,11 @@ public class TPerfEnterprise4tiocKey implements Serializable {
 
         TPerfEnterprise4tiocKey that = (TPerfEnterprise4tiocKey) o;
 
-        if (Double.compare(that.e_rsi_BitsPerSecondIn, e_rsi_BitsPerSecondIn) != 0) return false;
-        if (Double.compare(that.e_rsi_BitsPerSecondOut, e_rsi_BitsPerSecondOut) != 0) return false;
+        if (Double.compare(that.ersibitspersecondin, ersibitspersecondin) != 0) return false;
+        if (Double.compare(that.ersibitspersecondout, ersibitspersecondout) != 0) return false;
         if (Double.compare(that.e_rsi_Utilization, e_rsi_Utilization) != 0) return false;
         if (custName != null ? !custName.equals(that.custName) : that.custName != null) return false;
-        if (custType != null ? !custType.equals(that.custType) : that.custType != null) return false;
-        if (eRsiTimedata != null ? !eRsiTimedata.equals(that.eRsiTimedata) : that.eRsiTimedata != null) return false;
+        if (custtype != null ? !custtype.equals(that.custtype) : that.custtype != null) return false;
         if (farEnd != null ? !farEnd.equals(that.farEnd) : that.farEnd != null) return false;
         if (funct != null ? !funct.equals(that.funct) : that.funct != null) return false;
         if (grpCust != null ? !grpCust.equals(that.grpCust) : that.grpCust != null) return false;
@@ -187,12 +177,11 @@ public class TPerfEnterprise4tiocKey implements Serializable {
         int result;
         long temp;
         result = custName != null ? custName.hashCode() : 0;
-        result = 31 * result + (custType != null ? custType.hashCode() : 0);
-        temp = Double.doubleToLongBits(e_rsi_BitsPerSecondIn);
+        result = 31 * result + (custtype != null ? custtype.hashCode() : 0);
+        temp = Double.doubleToLongBits(ersibitspersecondin);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(e_rsi_BitsPerSecondOut);
+        temp = Double.doubleToLongBits(ersibitspersecondout);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (eRsiTimedata != null ? eRsiTimedata.hashCode() : 0);
         temp = Double.doubleToLongBits(e_rsi_Utilization);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (farEnd != null ? farEnd.hashCode() : 0);

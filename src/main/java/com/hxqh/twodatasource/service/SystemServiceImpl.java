@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +19,6 @@ import java.util.List;
 @Service("systemService")
 public class SystemServiceImpl implements SystemService {
 
-    @Autowired
-    private TStoKoordinatRepository tStoKoordinatRepository;
     @Autowired
     private LocenterpriseeventRepository locenterpriseeventRepository;
     @Autowired
@@ -38,6 +37,18 @@ public class SystemServiceImpl implements SystemService {
     /***************************MYSQL********************************/
     @Autowired
     private TPerfEnterprise4tiocRepository enterprise4tiocRepository;
+    @Autowired
+    private TAlertEnvRepository alertEnvRepository;
+    @Autowired
+    private TLvlEnterpriseCustRepository tLvlEnterpriseCustRepository;
+    @Autowired
+    private TtwifiMonitorRepository ttwifiMonitorRepository;
+    @Autowired
+    private TPortdown4iocRepository tPortdown4iocRepository;
+    @Autowired
+    private TtwifiMttrProactiveRepository ttwifiMttrProactiveRepository;
+    @Autowired
+    private TStoKoordinatRepository tStoKoordinatRepository;
 
     /***************************MYSQL********************************/
 
@@ -59,7 +70,8 @@ public class SystemServiceImpl implements SystemService {
 
     @Transactional
     @Override
-    public void saveAlertEnvs(List<TAlertEnv> tAlertEnvs) throws InvocationTargetException, IllegalAccessException {
+    public void saveAlertEnvs() throws InvocationTargetException, IllegalAccessException {
+        List<TAlertEnv> tAlertEnvs = alertEnvRepository.findAll();
         List<Locenterpriseevent> locenterpriseeventList = new ArrayList<>();
         for (TAlertEnv env : tAlertEnvs) {
             Locenterpriseevent locenterpriseevent = new Locenterpriseevent();
@@ -87,8 +99,11 @@ public class SystemServiceImpl implements SystemService {
         loccustomeruserRepository.save(loccustomeruserList);
     }
 
+    @Transactional
     @Override
-    public void saveTtwifiMonitor(List<TtwifiMonitorMttrProactive> monitorMttrProactiveList) throws Exception {
+    public void saveTtwifiMonitor() throws Exception {
+        List<TtwifiMonitorMttrProactive> monitorMttrProactiveList = ttwifiMonitorRepository.findAll();
+
         List<Locticketscreen100> locticketscreen100List = new ArrayList<>();
         for (TtwifiMonitorMttrProactive proactive : monitorMttrProactiveList) {
             Locticketscreen100 locticketscreen100 = new Locticketscreen100();
@@ -143,20 +158,41 @@ public class SystemServiceImpl implements SystemService {
     public void saveTPerfEnterprise4tiocRepository() throws Exception {
 
         //查询当前最大值
-        Loctperfenterprise4tioc maxDateData = loctperfenterprise4tiocRepository.findMaxDateData();
-        if(maxDateData.getIoctperfenterpriseid()!=null)
-        {
-
-            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findAllData(maxDateData);
+        List<Loctperfenterprise4tioc> maxDateData = loctperfenterprise4tiocRepository.findMaxDateData();
+        Loctperfenterprise4tioc tioc = null;
+        if (maxDateData.size()==0) {//maxDateData.getIoctperfenterpriseid()!=null&&maxDateData.getAdddate()!=null
+            //从MYSQL 中查询数据
+            if(maxDateData.size()>=1)
+            {
+                tioc = maxDateData.get(0);
+            }
+            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(tioc.geteRsiTimedata());
 
             List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
-            for (TPerfEnterprise4tioc  tPerfEnterprise4tioc: perfEnterprise4tiocList) {
-                Loctperfenterprise4tioc tioc = new Loctperfenterprise4tioc();
-                BeanUtils.copyProperties(tioc, tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey());
-                tioc.setAdddate(new Date());
-                loctperfenterprise4tiocs.add(tioc);
-            }
+            dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
             loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
+        } else {
+            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findAllDataTEST();
+//            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findAllData();
+            List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
+            dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
+            loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
+        }
+    }
+
+    private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
+        for (TPerfEnterprise4tioc tPerfEnterprise4tioc : perfEnterprise4tiocList) {
+            Loctperfenterprise4tioc tioc = new Loctperfenterprise4tioc();
+            BeanUtils.copyProperties(tioc, tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey());
+
+            tioc.seteRsiTimedata(tPerfEnterprise4tioc.geteRsiTimedata());
+            tioc.setAdddate(new Date());
+
+            tioc.setCusttype(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getCusttype());
+            tioc.seteRsiBitspersecondin(BigDecimal.valueOf(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getErsibitspersecondin()));
+            tioc.seteRsiBitspersecondout(BigDecimal.valueOf(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getErsibitspersecondout()));
+
+            loctperfenterprise4tiocs.add(tioc);
         }
     }
 
