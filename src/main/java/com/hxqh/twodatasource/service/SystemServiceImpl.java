@@ -52,118 +52,123 @@ public class SystemServiceImpl implements SystemService {
 
     /***************************MYSQL********************************/
 
-    @Transactional
-    @Override
-    public void openStreetMap() throws InvocationTargetException, IllegalAccessException {
-
-    }
-
-    @Override
-    public void saveOpenstreetmap(Openstreetmap openstreetmap) {
-        openstreetmapRepository.save(openstreetmap);
-    }
-
-    @Override
-    public void save(List<Openstreetmap> openstreetmapList) {
-        openstreetmapRepository.save(openstreetmapList);
-    }
 
     @Transactional
     @Override
     public void saveAlertEnvs() throws InvocationTargetException, IllegalAccessException {
         List<TAlertEnv> tAlertEnvs = alertEnvRepository.findAll();
-        List<Locenterpriseevent> locenterpriseeventList = new ArrayList<>();
-        for (TAlertEnv env : tAlertEnvs) {
-            Locenterpriseevent locenterpriseevent = new Locenterpriseevent();
-            BeanUtils.copyProperties(locenterpriseevent, env.gettAlertEnvKey());
-            locenterpriseevent.setAdddate(new Date());
-            locenterpriseeventList.add(locenterpriseevent);
+        if (tAlertEnvs != null) {
+            List<Locenterpriseevent> locenterpriseeventList = new ArrayList<>();
+            for (TAlertEnv env : tAlertEnvs) {
+                Locenterpriseevent locenterpriseevent = new Locenterpriseevent();
+                BeanUtils.copyProperties(locenterpriseevent, env.gettAlertEnvKey());
+                locenterpriseevent.setAdddate(new Date());
+                locenterpriseeventList.add(locenterpriseevent);
+            }
+            locenterpriseeventRepository.deleteAll();
+            locenterpriseeventRepository.save(locenterpriseeventList);
         }
-        locenterpriseeventRepository.deleteAll();
-        locenterpriseeventRepository.save(locenterpriseeventList);
     }
 
     @Transactional
     @Override
-    public void saveEnterpriseCusts(List<TLvlEnterpriseCust> tLvlEnterpriseCusts) throws Exception {
-        List<Loccustomeruser> loccustomeruserList = new ArrayList<>();
-        for (TLvlEnterpriseCust cust : tLvlEnterpriseCusts) {
-            if (cust != null) {
-                Loccustomeruser loccustomeruser = new Loccustomeruser();
-                BeanUtils.copyProperties(loccustomeruser, cust.gettLvlEnterpriseCustKey());
-                loccustomeruser.setAdddate(new Date());
-                loccustomeruserList.add(loccustomeruser);
+    public void saveEnterpriseCusts() throws Exception {
+
+        List<TLvlEnterpriseCust> tLvlEnterpriseCusts = tLvlEnterpriseCustRepository.findAll();
+        if (tLvlEnterpriseCusts != null) {
+            List<Loccustomeruser> loccustomeruserList = new ArrayList<>();
+            for (TLvlEnterpriseCust cust : tLvlEnterpriseCusts) {
+                if (cust != null) {
+                    Loccustomeruser loccustomeruser = new Loccustomeruser();
+                    BeanUtils.copyProperties(loccustomeruser, cust);
+                    loccustomeruser.setAdddate(new Date());
+                    loccustomeruserList.add(loccustomeruser);
+                }
             }
+            loccustomeruserRepository.deleteAll();
+            loccustomeruserRepository.save(loccustomeruserList);
         }
-        loccustomeruserRepository.deleteAll();
-        loccustomeruserRepository.save(loccustomeruserList);
     }
 
     @Transactional
     @Override
     public void saveTtwifiMonitor() throws Exception {
         List<TtwifiMonitorMttrProactive> monitorMttrProactiveList = ttwifiMonitorRepository.findAll();
+        if (monitorMttrProactiveList != null) {
 
-        List<Locticketscreen100> locticketscreen100List = new ArrayList<>();
-        for (TtwifiMonitorMttrProactive proactive : monitorMttrProactiveList) {
-            Locticketscreen100 locticketscreen100 = new Locticketscreen100();
-            BeanUtils.copyProperties(locticketscreen100, proactive.getTtwifiMonitorKey());
-            locticketscreen100.setAdddate(new Date());
-            locticketscreen100List.add(locticketscreen100);
+            List<Locticketscreen100> locticketscreen100List = new ArrayList<>();
+            for (TtwifiMonitorMttrProactive proactive : monitorMttrProactiveList) {
+                Locticketscreen100 locticketscreen100 = new Locticketscreen100();
+                BeanUtils.copyProperties(locticketscreen100, proactive.getTtwifiMonitorKey());
+                locticketscreen100.setAdddate(new Date());
+                locticketscreen100List.add(locticketscreen100);
+            }
+            locticketscreen100Repository.deleteAll();
+            locticketscreen100Repository.save(locticketscreen100List);
         }
-        locticketscreen100Repository.deleteAll();
-        locticketscreen100Repository.save(locticketscreen100List);
     }
 
+    @Transactional
     @Override
-    public void saveTPortdown(List<TPortdown4ioc> tPortdown4iocRepositoryAll) throws Exception {
-        List<Loctportdown4ioc> loctportdown4iocs = new ArrayList<>();
-        for (TPortdown4ioc portdown4ioc : tPortdown4iocRepositoryAll) {
-            Loctportdown4ioc ioc = new Loctportdown4ioc();
-            BeanUtils.copyProperties(ioc, portdown4ioc.gettPortdown4iocKey());
-            ioc.setAdddate(new Date());
-            loctportdown4iocs.add(ioc);
+    public void saveTPortdown() throws Exception {
+        List<TPortdown4ioc> tPortdown4iocRepositoryAll = tPortdown4iocRepository.findAll();
+        if (tPortdown4iocRepositoryAll != null) {
+            List<Loctportdown4ioc> loctportdown4iocs = new ArrayList<>();
+            for (TPortdown4ioc portdown4ioc : tPortdown4iocRepositoryAll) {
+                Loctportdown4ioc ioc = new Loctportdown4ioc();
+                BeanUtils.copyProperties(ioc, portdown4ioc.gettPortdown4iocKey());
+                ioc.setAdddate(new Date());
+                loctportdown4iocs.add(ioc);
+            }
+            loctportdown4iocRepository.deleteAll();
+            loctportdown4iocRepository.save(loctportdown4iocs);
         }
-        loctportdown4iocRepository.deleteAll();
-        loctportdown4iocRepository.save(loctportdown4iocs);
     }
 
+    @Transactional
     @Override
-    public void saveTtwifiMttr(List<TtwifiMttrProactiveLastMonth> mttrProactiveLastMonthList) throws Exception {
-        List<Locticketscreen96> locticketscreen96s = new ArrayList<>();
-        for (TtwifiMttrProactiveLastMonth mttrProactiveLastMonth : mttrProactiveLastMonthList) {
-            Locticketscreen96 ioc = new Locticketscreen96();
-            BeanUtils.copyProperties(ioc, mttrProactiveLastMonth.getTtwifiMttrProactiveKey());
-            ioc.setAdddate(new Date());
-            locticketscreen96s.add(ioc);
+    public void saveTtwifiMttr() throws Exception {
+        List<TtwifiMttrProactiveLastMonth> mttrProactiveLastMonthList = ttwifiMttrProactiveRepository.findAll();
+        if (mttrProactiveLastMonthList != null) {
+            List<Locticketscreen96> locticketscreen96s = new ArrayList<>();
+            for (TtwifiMttrProactiveLastMonth mttrProactiveLastMonth : mttrProactiveLastMonthList) {
+                Locticketscreen96 ioc = new Locticketscreen96();
+                BeanUtils.copyProperties(ioc, mttrProactiveLastMonth.getTtwifiMttrProactiveKey());
+                ioc.setAdddate(new Date());
+                locticketscreen96s.add(ioc);
+            }
+            locticketscreen96Repository.deleteAll();
+            locticketscreen96Repository.save(locticketscreen96s);
         }
-        locticketscreen96Repository.deleteAll();
-        locticketscreen96Repository.save(locticketscreen96s);
     }
 
+    @Transactional
     @Override
-    public void saveTStoKoordinat(List<TStoKoordinat> tStoKoordinatList) throws Exception {
-        List<Openstreetmap> openstreetmapList = new ArrayList<>();
-        for (TStoKoordinat tStoKoordinat : tStoKoordinatList) {
-            Openstreetmap openstreetmap = new Openstreetmap();
-            BeanUtils.copyProperties(openstreetmap, tStoKoordinat.gettStoKoordinatKey());
-            openstreetmap.setAdddate(new Date());
-            openstreetmapList.add(openstreetmap);
+    public void saveTStoKoordinat() throws Exception {
+        List<TStoKoordinat> tStoKoordinatList = tStoKoordinatRepository.findAll();
+        if (tStoKoordinatList != null) {
+            List<Openstreetmap> openstreetmapList = new ArrayList<>();
+            for (TStoKoordinat tStoKoordinat : tStoKoordinatList) {
+                Openstreetmap openstreetmap = new Openstreetmap();
+                BeanUtils.copyProperties(openstreetmap, tStoKoordinat.gettStoKoordinatKey());
+                openstreetmap.setAdddate(new Date());
+                openstreetmapList.add(openstreetmap);
+            }
+            openstreetmapRepository.deleteAll();
+            openstreetmapRepository.save(openstreetmapList);
         }
-        openstreetmapRepository.deleteAll();
-        openstreetmapRepository.save(openstreetmapList);
     }
 
+    @Transactional
     @Override
     public void saveTPerfEnterprise4tiocRepository() throws Exception {
 
         //查询当前最大值
         List<Loctperfenterprise4tioc> maxDateData = loctperfenterprise4tiocRepository.findMaxDateData();
         Loctperfenterprise4tioc tioc = null;
-        if (maxDateData.size()==0) {//maxDateData.getIoctperfenterpriseid()!=null&&maxDateData.getAdddate()!=null
+        if (maxDateData.size() == 0) {//maxDateData.getIoctperfenterpriseid()!=null&&maxDateData.getAdddate()!=null
             //从MYSQL 中查询数据
-            if(maxDateData.size()>=1)
-            {
+            if (maxDateData.size() >= 1) {
                 tioc = maxDateData.get(0);
             }
             List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(tioc.geteRsiTimedata());

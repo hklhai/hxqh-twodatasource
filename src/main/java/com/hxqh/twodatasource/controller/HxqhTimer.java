@@ -16,8 +16,9 @@ public class HxqhTimer {
 
 
     //每天早八点到晚八点，间隔5分钟执行任务
+    //MYSQL(Source)   -->     Oracle(Target)
     //t_alert_env             tb_iocenterpriseevent
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 0/1 8-23 * * ?")
     public void execTAlertEnv() {
         try {
             systemService.saveAlertEnvs();
@@ -42,19 +43,54 @@ public class HxqhTimer {
     //每天早八点到晚八点，间隔5分钟执行任务
     //T_LVL_ENTERPRISE_CUST             tb_IOCCUSTOMERUSER
     @Scheduled(cron = "0 0/5 8-20 * * ?")
-    public void exec() {
+    public void execTLvlEnterpriseCust() {
+        try {
+            systemService.saveEnterpriseCusts();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    //T_PORTDOWN_4IOC             tb_IOCTPORTDOWN4IOC
+    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    public void execPortdown() {
+        try {
+            systemService.saveTPortdown();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //ttwifi_mttr_proactive_last_month             tb_iocticketScreen96
+    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    public void execMttrProactive() {
+        try {
+            systemService.saveTtwifiMttr();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //t_sto_koordinat             tb_openstreetmap
+    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    public void execStoKoordinat() {
+        try {
+            systemService.saveTStoKoordinat();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
-//    @Test
-//    public void testSaveTLvlEnterpriseCust() throws Exception {
-//        List<TLvlEnterpriseCust> tLvlEnterpriseCusts = tLvlEnterpriseCustRepository.findAll();
-//        if (tLvlEnterpriseCusts != null) {
-//            systemService.saveEnterpriseCusts(tLvlEnterpriseCusts);
-//        }
-//    }
-
+    //v_perf_enterprise_4tioc1             TB_IOC_ENT_4TIOC
+    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    public void execPerfEnterprise4tiocRepository() {
+        try {
+            systemService.saveTPerfEnterprise4tiocRepository();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 //    //每5分钟执行一次
 //    @Scheduled(fixedRate = 2 * 60 * 1000)
@@ -68,6 +104,5 @@ public class HxqhTimer {
 //            e.printStackTrace();
 //        }
 //    }
-
 
 }

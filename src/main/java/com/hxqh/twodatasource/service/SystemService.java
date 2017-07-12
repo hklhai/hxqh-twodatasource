@@ -13,23 +13,18 @@ import java.util.List;
 
 public interface SystemService {
 
-    void openStreetMap() throws InvocationTargetException, IllegalAccessException;
-
-    void saveOpenstreetmap(Openstreetmap openstreetmap);
-
-    void save(List<Openstreetmap> openstreetmapList);
 
     void saveAlertEnvs() throws InvocationTargetException, IllegalAccessException;
 
-    void saveEnterpriseCusts(List<TLvlEnterpriseCust> tLvlEnterpriseCusts) throws Exception;
+    void saveEnterpriseCusts() throws Exception;
 
     void saveTtwifiMonitor() throws Exception;
 
-    void saveTPortdown(List<TPortdown4ioc> tPortdown4iocRepositoryAll) throws Exception;
+    void saveTPortdown() throws Exception;
 
-    void saveTtwifiMttr(List<TtwifiMttrProactiveLastMonth> mttrProactiveLastMonthList) throws Exception;
+    void saveTtwifiMttr() throws Exception;
 
-    void saveTStoKoordinat(List<TStoKoordinat> tStoKoordinatList) throws Exception;
+    void saveTStoKoordinat() throws Exception;
 
     void saveTPerfEnterprise4tiocRepository() throws Exception;
 }

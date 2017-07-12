@@ -12,17 +12,65 @@ import javax.persistence.*;
 public class TLvlEnterpriseCust implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Column(name = "cust_abbrev")
+    private String custAbbrev;
+
+    @Column(name = "cust_name")
+    private String custName;
+
+    @Column(name = "`DIV`")
+    private String div;
+
     @Id
-    private TLvlEnterpriseCustKey tLvlEnterpriseCustKey;
+    @Column(name = "GRP_CUST")
+    private String grpCust;
+
+    @Column(name = "LVL")
+    private String lvl;
 
     public TLvlEnterpriseCust() {
     }
 
-    public TLvlEnterpriseCustKey gettLvlEnterpriseCustKey() {
-        return tLvlEnterpriseCustKey;
+
+    public String getCustAbbrev() {
+        return this.custAbbrev;
     }
 
-    public void settLvlEnterpriseCustKey(TLvlEnterpriseCustKey tLvlEnterpriseCustKey) {
-        this.tLvlEnterpriseCustKey = tLvlEnterpriseCustKey;
+    public void setCustAbbrev(String custAbbrev) {
+        this.custAbbrev = custAbbrev;
     }
+
+    public String getCustName() {
+        return this.custName;
+    }
+
+    public void setCustName(String custName) {
+        this.custName = custName;
+    }
+
+    public String getDiv() {
+        return this.div;
+    }
+
+    public void setDiv(String div) {
+        this.div = div;
+    }
+
+    public String getGrpCust() {
+        return this.grpCust;
+    }
+
+    public void setGrpCust(String grpCust) {
+        this.grpCust = grpCust;
+    }
+
+    public String getLvl() {
+        return this.lvl;
+    }
+
+    public void setLvl(String lvl) {
+        this.lvl = lvl;
+    }
+
+
 }

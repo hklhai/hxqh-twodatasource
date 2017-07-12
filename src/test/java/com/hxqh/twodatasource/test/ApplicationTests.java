@@ -19,19 +19,6 @@ public class ApplicationTests {
 
     @Autowired
     private SystemService systemService;
-    @Autowired
-    private TAlertEnvRepository alertEnvRepository;
-    @Autowired
-    private TLvlEnterpriseCustRepository tLvlEnterpriseCustRepository;
-    @Autowired
-    private TtwifiMonitorRepository ttwifiMonitorRepository;
-    @Autowired
-    private TPortdown4iocRepository tPortdown4iocRepository;
-    @Autowired
-    private TtwifiMttrProactiveRepository ttwifiMttrProactiveRepository;
-    @Autowired
-    private TStoKoordinatRepository tStoKoordinatRepository;
-
 
 
     @Test
@@ -44,33 +31,24 @@ public class ApplicationTests {
         systemService.saveTtwifiMonitor();
     }
 
-
     @Test
     public void testSaveTLvlEnterpriseCust() throws Exception {
-        List<TLvlEnterpriseCust> tLvlEnterpriseCusts = tLvlEnterpriseCustRepository.findAll();
-        if (tLvlEnterpriseCusts != null) {
-            systemService.saveEnterpriseCusts(tLvlEnterpriseCusts);
-        }
+        systemService.saveEnterpriseCusts();
     }
-
-
 
     @Test
     public void testTPortdown4ioc() throws Exception {
-        List<TPortdown4ioc> tPortdown4iocRepositoryAll = tPortdown4iocRepository.findAll();
-        systemService.saveTPortdown(tPortdown4iocRepositoryAll);
-    }
-
-    @Test
-    public void testTtwifiMttr() throws Exception {
-        List<TtwifiMttrProactiveLastMonth> mttrProactiveLastMonthList = ttwifiMttrProactiveRepository.findAll();
-        systemService.saveTtwifiMttr(mttrProactiveLastMonthList);
+        systemService.saveTPortdown();
     }
 
     @Test
     public void testTStoKoordinat() throws Exception {
-        List<TStoKoordinat> tStoKoordinatList = tStoKoordinatRepository.findAll();
-        systemService.saveTStoKoordinat(tStoKoordinatList);
+        systemService.saveTStoKoordinat();
+    }
+
+    @Test
+    public void testTtwifiMttr() throws Exception {
+        systemService.saveTtwifiMttr();
     }
 
     @Test

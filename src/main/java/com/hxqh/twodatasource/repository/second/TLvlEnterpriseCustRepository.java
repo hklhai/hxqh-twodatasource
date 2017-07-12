@@ -10,8 +10,7 @@ import java.util.List;
  * Created by Ocean lin on 2017/7/11.
  */
 @Repository
-public interface TLvlEnterpriseCustRepository extends JpaRepository<TLvlEnterpriseCust, TLvlEnterpriseCustKey> {
-    //@Query(nativeQuery=true,value = "")
+public interface TLvlEnterpriseCustRepository extends JpaRepository<TLvlEnterpriseCust, String> {
     @Query("select 0 from TLvlEnterpriseCust o")
     List<TLvlEnterpriseCust> findAllData();
 }
