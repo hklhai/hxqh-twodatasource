@@ -18,7 +18,7 @@ public class HxqhTimer {
     //每天早八点到晚八点，间隔5分钟执行任务
     //MYSQL(Source)   -->     Oracle(Target)
     //t_alert_env             tb_iocenterpriseevent
-    @Scheduled(cron = "0 0/1 8-23 * * ?")
+    @Scheduled(cron = "0 0/5 8-20 * * ?")
     public void execTAlertEnv() {
         try {
             systemService.saveAlertEnvs();
