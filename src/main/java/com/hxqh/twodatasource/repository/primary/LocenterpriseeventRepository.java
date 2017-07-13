@@ -1,6 +1,6 @@
 package com.hxqh.twodatasource.repository.primary;
 
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +11,9 @@ import java.math.BigDecimal;
  */
 @Repository
 public interface LocenterpriseeventRepository extends CrudRepository<Locenterpriseevent, BigDecimal> {
-    @Query(nativeQuery=true,value = "truncate table TB_IOCENTERPRISEEVENT")
-    void truncatetable();
+//    @Query(nativeQuery=true,value = "truncate table TB_IOCENTERPRISEEVENT")
+//    void truncatetable();
+
+    @Procedure(name = "analysis_data_event_altenv")
+    void analysis_data_event_altenv();
 }

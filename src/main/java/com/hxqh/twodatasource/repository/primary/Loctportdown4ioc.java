@@ -11,6 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "TB_IOCTPORTDOWN4IOC")
+@NamedStoredProcedureQueries({@NamedStoredProcedureQuery(name = "analysis_source_portdown", procedureName = "analysis_source_portdown")})
 public class Loctportdown4ioc implements Serializable {
     private static final long serialVersionUID = 1L;
 

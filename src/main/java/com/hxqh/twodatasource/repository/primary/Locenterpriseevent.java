@@ -12,6 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="TB_IOCENTERPRISEEVENT")
+@NamedStoredProcedureQueries({@NamedStoredProcedureQuery(name = "analysis_data_event_altenv", procedureName = "analysis_data_event_altenv")})
 public class Locenterpriseevent implements Serializable {
 	private static final long serialVersionUID = 1L;
 

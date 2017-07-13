@@ -11,6 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "TB_IOC_ENT_4TIOC")
+@NamedStoredProcedureQueries({@NamedStoredProcedureQuery(name = "analysis_source_ent_4tioc1", procedureName = "analysis_source_ent_4tioc1")})
 public class Loctperfenterprise4tioc implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -27,4 +27,14 @@ public interface SystemService {
     void saveTStoKoordinat() throws Exception;
 
     void saveTPerfEnterprise4tiocRepository() throws Exception;
+
+    void analysis_source_ent_4tioc1();
+
+    void analysis_data_event_altenv();
+
+    void analysis_source_portdown();
+
+    void analysis_data_mttr_proactive();
+
+    void analysis_data_mttr_targets();
 }

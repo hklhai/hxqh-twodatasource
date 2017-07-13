@@ -22,6 +22,8 @@ public class HxqhTimer {
     public void execTAlertEnv() {
         try {
             systemService.saveAlertEnvs();
+            systemService.analysis_data_event_altenv();
+
         } catch (Exception e) {
             //TODO 日志功能
             e.printStackTrace();
@@ -33,6 +35,8 @@ public class HxqhTimer {
     public void execWifiMonitor() {
         try {
             systemService.saveTtwifiMonitor();
+            systemService.analysis_data_mttr_proactive();
+
         } catch (Exception e) {
             //TODO 日志功能
             e.printStackTrace();
@@ -56,6 +60,8 @@ public class HxqhTimer {
     public void execPortdown() {
         try {
             systemService.saveTPortdown();
+            systemService.analysis_source_portdown();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,6 +72,8 @@ public class HxqhTimer {
     public void execMttrProactive() {
         try {
             systemService.saveTtwifiMttr();
+            systemService.analysis_data_mttr_targets();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,10 +95,13 @@ public class HxqhTimer {
     public void execPerfEnterprise4tiocRepository() {
         try {
             systemService.saveTPerfEnterprise4tiocRepository();
+
+            systemService.analysis_source_ent_4tioc1();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
 //    //每5分钟执行一次
 //    @Scheduled(fixedRate = 2 * 60 * 1000)

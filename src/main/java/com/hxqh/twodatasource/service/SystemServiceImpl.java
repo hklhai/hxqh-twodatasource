@@ -185,6 +185,33 @@ public class SystemServiceImpl implements SystemService {
         }
     }
 
+    @Transactional
+    @Override
+    public void analysis_source_ent_4tioc1() {
+        loctperfenterprise4tiocRepository.analysis_source_ent_4tioc1();
+    }
+
+    @Override
+    public void analysis_data_event_altenv() {
+        locenterpriseeventRepository.analysis_data_event_altenv();
+    }
+
+    @Override
+    public void analysis_source_portdown() {
+        loctportdown4iocRepository.analysis_source_portdown();
+    }
+
+    @Override
+    public void analysis_data_mttr_proactive() {
+        locticketscreen100Repository.analysis_data_mttr_proactive();
+    }
+
+    @Override
+    public void analysis_data_mttr_targets() {
+        locticketscreen96Repository.analysis_data_mttr_targets();
+
+    }
+
     private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
         for (TPerfEnterprise4tioc tPerfEnterprise4tioc : perfEnterprise4tiocList) {
             Loctperfenterprise4tioc tioc = new Loctperfenterprise4tioc();

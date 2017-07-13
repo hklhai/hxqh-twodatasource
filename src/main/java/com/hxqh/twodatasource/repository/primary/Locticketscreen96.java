@@ -12,6 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="TB_IOCTICKETSCREEN96")
+@NamedStoredProcedureQueries({@NamedStoredProcedureQuery(name = "analysis_data_mttr_targets", procedureName = "analysis_data_mttr_targets")})
 public class Locticketscreen96 implements Serializable {
 	private static final long serialVersionUID = 1L;
 
