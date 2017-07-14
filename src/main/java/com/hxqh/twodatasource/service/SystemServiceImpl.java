@@ -152,6 +152,9 @@ public class SystemServiceImpl implements SystemService {
                 Openstreetmap openstreetmap = new Openstreetmap();
                 BeanUtils.copyProperties(openstreetmap, tStoKoordinat.gettStoKoordinatKey());
                 openstreetmap.setAdddate(new Date());
+                //手动设置经纬度，因规避关键字
+                openstreetmap.setLatitude(BigDecimal.valueOf(tStoKoordinat.gettStoKoordinatKey().getLat()));
+                openstreetmap.setLongitude(BigDecimal.valueOf(tStoKoordinat.gettStoKoordinatKey().getLong_()));
                 openstreetmapList.add(openstreetmap);
             }
             openstreetmapRepository.deleteAll();
