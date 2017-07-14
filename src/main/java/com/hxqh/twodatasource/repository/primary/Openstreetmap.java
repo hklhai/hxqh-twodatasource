@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="TB_OPENSTREETMAP")
+@Table(name="TB_IOC_CENTER_MAP")
 public class Openstreetmap implements Serializable {
 	private static final long serialVersionUID = 1L;
 
