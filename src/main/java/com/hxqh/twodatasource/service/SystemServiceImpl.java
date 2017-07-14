@@ -118,6 +118,7 @@ public class SystemServiceImpl implements SystemService {
                 Loctportdown4ioc ioc = new Loctportdown4ioc();
                 BeanUtils.copyProperties(ioc, portdown4ioc.gettPortdown4iocKey());
                 ioc.setAdddate(new Date());
+                ioc.setIocinterface(portdown4ioc.gettPortdown4iocKey().getInterface_());
                 loctportdown4iocs.add(ioc);
             }
             loctportdown4iocRepository.deleteAll();
@@ -155,6 +156,7 @@ public class SystemServiceImpl implements SystemService {
                 //手动设置经纬度，因规避关键字
                 openstreetmap.setLatitude(BigDecimal.valueOf(tStoKoordinat.gettStoKoordinatKey().getLat()));
                 openstreetmap.setLongitude(BigDecimal.valueOf(tStoKoordinat.gettStoKoordinatKey().getLong_()));
+                openstreetmap.setShow(1);
                 openstreetmapList.add(openstreetmap);
             }
             openstreetmapRepository.deleteAll();

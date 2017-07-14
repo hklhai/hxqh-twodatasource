@@ -39,6 +39,8 @@ public class Openstreetmap implements Serializable {
 
 	private Date adddate;
 
+	private Integer show;
+
 	public Openstreetmap() {
 	}
 
@@ -122,4 +124,11 @@ public class Openstreetmap implements Serializable {
 		this.treg = treg;
 	}
 
+	public Integer getShow() {
+		return show;
+	}
+
+	public void setShow(Integer show) {
+		this.show = show;
+	}
 }
