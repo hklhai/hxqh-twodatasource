@@ -79,7 +79,7 @@ public class HxqhTimer {
         }
     }
 
-    //t_sto_koordinat             tb_openstreetmap
+    //t_sto_koordinat             TB_IOC_CENTER_MAP
     @Scheduled(cron = "0 0/5 8-20 * * ?")
     public void execStoKoordinat() {
         try {

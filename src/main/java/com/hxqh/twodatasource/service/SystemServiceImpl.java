@@ -157,6 +157,7 @@ public class SystemServiceImpl implements SystemService {
                 openstreetmap.setLatitude(BigDecimal.valueOf(tStoKoordinat.gettStoKoordinatKey().getLat()));
                 openstreetmap.setLongitude(BigDecimal.valueOf(tStoKoordinat.gettStoKoordinatKey().getLong_()));
                 openstreetmap.setShow(1);
+                openstreetmap.setStatus("Up");
                 openstreetmapList.add(openstreetmap);
             }
             openstreetmapRepository.deleteAll();

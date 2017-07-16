@@ -41,6 +41,8 @@ public class Openstreetmap implements Serializable {
 
 	private Integer show;
 
+	private String status;
+
 	public Openstreetmap() {
 	}
 
@@ -130,5 +132,13 @@ public class Openstreetmap implements Serializable {
 
 	public void setShow(Integer show) {
 		this.show = show;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }
