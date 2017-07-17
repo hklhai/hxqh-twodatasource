@@ -1,14 +1,12 @@
 package com.hxqh.twodatasource.test;
 
-import com.hxqh.twodatasource.repository.second.*;
 import com.hxqh.twodatasource.service.SystemService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.List;
 
 /**
  * Created by Ocean lin on 2017/7/7.
@@ -20,6 +18,11 @@ public class ApplicationTests {
     @Autowired
     private SystemService systemService;
 
+
+    @Test
+    public void test() throws Exception {
+        Assert.assertTrue(1==1);
+    }
 
 //    @Test
 //    public void testTAlertEnv() throws Exception {
