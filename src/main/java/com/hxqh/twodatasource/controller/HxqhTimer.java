@@ -103,7 +103,7 @@ public class HxqhTimer {
         }
     }
     //sipete_v_is_tg_ss_daily             TB_IOC_CONSUMER_VOICE_TRAFFIC
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 0/15 8-20 * * ?")
     public void execSipeteVIsTgSsDailyRepository() {
         try {
             systemService.saveSipeteVIsTgSsDailyRepository();
@@ -113,7 +113,17 @@ public class HxqhTimer {
             e.printStackTrace();
         }
     }
+    //t_tsel_agg_topolgy             TB_IOC_MOBILE_BACKHAUL_TTC
+    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    public void execMOBILE_BACKHAUL_TTCRepository() {
+        try {
+            systemService.saveMOBILE_BACKHAUL_TTCRepository();
 
+            //  systemService.analysis_source_ent_4tioc1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 //    //每5分钟执行一次
 //    @Scheduled(fixedRate = 2 * 60 * 1000)
