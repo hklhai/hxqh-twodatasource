@@ -4,6 +4,7 @@ import com.hxqh.twodatasource.repository.primary.*;
 import com.hxqh.twodatasource.repository.second.*;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -215,6 +216,12 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public void analysis_data_mttr_targets() {
         locticketscreen96Repository.analysis_data_mttr_targets();
+
+    }
+
+    @Override
+    public void analysis_data_cust_for_dws() {
+        loccustomeruserRepository.analysis_data_cust_for_dws();
 
     }
 

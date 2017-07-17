@@ -21,7 +21,7 @@ public class ApplicationTests {
 
     @Test
     public void test() throws Exception {
-        Assert.assertTrue(1==1);
+        Assert.assertTrue(1 == 1);
     }
 
 //    @Test
@@ -91,6 +91,12 @@ public class ApplicationTests {
 //    @Test
 //    public void testIocticketScreen96  () throws Exception {
 //        systemService.analysis_data_mttr_targets();
+//    }
+
+    //    //T_LVL_ENTERPRISE_CUST             tb_IOCCUSTOMERUSER
+//    @Test
+//    public void analysis_data_cust_for_dws() throws Exception {
+//        systemService.analysis_data_cust_for_dws();
 //    }
 
 }

@@ -46,10 +46,11 @@ public class HxqhTimer {
 
     //每天早八点到晚八点，间隔5分钟执行任务
     //T_LVL_ENTERPRISE_CUST             tb_IOCCUSTOMERUSER
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 0/60 8-20 * * ?")
     public void execTLvlEnterpriseCust() {
         try {
             systemService.saveEnterpriseCusts();
+            systemService.analysis_data_cust_for_dws();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -11,6 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "TB_IOCCUSTOMERUSER")
+@NamedStoredProcedureQueries({@NamedStoredProcedureQuery(name = "analysis_data_cust_for_dws", procedureName = "analysis_data_cust_for_dws")})
 public class Loccustomeruser implements Serializable {
     private static final long serialVersionUID = 1L;
 
