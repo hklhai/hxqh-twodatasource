@@ -35,6 +35,9 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     private Loctperfenterprise4tiocRepository loctperfenterprise4tiocRepository;
 
+    @Autowired
+    private TbIocConsumerVoiceTrafficRepository tbIocConsumerVoiceTrafficRepository;
+
     /***************************MYSQL********************************/
     @Autowired
     private TPerfEnterprise4tiocRepository enterprise4tiocRepository;
@@ -50,6 +53,8 @@ public class SystemServiceImpl implements SystemService {
     private TtwifiMttrProactiveRepository ttwifiMttrProactiveRepository;
     @Autowired
     private TStoKoordinatRepository tStoKoordinatRepository;
+    @Autowired
+    private SipeteVIsTgSsDailyRepository sipeteVIsTgSsDailyRepository;
 
     /***************************MYSQL********************************/
 
@@ -223,6 +228,28 @@ public class SystemServiceImpl implements SystemService {
     public void analysis_data_cust_for_dws() {
         loccustomeruserRepository.analysis_data_cust_for_dws();
 
+    }
+
+
+    @Transactional
+    @Override
+    public void saveSipeteVIsTgSsDailyRepository() throws InvocationTargetException, IllegalAccessException {
+        List<SipeteVIsTgSsDaily> vIsTgSsDailyList = sipeteVIsTgSsDailyRepository.findAll();
+
+
+        if (vIsTgSsDailyList != null) {
+            List<TbIocConsumerVoiceTraffic> iocConsumerVoiceTrafficList = new ArrayList<>();
+            for (SipeteVIsTgSsDaily s : vIsTgSsDailyList) {
+                TbIocConsumerVoiceTraffic tbIocConsumerVoiceTraffic = new TbIocConsumerVoiceTraffic();
+                BeanUtils.copyProperties(tbIocConsumerVoiceTraffic, s.getSipeteVIsTgSsDailyKey());
+                tbIocConsumerVoiceTraffic.setTs(new Date());
+                iocConsumerVoiceTrafficList.add(tbIocConsumerVoiceTraffic);
+
+            }
+
+            tbIocConsumerVoiceTrafficRepository.deleteAll();
+            tbIocConsumerVoiceTrafficRepository.save(iocConsumerVoiceTrafficList);
+        }
     }
 
     private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {

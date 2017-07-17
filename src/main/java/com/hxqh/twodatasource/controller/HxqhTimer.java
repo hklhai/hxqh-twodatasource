@@ -102,6 +102,17 @@ public class HxqhTimer {
             e.printStackTrace();
         }
     }
+    //sipete_v_is_tg_ss_daily             TB_IOC_CONSUMER_VOICE_TRAFFIC
+    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    public void execSipeteVIsTgSsDailyRepository() {
+        try {
+            systemService.saveSipeteVIsTgSsDailyRepository();
+
+            //  systemService.analysis_source_ent_4tioc1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 //    //每5分钟执行一次
