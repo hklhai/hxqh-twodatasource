@@ -99,6 +99,26 @@ public class ApplicationTests {
 //        systemService.analysis_data_cust_for_dws();
 //    }
 
+
+
+
+  /*  @Test
+    public void testSipeteVIsTgSsDailyRepository() throws Exception {
+        systemService.saveSipeteVIsTgSsDailyRepository();
+    }
+    @Test
+    public void testsaveMOBILE_BACKHAUL_TTCRepository() throws Exception {
+        systemService.saveMOBILE_BACKHAUL_TTCRepository();
+    }
+
+    @Test
+    public void testsave_mobile_ip_transitRepository() throws Exception {
+        systemService.save_mobile_ip_transitRepository();
+    }*/
+
+
+
+
 }
 
 

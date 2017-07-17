@@ -35,8 +35,22 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     private Loctperfenterprise4tiocRepository loctperfenterprise4tiocRepository;
 
+    /**
+     * Add Hy Chang Start
+     */
+
     @Autowired
     private TbIocConsumerVoiceTrafficRepository tbIocConsumerVoiceTrafficRepository;
+
+    @Autowired
+    private TbIocMobileBackHaulTtcRepository tbIocMobileBackHaulTtcRepository;
+    @Autowired
+    private  TbIocMobileIpTransitRepository tbIocMobileIpTransitRepository;
+
+
+    /**
+     * Add Hy Chang end
+     * */
 
     /***************************MYSQL********************************/
     @Autowired
@@ -53,8 +67,18 @@ public class SystemServiceImpl implements SystemService {
     private TtwifiMttrProactiveRepository ttwifiMttrProactiveRepository;
     @Autowired
     private TStoKoordinatRepository tStoKoordinatRepository;
+    /**
+     * Add Hy Chang Start
+     */
     @Autowired
     private SipeteVIsTgSsDailyRepository sipeteVIsTgSsDailyRepository;
+    @Autowired
+    private TTselAggTopolgyRepository tTselAggTopolgyRepository;
+    @Autowired
+    private  TIxtsel4iocRepository tIxtsel4iocRepository;
+    /**
+     * Add Hy Chang end
+     * */
 
     /***************************MYSQL********************************/
 
@@ -231,6 +255,10 @@ public class SystemServiceImpl implements SystemService {
     }
 
 
+    /**
+     * Add By Hy Chang Area Start
+     */
+
     @Transactional
     @Override
     public void saveSipeteVIsTgSsDailyRepository() throws InvocationTargetException, IllegalAccessException {
@@ -251,6 +279,48 @@ public class SystemServiceImpl implements SystemService {
             tbIocConsumerVoiceTrafficRepository.save(iocConsumerVoiceTrafficList);
         }
     }
+
+
+    @Transactional
+    @Override
+    public void saveMOBILE_BACKHAUL_TTCRepository() throws InvocationTargetException, IllegalAccessException {
+        List<TTselAggTopolgy> vIsTgSsDailyList = tTselAggTopolgyRepository.findAll();
+        if (vIsTgSsDailyList.size() > 0) {
+            List<TbIocMobileBackhaulTtc> backhaulTtcList = new ArrayList<>();
+            for (TTselAggTopolgy tt : vIsTgSsDailyList) {
+                TbIocMobileBackhaulTtc ttc = new TbIocMobileBackhaulTtc();
+                BeanUtils.copyProperties(ttc, tt.gettTselAggTopolgyKey());
+                ttc.setTs(new Date());
+                ttc.setWrong(BigDecimal.valueOf(tt.gettTselAggTopolgyKey().getErrors()));
+                backhaulTtcList.add(ttc);
+            }
+            tbIocMobileBackHaulTtcRepository.deleteAll();
+            tbIocMobileBackHaulTtcRepository.save(backhaulTtcList);
+        }
+
+
+    }
+
+    @Override
+    public void save_mobile_ip_transitRepository() throws InvocationTargetException, IllegalAccessException {
+        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findAll();
+        if(tIxtsel4iocList.size()>0){
+            List<TbIocMobileIpTransit> transits=new ArrayList<>();
+            for (TIxtsel4ioc t:tIxtsel4iocList){
+                TbIocMobileIpTransit tn=new TbIocMobileIpTransit();
+                BeanUtils.copyProperties(tn,t.gettIxtsel4iocKey());
+                tn.setTs(new Date());
+                transits.add(tn);
+            }
+            tbIocMobileIpTransitRepository.deleteAll();
+            tbIocMobileIpTransitRepository.save(transits);
+
+        }
+
+    }
+
+    /****Add bY Hy Chang Area End****/
+
 
     private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
         for (TPerfEnterprise4tioc tPerfEnterprise4tioc : perfEnterprise4tiocList) {

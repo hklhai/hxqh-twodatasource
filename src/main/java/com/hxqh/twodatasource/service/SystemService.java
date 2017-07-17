@@ -39,7 +39,15 @@ public interface SystemService {
     void analysis_data_mttr_targets();
 
     void analysis_data_cust_for_dws();
+
+    /***Add Hy Chang  Start ****/
     void saveSipeteVIsTgSsDailyRepository() throws InvocationTargetException, IllegalAccessException;
+
+    void saveMOBILE_BACKHAUL_TTCRepository() throws InvocationTargetException, IllegalAccessException;
+
+    void save_mobile_ip_transitRepository() throws InvocationTargetException, IllegalAccessException;
+    /***Add Hy Chang  end ****/
+
 }
 
 

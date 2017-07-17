@@ -12,11 +12,11 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="TB_IOC_MOBILE_BACKHAUL_TTC")
+@Table(name="TB_IOC_MOB_BACKHAUL_TTC_SOURCE")
  public class TbIocMobileBackhaulTtc implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@SequenceGenerator(name="TB_IOC_MOBILE_BACKHAUL_TTC_TTC_ID_GENERATOR", sequenceName="SEQ_TB_IOC_MOBILE_BACKHAUL_TTC")
+	@SequenceGenerator(name="TB_IOC_MOBILE_BACKHAUL_TTC_TTC_ID_GENERATOR", sequenceName="SEQ_TB_IOC_MOB_TTC_SOURCE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TB_IOC_MOBILE_BACKHAUL_TTC_TTC_ID_GENERATOR")
 	@Column(name="TTC_ID")
 	private BigDecimal ttcId;

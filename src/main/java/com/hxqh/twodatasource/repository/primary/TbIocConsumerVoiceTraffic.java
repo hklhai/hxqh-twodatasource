@@ -10,12 +10,12 @@ import java.util.Date;
  * The persistent class for the TB_IOC_CONSUMER_VOICE_TRAFFIC database table.
  */
 @Entity
-@Table(name = "TB_IOC_CONSUMER_VOICE_TRAFFIC")
+@Table(name = "TB_IOC_CONSUMER_VOICE_SOURCE")
 public class TbIocConsumerVoiceTraffic implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "TTB_IOC_CONSUMER_VOICE_TRAFFICVOICE_TRAFFIC_ID_GENERATOR", sequenceName = "SEQ_TB_CONSUMER_VOICE_TRAFFIC")
+    @SequenceGenerator(name = "TTB_IOC_CONSUMER_VOICE_TRAFFICVOICE_TRAFFIC_ID_GENERATOR", sequenceName = "SEQ_TB_IOC_MOB_VOICE_SOURCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TTB_IOC_CONSUMER_VOICE_TRAFFICVOICE_TRAFFIC_ID_GENERATOR")
     @Column(name = "VOICE_TRAFFIC_ID")
     private BigDecimal voiceTrafficId;
