@@ -11,7 +11,25 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "TB_IOC_CONSUMER_VOICE_SOURCE")
+@NamedStoredProcedureQueries(
+        {@NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_USER", procedureName = "p_truncate_twodatasource.trun_TB_USER"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOCCUSTOMERUSER", procedureName = "p_truncate_twodatasource.trun_TB_IOCCUSTOMERUSER"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOCENTERPRISEEVENT", procedureName = "p_truncate_twodatasource.trun_TB_IOCENTERPRISEEVENT"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOCTICKETSCREEN96", procedureName = "p_truncate_twodatasource.trun_TB_IOCTICKETSCREEN96"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOCTICKETSCREEN96", procedureName = "p_truncate_twodatasource.trun_TB_IOCTICKETSCREEN96"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOCTICKETSCREEN100", procedureName = "p_truncate_twodatasource.trun_TB_IOCTICKETSCREEN100"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOC_ENT_4TIOC", procedureName = "p_truncate_twodatasource.trun_TB_IOC_ENT_4TIOC"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOCTPORTDOWN4IOC", procedureName = "p_truncate_twodatasource.trun_TB_IOCTPORTDOWN4IOC"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOC_CENTER_MAP", procedureName = "p_truncate_twodatasource.trun_TB_IOC_CENTER_MAP"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOC_CONSUMER", procedureName = "p_truncate_twodatasource.trun_TB_IOC_CONSUMER"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOC_MOB_BACKHAUL", procedureName = "p_truncate_twodatasource.trun_TB_IOC_MOB_BACKHAUL"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOC_MOBILE_IPTRANSIT", procedureName = "p_truncate_twodatasource.trun_TB_IOC_MOBILE_IPTRANSIT"),
+        })
+
+
 public class TbIocConsumerVoiceTraffic implements Serializable {
+
+    //    @NamedStoredProcedureQuery(name = "analysis_source_portdown", procedureName = "analysis_source_portdown"),
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -140,7 +158,7 @@ public class TbIocConsumerVoiceTraffic implements Serializable {
     @Column(name = "T_SUB_AREA")
     private String tSubArea;
 
-    private String tanggal;
+    private Date tanggal;
 
     @Column(name = "TO_XCH")
     private String toXch;
@@ -599,11 +617,43 @@ public class TbIocConsumerVoiceTraffic implements Serializable {
         this.tSubArea = tSubArea;
     }
 
-    public String getTanggal() {
-        return this.tanggal;
+    public String getfArea() {
+        return fArea;
     }
 
-    public void setTanggal(String tanggal) {
+    public void setfArea(String fArea) {
+        this.fArea = fArea;
+    }
+
+    public String getfSubArea() {
+        return fSubArea;
+    }
+
+    public void setfSubArea(String fSubArea) {
+        this.fSubArea = fSubArea;
+    }
+
+    public String gettArea() {
+        return tArea;
+    }
+
+    public void settArea(String tArea) {
+        this.tArea = tArea;
+    }
+
+    public String gettSubArea() {
+        return tSubArea;
+    }
+
+    public void settSubArea(String tSubArea) {
+        this.tSubArea = tSubArea;
+    }
+
+    public Date getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(Date tanggal) {
         this.tanggal = tanggal;
     }
 

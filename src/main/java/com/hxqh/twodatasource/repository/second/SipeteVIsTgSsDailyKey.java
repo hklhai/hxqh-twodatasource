@@ -1,6 +1,7 @@
 package com.hxqh.twodatasource.repository.second;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 
@@ -178,7 +179,7 @@ public class SipeteVIsTgSsDailyKey implements Serializable {
 	private String tSubArea;
 
 	@Column(name="TANGGAL")
-	private String tanggal;
+	private Date tanggal;
 
 	@Column(name="TO_XCH")
 	private String toXch;
@@ -196,6 +197,46 @@ public class SipeteVIsTgSsDailyKey implements Serializable {
 	private String xch;
 
 	public SipeteVIsTgSsDailyKey() {
+	}
+
+	public String getfArea() {
+		return fArea;
+	}
+
+	public void setfArea(String fArea) {
+		this.fArea = fArea;
+	}
+
+	public String getfSubArea() {
+		return fSubArea;
+	}
+
+	public void setfSubArea(String fSubArea) {
+		this.fSubArea = fSubArea;
+	}
+
+	public String gettArea() {
+		return tArea;
+	}
+
+	public void settArea(String tArea) {
+		this.tArea = tArea;
+	}
+
+	public String gettSubArea() {
+		return tSubArea;
+	}
+
+	public void settSubArea(String tSubArea) {
+		this.tSubArea = tSubArea;
+	}
+
+	public Date getTanggal() {
+		return tanggal;
+	}
+
+	public void setTanggal(Date tanggal) {
+		this.tanggal = tanggal;
 	}
 
 	public String getAictraf() {
@@ -638,13 +679,7 @@ public class SipeteVIsTgSsDailyKey implements Serializable {
 		this.tSubArea = tSubArea;
 	}
 
-	public String getTanggal() {
-		return this.tanggal;
-	}
 
-	public void setTanggal(String tanggal) {
-		this.tanggal = tanggal;
-	}
 
 	public String getToXch() {
 		return this.toXch;

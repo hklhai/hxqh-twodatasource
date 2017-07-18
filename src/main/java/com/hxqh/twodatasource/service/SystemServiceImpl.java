@@ -41,12 +41,10 @@ public class SystemServiceImpl implements SystemService {
 
     @Autowired
     private TbIocConsumerVoiceTrafficRepository tbIocConsumerVoiceTrafficRepository;
-
     @Autowired
     private TbIocMobileBackHaulTtcRepository tbIocMobileBackHaulTtcRepository;
     @Autowired
-    private  TbIocMobileIpTransitRepository tbIocMobileIpTransitRepository;
-
+    private TbIocMobileIpTransitRepository tbIocMobileIpTransitRepository;
 
     /**
      * Add Hy Chang end
@@ -75,7 +73,7 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     private TTselAggTopolgyRepository tTselAggTopolgyRepository;
     @Autowired
-    private  TIxtsel4iocRepository tIxtsel4iocRepository;
+    private TIxtsel4iocRepository tIxtsel4iocRepository;
     /**
      * Add Hy Chang end
      * */
@@ -221,7 +219,6 @@ public class SystemServiceImpl implements SystemService {
         }
     }
 
-    @Transactional
     @Override
     public void analysis_source_ent_4tioc1() {
         loctperfenterprise4tiocRepository.analysis_source_ent_4tioc1();
@@ -245,13 +242,11 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public void analysis_data_mttr_targets() {
         locticketscreen96Repository.analysis_data_mttr_targets();
-
     }
 
     @Override
     public void analysis_data_cust_for_dws() {
         loccustomeruserRepository.analysis_data_cust_for_dws();
-
     }
 
 
@@ -264,7 +259,6 @@ public class SystemServiceImpl implements SystemService {
     public void saveSipeteVIsTgSsDailyRepository() throws InvocationTargetException, IllegalAccessException {
         List<SipeteVIsTgSsDaily> vIsTgSsDailyList = sipeteVIsTgSsDailyRepository.findAll();
 
-
         if (vIsTgSsDailyList != null) {
             List<TbIocConsumerVoiceTraffic> iocConsumerVoiceTrafficList = new ArrayList<>();
             for (SipeteVIsTgSsDaily s : vIsTgSsDailyList) {
@@ -272,9 +266,7 @@ public class SystemServiceImpl implements SystemService {
                 BeanUtils.copyProperties(tbIocConsumerVoiceTraffic, s.getSipeteVIsTgSsDailyKey());
                 tbIocConsumerVoiceTraffic.setTs(new Date());
                 iocConsumerVoiceTrafficList.add(tbIocConsumerVoiceTraffic);
-
             }
-
             tbIocConsumerVoiceTrafficRepository.deleteAll();
             tbIocConsumerVoiceTrafficRepository.save(iocConsumerVoiceTrafficList);
         }
@@ -301,27 +293,25 @@ public class SystemServiceImpl implements SystemService {
 
     }
 
+    @Transactional
     @Override
     public void save_mobile_ip_transitRepository() throws InvocationTargetException, IllegalAccessException {
         List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findAll();
-        if(tIxtsel4iocList.size()>0){
-            List<TbIocMobileIpTransit> transits=new ArrayList<>();
-            for (TIxtsel4ioc t:tIxtsel4iocList){
-                TbIocMobileIpTransit tn=new TbIocMobileIpTransit();
-                BeanUtils.copyProperties(tn,t.gettIxtsel4iocKey());
+        if (tIxtsel4iocList.size() > 0) {
+            List<TbIocMobileIpTransit> transits = new ArrayList<>();
+            for (TIxtsel4ioc t : tIxtsel4iocList) {
+                TbIocMobileIpTransit tn = new TbIocMobileIpTransit();
+                BeanUtils.copyProperties(tn, t.gettIxtsel4iocKey());
                 tn.setTs(new Date());
                 transits.add(tn);
             }
             tbIocMobileIpTransitRepository.deleteAll();
             tbIocMobileIpTransitRepository.save(transits);
-
         }
-
     }
 
+
     /****Add bY Hy Chang Area End****/
-
-
     private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
         for (TPerfEnterprise4tioc tPerfEnterprise4tioc : perfEnterprise4tiocList) {
             Loctperfenterprise4tioc tioc = new Loctperfenterprise4tioc();
@@ -336,6 +326,16 @@ public class SystemServiceImpl implements SystemService {
 
             loctperfenterprise4tiocs.add(tioc);
         }
+    }
+
+    @Override
+    public void testTruncate() {
+        tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_TB_USER();
+    }
+
+    @Override
+    public void analysis_data_consumer_voice() {
+        tbIocConsumerVoiceTrafficRepository.analysis_data_consumer_voice();
     }
 
 }

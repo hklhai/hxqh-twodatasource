@@ -99,24 +99,33 @@ public class ApplicationTests {
 //        systemService.analysis_data_cust_for_dws();
 //    }
 
+    // TB_IOC_CONSUMER_VOICE_SOURCE     ----->Analysis_Data_CONSUMER_Voice
+//    @Test
+//    public void analysis_data_consumer_voice() throws Exception {
+//        systemService.analysis_data_consumer_voice();
+//    }
 
 
+    //sipete_v_is_tg_ss_daily  tb_ioc_consumer_voice_source
+//    @Test
+//    public void testSipeteVIsTgSsDailyRepository() throws Exception {
+//        systemService.saveSipeteVIsTgSsDailyRepository();
+//    }
+//    @Test
+//    public void testsaveMOBILE_BACKHAUL_TTCRepository() throws Exception {
+//        systemService.saveMOBILE_BACKHAUL_TTCRepository();
+//    }
 
-  /*  @Test
-    public void testSipeteVIsTgSsDailyRepository() throws Exception {
-        systemService.saveSipeteVIsTgSsDailyRepository();
-    }
-    @Test
-    public void testsaveMOBILE_BACKHAUL_TTCRepository() throws Exception {
-        systemService.saveMOBILE_BACKHAUL_TTCRepository();
-    }
-
-    @Test
-    public void testsave_mobile_ip_transitRepository() throws Exception {
-        systemService.save_mobile_ip_transitRepository();
-    }*/
+//    @Test
+//    public void testsave_mobile_ip_transitRepository() throws Exception {
+//        systemService.save_mobile_ip_transitRepository();
+//    }
 
 
+//    @Test
+//    public void testTruncate() throws Exception {
+//        systemService.testTruncate();
+//    }
 
 
 }

@@ -46,8 +46,12 @@ public interface SystemService {
     void saveMOBILE_BACKHAUL_TTCRepository() throws InvocationTargetException, IllegalAccessException;
 
     void save_mobile_ip_transitRepository() throws InvocationTargetException, IllegalAccessException;
+
     /***Add Hy Chang  end ****/
 
+    void testTruncate();
+
+    void analysis_data_consumer_voice();
 }
 
 

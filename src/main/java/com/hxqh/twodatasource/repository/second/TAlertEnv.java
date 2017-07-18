@@ -8,24 +8,23 @@ import java.io.Serializable;
 
 /**
  * The persistent class for the t_alert_env database table.
- * 
  */
 @Entity
-@Table(name="t_alert_env")
+@Table(name = "t_alert_env")
 public class TAlertEnv implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	TAlertEnvKey tAlertEnvKey;
+    @Id
+    TAlertEnvKey tAlertEnvKey;
 
-	public TAlertEnv() {
-	}
+    public TAlertEnv() {
+    }
 
-	public TAlertEnvKey gettAlertEnvKey() {
-		return tAlertEnvKey;
-	}
+    public TAlertEnvKey gettAlertEnvKey() {
+        return tAlertEnvKey;
+    }
 
-	public void settAlertEnvKey(TAlertEnvKey tAlertEnvKey) {
-		this.tAlertEnvKey = tAlertEnvKey;
-	}
+    public void settAlertEnvKey(TAlertEnvKey tAlertEnvKey) {
+        this.tAlertEnvKey = tAlertEnvKey;
+    }
 }
