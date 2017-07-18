@@ -1,5 +1,7 @@
 package com.hxqh.twodatasource.test;
 
+import com.hxqh.twodatasource.repository.primary.TbFfmAchievementRepository;
+import com.hxqh.twodatasource.repository.primary.TbIocConsumerVoiceTrafficRepository;
 import com.hxqh.twodatasource.service.SystemService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,7 +19,8 @@ public class ApplicationTests {
 
     @Autowired
     private SystemService systemService;
-
+    @Autowired
+    private TbIocConsumerVoiceTrafficRepository tbIocConsumerVoiceTrafficRepository;
 
     @Test
     public void test() throws Exception {
@@ -116,9 +119,20 @@ public class ApplicationTests {
 //        systemService.saveMOBILE_BACKHAUL_TTCRepository();
 //    }
 
-//    @Test
+    //    @Test
 //    public void testsave_mobile_ip_transitRepository() throws Exception {
 //        systemService.save_mobile_ip_transitRepository();
+//    }
+//    TB_IOC_MOB_BACKHAUL_TTC_SOURCE   --->  Analysis_Data_MOBILE_Back_TTC
+//    @Test
+//    public void analysis_data_mobile_back_ttc() throws Exception {
+//        tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_back_ttc();
+//    }
+//
+//    //    TB_IOC_MOBILE_IPTRANSIT_SOURCE ---> Analysis_Data_MOBILE_IP_Trans
+//    @Test
+//    public void analysis_data_mobile_ip_trans() throws Exception {
+//        tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_ip_trans();
 //    }
 
 //tTruncat测试
@@ -136,6 +150,7 @@ public class ApplicationTests {
     public void testsaveVFfmAchievement() throws Exception {
         systemService.saveVFfmAchievement();
     }
+
 
 }
 

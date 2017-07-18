@@ -26,4 +26,14 @@ public interface TbIocConsumerVoiceTrafficRepository extends CrudRepository<TbIo
 
     @Procedure(name = "p_truncate_twodatasource.trun_tb_ffm_achievement")
     void p_truncate_twodatasource_trun_tb_ffm_achievement();
+
+
+    /*************************调用*****************************************/
+    @Procedure(name = "analysis_data_mobile_back_ttc")
+    void analysis_data_mobile_back_ttc();
+    @Procedure(name = "analysis_data_mobile_ip_trans")
+    void analysis_data_mobile_ip_trans();
+
+    /*************************调用*****************************************/
+
 }

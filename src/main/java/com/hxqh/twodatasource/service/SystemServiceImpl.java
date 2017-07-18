@@ -288,6 +288,7 @@ public class SystemServiceImpl implements SystemService {
             tbIocMobileBackHaulTtcRepository.deleteAll();
             tbIocMobileBackHaulTtcRepository.save(backhaulTtcList);
         }
+        tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_back_ttc();
 
 
     }
@@ -308,6 +309,7 @@ public class SystemServiceImpl implements SystemService {
             tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_TB_IOC_MOBILE_IPTRANSIT();
             tbIocMobileIpTransitRepository.save(transits);
         }
+        tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_ip_trans();
     }
 
 
@@ -338,6 +340,7 @@ public class SystemServiceImpl implements SystemService {
         tbIocConsumerVoiceTrafficRepository.analysis_data_consumer_voice();
     }
 
+    @Transactional
     @Override
     public void saveVFfm() throws InvocationTargetException, IllegalAccessException {
         List<VFfm> vFfmList = vFfmRepository.findAll();
@@ -354,6 +357,7 @@ public class SystemServiceImpl implements SystemService {
         tbFfmRepository.save(ffmList);
     }
 
+    @Transactional
     @Override
     public void saveVFfmAchievement() throws InvocationTargetException, IllegalAccessException {
         List<VFfmAchievement> vFfmAchievementList = vFfmAchievementRepository.findAll();
@@ -369,5 +373,7 @@ public class SystemServiceImpl implements SystemService {
             tbFfmAchievementRepository.save(vFfmAchievements);
         }
     }
+
+
 
 }

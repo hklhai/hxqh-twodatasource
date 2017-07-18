@@ -12,7 +12,11 @@ import java.util.Date;
 @Entity
 @Table(name = "TB_IOC_CONSUMER_VOICE_SOURCE")
 @NamedStoredProcedureQueries(
-        {@NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_USER", procedureName = "p_truncate_twodatasource.trun_TB_USER"),
+        {
+                @NamedStoredProcedureQuery(name = "analysis_data_mobile_back_ttc", procedureName = "analysis_data_mobile_back_ttc"),
+                @NamedStoredProcedureQuery(name = "analysis_data_mobile_ip_trans", procedureName = "analysis_data_mobile_ip_trans"),
+
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_USER", procedureName = "p_truncate_twodatasource.trun_TB_USER"),
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOCCUSTOMERUSER", procedureName = "p_truncate_twodatasource.trun_TB_IOCCUSTOMERUSER"),
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOCENTERPRISEEVENT", procedureName = "p_truncate_twodatasource.trun_TB_IOCENTERPRISEEVENT"),
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOCTICKETSCREEN96", procedureName = "p_truncate_twodatasource.trun_TB_IOCTICKETSCREEN96"),
@@ -24,11 +28,9 @@ import java.util.Date;
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOC_MOB_BACKHAUL", procedureName = "p_truncate_twodatasource.trun_TB_IOC_MOB_BACKHAUL"),
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOC_MOBILE_IPTRANSIT", procedureName = "p_truncate_twodatasource.trun_TB_IOC_MOBILE_IPTRANSIT"),
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_tb_ffm", procedureName = "p_truncate_twodatasource.trun_tb_ffm"),
-                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_tb_ffm_achievement", procedureName = "p_truncate_twodatasource.trun_tb_ffm_achievement"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_tb_ffm_achievement", procedureName = "p_truncate_twodatasource.trun_tb_ffm_achievement")
 
         })
-
-
 public class TbIocConsumerVoiceTraffic implements Serializable {
 
     //    @NamedStoredProcedureQuery(name = "analysis_source_portdown", procedureName = "analysis_source_portdown"),
