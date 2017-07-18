@@ -121,12 +121,21 @@ public class ApplicationTests {
 //        systemService.save_mobile_ip_transitRepository();
 //    }
 
-
+//tTruncat测试
 //    @Test
 //    public void testTruncate() throws Exception {
 //        systemService.testTruncate();
 //    }
 
+    @Test
+    public void testsaveVFfm() throws Exception {
+        systemService.saveVFfm();
+    }
+
+    @Test
+    public void testsaveVFfmAchievement() throws Exception {
+        systemService.saveVFfmAchievement();
+    }
 
 }
 

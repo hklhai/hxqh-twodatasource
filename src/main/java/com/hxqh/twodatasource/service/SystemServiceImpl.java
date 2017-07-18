@@ -34,11 +34,6 @@ public class SystemServiceImpl implements SystemService {
     private OpenstreetmapRepository openstreetmapRepository;
     @Autowired
     private Loctperfenterprise4tiocRepository loctperfenterprise4tiocRepository;
-
-    /**
-     * Add Hy Chang Start
-     */
-
     @Autowired
     private TbIocConsumerVoiceTrafficRepository tbIocConsumerVoiceTrafficRepository;
     @Autowired
@@ -46,9 +41,11 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     private TbIocMobileIpTransitRepository tbIocMobileIpTransitRepository;
 
-    /**
-     * Add Hy Chang end
-     * */
+    @Autowired
+    private TbFfmAchievementRepository tbFfmAchievementRepository;
+    @Autowired
+    private TbFfmRepository tbFfmRepository;
+
 
     /***************************MYSQL********************************/
     @Autowired
@@ -65,18 +62,16 @@ public class SystemServiceImpl implements SystemService {
     private TtwifiMttrProactiveRepository ttwifiMttrProactiveRepository;
     @Autowired
     private TStoKoordinatRepository tStoKoordinatRepository;
-    /**
-     * Add Hy Chang Start
-     */
     @Autowired
     private SipeteVIsTgSsDailyRepository sipeteVIsTgSsDailyRepository;
     @Autowired
     private TTselAggTopolgyRepository tTselAggTopolgyRepository;
     @Autowired
     private TIxtsel4iocRepository tIxtsel4iocRepository;
-    /**
-     * Add Hy Chang end
-     * */
+    @Autowired
+    private VFfmRepository vFfmRepository;
+    @Autowired
+    private VFfmAchievementRepository vFfmAchievementRepository;
 
     /***************************MYSQL********************************/
 
@@ -267,8 +262,12 @@ public class SystemServiceImpl implements SystemService {
                 tbIocConsumerVoiceTraffic.setTs(new Date());
                 iocConsumerVoiceTrafficList.add(tbIocConsumerVoiceTraffic);
             }
-            tbIocConsumerVoiceTrafficRepository.deleteAll();
+            //因为业务需要不删除数据
+            //tbIocConsumerVoiceTrafficRepository.deleteAll();
             tbIocConsumerVoiceTrafficRepository.save(iocConsumerVoiceTrafficList);
+//            tbIocConsumerVoiceTrafficRepository
+
+            //TODO
         }
     }
 
@@ -305,7 +304,8 @@ public class SystemServiceImpl implements SystemService {
                 tn.setTs(new Date());
                 transits.add(tn);
             }
-            tbIocMobileIpTransitRepository.deleteAll();
+//            tbIocMobileIpTransitRepository.deleteAll();
+            tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_TB_IOC_MOBILE_IPTRANSIT();
             tbIocMobileIpTransitRepository.save(transits);
         }
     }
@@ -336,6 +336,38 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public void analysis_data_consumer_voice() {
         tbIocConsumerVoiceTrafficRepository.analysis_data_consumer_voice();
+    }
+
+    @Override
+    public void saveVFfm() throws InvocationTargetException, IllegalAccessException {
+        List<VFfm> vFfmList = vFfmRepository.findAll();
+        List<TbFfm> ffmList = new ArrayList<>();
+        if (vFfmList.size() > 0) {
+            for (int i = 0; i < vFfmList.size(); i++) {
+                TbFfm ffm = new TbFfm();
+                BeanUtils.copyProperties(ffm, vFfmList.get(i).getvFfmKey());
+                ffm.setAdddate(new Date());
+                ffmList.add(ffm);
+            }
+        }
+        tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_tb_ffm();
+        tbFfmRepository.save(ffmList);
+    }
+
+    @Override
+    public void saveVFfmAchievement() throws InvocationTargetException, IllegalAccessException {
+        List<VFfmAchievement> vFfmAchievementList = vFfmAchievementRepository.findAll();
+        List<TbFfmAchievement> vFfmAchievements = new ArrayList<>();
+        if (vFfmAchievementList.size() > 0) {
+            for (int i = 0; i < vFfmAchievementList.size(); i++) {
+                TbFfmAchievement tbFfmAchievement = new TbFfmAchievement();
+                BeanUtils.copyProperties(tbFfmAchievement, vFfmAchievementList.get(i).getvFfmAchievementKey());
+                tbFfmAchievement.setAdddate(new Date());
+                vFfmAchievements.add(tbFfmAchievement);
+            }
+            tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_tb_ffm_achievement();
+            tbFfmAchievementRepository.save(vFfmAchievements);
+        }
     }
 
 }

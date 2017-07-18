@@ -52,6 +52,10 @@ public interface SystemService {
     void testTruncate();
 
     void analysis_data_consumer_voice();
+
+    void saveVFfm() throws InvocationTargetException, IllegalAccessException;
+
+    void saveVFfmAchievement() throws InvocationTargetException, IllegalAccessException;
 }
 
 
