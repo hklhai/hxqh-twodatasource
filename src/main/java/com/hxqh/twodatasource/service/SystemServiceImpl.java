@@ -302,6 +302,7 @@ public class SystemServiceImpl implements SystemService {
             for (TIxtsel4ioc t : tIxtsel4iocList) {
                 TbIocMobileIpTransit tn = new TbIocMobileIpTransit();
                 BeanUtils.copyProperties(tn, t.gettIxtsel4iocKey());
+                tn.setWrongs(BigDecimal.valueOf(t.gettIxtsel4iocKey().getWrong()));
                 tn.setTs(new Date());
                 transits.add(tn);
             }

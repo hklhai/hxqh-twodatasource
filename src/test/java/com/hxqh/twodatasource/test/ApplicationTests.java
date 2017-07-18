@@ -1,6 +1,5 @@
 package com.hxqh.twodatasource.test;
 
-import com.hxqh.twodatasource.repository.primary.TbFfmAchievementRepository;
 import com.hxqh.twodatasource.repository.primary.TbIocConsumerVoiceTrafficRepository;
 import com.hxqh.twodatasource.service.SystemService;
 import org.junit.Assert;
@@ -119,7 +118,8 @@ public class ApplicationTests {
 //        systemService.saveMOBILE_BACKHAUL_TTCRepository();
 //    }
 
-    //    @Test
+    //TB_IOC_CONSUMER_VOICE_SOURCE
+//    @Test
 //    public void testsave_mobile_ip_transitRepository() throws Exception {
 //        systemService.save_mobile_ip_transitRepository();
 //    }
@@ -141,15 +141,15 @@ public class ApplicationTests {
 //        systemService.testTruncate();
 //    }
 
-    @Test
-    public void testsaveVFfm() throws Exception {
-        systemService.saveVFfm();
-    }
-
-    @Test
-    public void testsaveVFfmAchievement() throws Exception {
-        systemService.saveVFfmAchievement();
-    }
+//    @Test
+//    public void testsaveVFfm() throws Exception {
+//        systemService.saveVFfm();
+//    }
+//
+//    @Test
+//    public void testsaveVFfmAchievement() throws Exception {
+//        systemService.saveVFfmAchievement();
+//    }
 
 
 }
