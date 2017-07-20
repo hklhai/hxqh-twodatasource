@@ -11,6 +11,6 @@ import java.util.List;
  */
 @Repository
 public interface TLvlEnterpriseCustRepository extends JpaRepository<TLvlEnterpriseCust, String> {
-    @Query("select 0 from TLvlEnterpriseCust o")
+    @Query("select o from TLvlEnterpriseCust o")
     List<TLvlEnterpriseCust> findAllData();
 }

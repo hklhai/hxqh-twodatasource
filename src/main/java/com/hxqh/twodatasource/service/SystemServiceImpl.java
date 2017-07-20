@@ -293,10 +293,15 @@ public class SystemServiceImpl implements SystemService {
 
     }
 
+
     @Transactional
     @Override
     public void save_mobile_ip_transitRepository() throws InvocationTargetException, IllegalAccessException {
-        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findAll();
+        //1.检查 Oracle 最大时间记录
+        Date date = tbIocConsumerVoiceTrafficRepository.getMaxDateRecord();
+        //2.查询MYSQL之后数据
+        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findMaxDateData(date);
+        //3.存入Oracle
         if (tIxtsel4iocList.size() > 0) {
             List<TbIocMobileIpTransit> transits = new ArrayList<>();
             for (TIxtsel4ioc t : tIxtsel4iocList) {
@@ -304,10 +309,11 @@ public class SystemServiceImpl implements SystemService {
                 BeanUtils.copyProperties(tn, t.gettIxtsel4iocKey());
                 tn.setWrongs(BigDecimal.valueOf(t.gettIxtsel4iocKey().getWrong()));
                 tn.setTs(new Date());
+                tn.setInterface_(t.gettIxtsel4iocKey().getIocinterface());
+                tn.setTimedata(t.getTimedata());
+
                 transits.add(tn);
             }
-//            tbIocMobileIpTransitRepository.deleteAll();
-            tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_TB_IOC_MOBILE_IPTRANSIT();
             tbIocMobileIpTransitRepository.save(transits);
         }
         tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_ip_trans();
@@ -356,6 +362,8 @@ public class SystemServiceImpl implements SystemService {
         }
         tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_tb_ffm();
         tbFfmRepository.save(ffmList);
+        //调用存储过程V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET
+        //TODO
     }
 
     @Transactional
@@ -373,8 +381,19 @@ public class SystemServiceImpl implements SystemService {
             tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_tb_ffm_achievement();
             tbFfmAchievementRepository.save(vFfmAchievements);
         }
+        //调用存储过程v_ffm_achievement  tb_ioc_pro_ticket--->Analysis_Data_PRO_TICKET_FFM
+        // TODO
     }
 
+    @Override
+    public void analysis_data_pro_ticket() {
+        tbIocConsumerVoiceTrafficRepository.analysis_data_pro_ticket();
+    }
+
+    @Override
+    public void analysis_data_pro_ticket_ffm() {
+        tbIocConsumerVoiceTrafficRepository.analysis_data_pro_ticket_ffm();
+    }
 
 
 }

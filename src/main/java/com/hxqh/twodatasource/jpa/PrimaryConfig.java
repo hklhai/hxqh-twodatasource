@@ -59,7 +59,7 @@ public class PrimaryConfig {
         Map<String, String> properties = new HashMap<>();
 //        properties.put("hibernate.hbm2ddl.auto","update");
         properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
-        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.show_sql", "false");
         properties.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
 
         jpaProperties.setProperties(properties);

@@ -28,8 +28,6 @@ public class TIxtsel4iocKey implements Serializable {
 
     private int operstatuspollable;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date timedata;
 
     private String ttc;
 
@@ -100,14 +98,6 @@ public class TIxtsel4iocKey implements Serializable {
         this.operstatuspollable = operstatuspollable;
     }
 
-    public Date getTimedata() {
-        return timedata;
-    }
-
-    public void setTimedata(Date timedata) {
-        this.timedata = timedata;
-    }
-
     public String getTtc() {
         return ttc;
     }
@@ -131,7 +121,6 @@ public class TIxtsel4iocKey implements Serializable {
         if (gate != null ? !gate.equals(that.gate) : that.gate != null) return false;
         if (iocinterface != null ? !iocinterface.equals(that.iocinterface) : that.iocinterface != null) return false;
         if (node != null ? !node.equals(that.node) : that.node != null) return false;
-        if (timedata != null ? !timedata.equals(that.timedata) : that.timedata != null) return false;
         return ttc != null ? ttc.equals(that.ttc) : that.ttc == null;
     }
 
@@ -149,7 +138,6 @@ public class TIxtsel4iocKey implements Serializable {
         result = 31 * result + (iocinterface != null ? iocinterface.hashCode() : 0);
         result = 31 * result + (node != null ? node.hashCode() : 0);
         result = 31 * result + operstatuspollable;
-        result = 31 * result + (timedata != null ? timedata.hashCode() : 0);
         result = 31 * result + (ttc != null ? ttc.hashCode() : 0);
         return result;
     }

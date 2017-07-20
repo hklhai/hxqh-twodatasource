@@ -118,17 +118,20 @@ public class ApplicationTests {
 //        systemService.saveMOBILE_BACKHAUL_TTCRepository();
 //    }
 
-    //TB_IOC_CONSUMER_VOICE_SOURCE
+    //v_ixtsel_4ioc    TB_IOC_MOBILE_IPTRANSIT_SOURCE
 //    @Test
 //    public void testsave_mobile_ip_transitRepository() throws Exception {
 //        systemService.save_mobile_ip_transitRepository();
 //    }
+
+
 //    TB_IOC_MOB_BACKHAUL_TTC_SOURCE   --->  Analysis_Data_MOBILE_Back_TTC
 //    @Test
 //    public void analysis_data_mobile_back_ttc() throws Exception {
 //        tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_back_ttc();
 //    }
-//
+
+
 //    //    TB_IOC_MOBILE_IPTRANSIT_SOURCE ---> Analysis_Data_MOBILE_IP_Trans
 //    @Test
 //    public void analysis_data_mobile_ip_trans() throws Exception {
@@ -150,6 +153,20 @@ public class ApplicationTests {
 //    public void testsaveVFfmAchievement() throws Exception {
 //        systemService.saveVFfmAchievement();
 //    }
+
+    //调用存储过程V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET
+//    @Test
+//    public void analysis_data_pro_ticket() throws Exception {
+//        systemService.analysis_data_pro_ticket();
+//    }
+//
+//
+//    //调用存储过程v_ffm_achievement  tb_ioc_pro_ticket--->Analysis_Data_PRO_TICKET_FFM
+//    @Test
+//    public void analysis_data_pro_ticket_ffm() throws Exception {
+//        systemService.analysis_data_pro_ticket_ffm();
+//    }
+
 
 
 }

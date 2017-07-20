@@ -57,6 +57,9 @@ public interface SystemService {
 
     void saveVFfmAchievement() throws InvocationTargetException, IllegalAccessException;
 
+    void analysis_data_pro_ticket();
+
+    void analysis_data_pro_ticket_ffm();
 }
 
 

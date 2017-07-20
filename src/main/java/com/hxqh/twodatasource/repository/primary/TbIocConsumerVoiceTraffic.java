@@ -15,6 +15,9 @@ import java.util.Date;
         {
                 @NamedStoredProcedureQuery(name = "analysis_data_mobile_back_ttc", procedureName = "analysis_data_mobile_back_ttc"),
                 @NamedStoredProcedureQuery(name = "analysis_data_mobile_ip_trans", procedureName = "analysis_data_mobile_ip_trans"),
+                @NamedStoredProcedureQuery(name = "analysis_data_pro_ticket", procedureName = "analysis_data_pro_ticket"),
+                @NamedStoredProcedureQuery(name = "analysis_data_pro_ticket_ffm", procedureName = "analysis_data_pro_ticket_ffm"),
+
 
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_USER", procedureName = "p_truncate_twodatasource.trun_TB_USER"),
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOCCUSTOMERUSER", procedureName = "p_truncate_twodatasource.trun_TB_IOCCUSTOMERUSER"),
@@ -33,7 +36,7 @@ import java.util.Date;
         })
 public class TbIocConsumerVoiceTraffic implements Serializable {
 
-    //    @NamedStoredProcedureQuery(name = "analysis_source_portdown", procedureName = "analysis_source_portdown"),
+    // @NamedStoredProcedureQuery(name = "analysis_source_portdown", procedureName = "analysis_source_portdown"),
     private static final long serialVersionUID = 1L;
 
     @Id
