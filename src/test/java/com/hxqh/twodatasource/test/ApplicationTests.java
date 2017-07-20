@@ -135,7 +135,7 @@ public class ApplicationTests {
 //        tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_ip_trans();
 //    }
 
-//tTruncat测试
+    //tTruncat测试
 //    @Test
 //    public void testTruncate() throws Exception {
 //        systemService.testTruncate();

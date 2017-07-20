@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -17,7 +16,6 @@ import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * Created by Ocean lin on 2017/7/7.
@@ -58,8 +56,19 @@ public class SecondaryConfig {
         Map<String, String> properties = new HashMap<>();
 //        properties.put("hibernate.hbm2ddl.auto","update");
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.show_sql", "fasle");
         properties.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
+
+        properties.put("validationInterval","30000");
+        properties.put("timeBetweenEvictionRunsMillis ","30000");
+        properties.put("maxActive","200");
+        properties.put("minIdle","10");
+        properties.put("maxWait","10000");
+        properties.put("initialSize","200");
+        properties.put("removeAbandonedTimeout","120");
+        properties.put("removeAbandoned","true");
+        properties.put("logAbandoned","false");
+        properties.put("minEvictableIdleTimeMillis","30000");
 
         jpaProperties.setProperties(properties);
         return jpaProperties.getHibernateProperties(dataSource);
