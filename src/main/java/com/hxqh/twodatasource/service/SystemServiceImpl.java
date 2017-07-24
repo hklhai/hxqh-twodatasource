@@ -3,8 +3,8 @@ package com.hxqh.twodatasource.service;
 import com.hxqh.twodatasource.repository.primary.*;
 import com.hxqh.twodatasource.repository.second.*;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +19,9 @@ import java.util.List;
  */
 @Service("systemService")
 public class SystemServiceImpl implements SystemService {
+
+    static Logger logger = Logger.getLogger(SystemServiceImpl.class);
+
 
     @Autowired
     private LocenterpriseeventRepository locenterpriseeventRepository;
@@ -91,6 +94,7 @@ public class SystemServiceImpl implements SystemService {
             locenterpriseeventRepository.deleteAll();
             locenterpriseeventRepository.save(locenterpriseeventList);
         }
+        logger.info(new Date() + " t_alert_env-->TB_IOCENTERPRISEEVENT");
     }
 
     @Transactional
@@ -111,6 +115,7 @@ public class SystemServiceImpl implements SystemService {
             loccustomeruserRepository.deleteAll();
             loccustomeruserRepository.save(loccustomeruserList);
         }
+        logger.info(new Date() + " v_lvl_enterprise_cust-->TB_IOCCUSTOMERUSER");
     }
 
     @Transactional
@@ -129,6 +134,7 @@ public class SystemServiceImpl implements SystemService {
             locticketscreen100Repository.deleteAll();
             locticketscreen100Repository.save(locticketscreen100List);
         }
+        logger.info(new Date() + " ttwifi_monitor_mttr_proactive-->TB_IOCTICKETSCREEN100");
     }
 
     @Transactional
@@ -147,6 +153,8 @@ public class SystemServiceImpl implements SystemService {
             loctportdown4iocRepository.deleteAll();
             loctportdown4iocRepository.save(loctportdown4iocs);
         }
+        logger.info(new Date() + " v_portdown_4ioc-->TB_IOCTPORTDOWN4IOC");
+
     }
 
     @Transactional
@@ -164,6 +172,8 @@ public class SystemServiceImpl implements SystemService {
             locticketscreen96Repository.deleteAll();
             locticketscreen96Repository.save(locticketscreen96s);
         }
+        logger.info(new Date() + " ttwifi_mttr_proactive_last_month-->TB_IOCTICKETSCREEN96");
+
     }
 
     @Transactional
@@ -186,6 +196,8 @@ public class SystemServiceImpl implements SystemService {
             openstreetmapRepository.deleteAll();
             openstreetmapRepository.save(openstreetmapList);
         }
+        logger.info(new Date() + " t_sto_koordinat-->TB_IOC_CENTER_MAP");
+
     }
 
     @Transactional
@@ -211,6 +223,23 @@ public class SystemServiceImpl implements SystemService {
             List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
             dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
             loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
+        }
+        logger.info(new Date() + " v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC");
+    }
+
+    private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
+        for (TPerfEnterprise4tioc tPerfEnterprise4tioc : perfEnterprise4tiocList) {
+            Loctperfenterprise4tioc tioc = new Loctperfenterprise4tioc();
+            BeanUtils.copyProperties(tioc, tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey());
+
+            tioc.seteRsiTimedata(tPerfEnterprise4tioc.geteRsiTimedata());
+            tioc.setAdddate(new Date());
+
+            tioc.setCusttype(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getCusttype());
+            tioc.seteRsiBitspersecondin(BigDecimal.valueOf(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getErsibitspersecondin()));
+            tioc.seteRsiBitspersecondout(BigDecimal.valueOf(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getErsibitspersecondout()));
+
+            loctperfenterprise4tiocs.add(tioc);
         }
     }
 
@@ -248,7 +277,6 @@ public class SystemServiceImpl implements SystemService {
     /**
      * Add By Hy Chang Area Start
      */
-
     @Transactional
     @Override
     public void saveSipeteVIsTgSsDailyRepository() throws InvocationTargetException, IllegalAccessException {
@@ -263,12 +291,10 @@ public class SystemServiceImpl implements SystemService {
                 iocConsumerVoiceTrafficList.add(tbIocConsumerVoiceTraffic);
             }
             //因为业务需要不删除数据
-            //tbIocConsumerVoiceTrafficRepository.deleteAll();
             tbIocConsumerVoiceTrafficRepository.save(iocConsumerVoiceTrafficList);
-//            tbIocConsumerVoiceTrafficRepository
-
-            //TODO
         }
+        logger.info(new Date() + " sipete_v_is_tg_ss_daily-->TB_IOC_CONSUMER_VOICE_SOURCE");
+
     }
 
 
@@ -289,8 +315,7 @@ public class SystemServiceImpl implements SystemService {
             tbIocMobileBackHaulTtcRepository.save(backhaulTtcList);
         }
         tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_back_ttc();
-
-
+        logger.info(new Date() + " t_tsel_agg_topolgy-->TB_IOC_MOB_BACKHAUL_TTC_SOURCE");
     }
 
 
@@ -317,25 +342,12 @@ public class SystemServiceImpl implements SystemService {
             tbIocMobileIpTransitRepository.save(transits);
         }
         tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_ip_trans();
+
+        logger.info(new Date() + " v_ixtsel_4ioc-->TB_IOC_MOBILE_IPTRANSIT_SOURCE-->analysis_data_mobile_ip_trans");
+
     }
-
-
     /****Add bY Hy Chang Area End****/
-    private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
-        for (TPerfEnterprise4tioc tPerfEnterprise4tioc : perfEnterprise4tiocList) {
-            Loctperfenterprise4tioc tioc = new Loctperfenterprise4tioc();
-            BeanUtils.copyProperties(tioc, tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey());
 
-            tioc.seteRsiTimedata(tPerfEnterprise4tioc.geteRsiTimedata());
-            tioc.setAdddate(new Date());
-
-            tioc.setCusttype(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getCusttype());
-            tioc.seteRsiBitspersecondin(BigDecimal.valueOf(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getErsibitspersecondin()));
-            tioc.seteRsiBitspersecondout(BigDecimal.valueOf(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getErsibitspersecondout()));
-
-            loctperfenterprise4tiocs.add(tioc);
-        }
-    }
 
     @Override
     public void testTruncate() {
@@ -362,8 +374,10 @@ public class SystemServiceImpl implements SystemService {
         }
         tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_tb_ffm();
         tbFfmRepository.save(ffmList);
-        //调用存储过程V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET
-        //TODO
+        //调用存储过程
+        tbIocConsumerVoiceTrafficRepository.analysis_data_pro_ticket();
+
+        logger.info(new Date() + " V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET");
     }
 
     @Transactional
@@ -381,8 +395,9 @@ public class SystemServiceImpl implements SystemService {
             tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_tb_ffm_achievement();
             tbFfmAchievementRepository.save(vFfmAchievements);
         }
-        //调用存储过程v_ffm_achievement  tb_ioc_pro_ticket--->Analysis_Data_PRO_TICKET_FFM
-        // TODO
+        //调用存储过程
+        tbIocConsumerVoiceTrafficRepository.analysis_data_pro_ticket_ffm();
+        logger.info(new Date() + " v_ffm_achievement-->tb_ioc_pro_ticket--->Analysis_Data_PRO_TICKET_FFM");
     }
 
     @Override

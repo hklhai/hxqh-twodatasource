@@ -25,7 +25,7 @@ public class ApplicationTests {
     public void test() throws Exception {
         Assert.assertTrue(1 == 1);
     }
-
+//T_ALERT_ENV-->TB_IOCENTERPRISEEVENT
 //    @Test
 //    public void testTAlertEnv() throws Exception {
 //        systemService.saveAlertEnvs();
@@ -149,18 +149,18 @@ public class ApplicationTests {
 //        systemService.saveVFfm();
 //    }
 //
-//    @Test
-//    public void testsaveVFfmAchievement() throws Exception {
-//        systemService.saveVFfmAchievement();
-//    }
+    @Test
+    public void testsaveVFfmAchievement() throws Exception {
+        systemService.saveVFfmAchievement();
+    }
 
     //调用存储过程V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET
 //    @Test
 //    public void analysis_data_pro_ticket() throws Exception {
 //        systemService.analysis_data_pro_ticket();
 //    }
-//
-//
+
+
 //    //调用存储过程v_ffm_achievement  tb_ioc_pro_ticket--->Analysis_Data_PRO_TICKET_FFM
 //    @Test
 //    public void analysis_data_pro_ticket_ffm() throws Exception {
