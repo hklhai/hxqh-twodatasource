@@ -149,10 +149,10 @@ public class ApplicationTests {
 //        systemService.saveVFfm();
 //    }
 //
-    @Test
-    public void testsaveVFfmAchievement() throws Exception {
-        systemService.saveVFfmAchievement();
-    }
+//    @Test
+//    public void testsaveVFfmAchievement() throws Exception {
+//        systemService.saveVFfmAchievement();
+//    }
 
     //调用存储过程V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET
 //    @Test
