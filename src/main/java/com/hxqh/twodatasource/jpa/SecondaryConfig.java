@@ -59,16 +59,21 @@ public class SecondaryConfig {
         properties.put("hibernate.show_sql", "fasle");
         properties.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
 
-        properties.put("validationInterval","30000");
-        properties.put("timeBetweenEvictionRunsMillis ","30000");
-        properties.put("maxActive","200");
-        properties.put("minIdle","10");
-        properties.put("maxWait","10000");
-        properties.put("initialSize","200");
-        properties.put("removeAbandonedTimeout","120");
-        properties.put("removeAbandoned","true");
-        properties.put("logAbandoned","false");
-        properties.put("minEvictableIdleTimeMillis","30000");
+        properties.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
+
+
+
+
+//        properties.put("validationInterval","30000");
+//        properties.put("timeBetweenEvictionRunsMillis ","30000");
+//        properties.put("maxActive","200");
+//        properties.put("minIdle","10");
+//        properties.put("maxWait","30000");
+//        properties.put("initialSize","200");
+//        properties.put("removeAbandonedTimeout","120");
+//        properties.put("removeAbandoned","true");
+//        properties.put("logAbandoned","false");
+//        properties.put("minEvictableIdleTimeMillis","30000");
 
         jpaProperties.setProperties(properties);
         return jpaProperties.getHibernateProperties(dataSource);
