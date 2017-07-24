@@ -108,7 +108,7 @@ public class ApplicationTests {
 //    }
 
 
-    //sipete_v_is_tg_ss_daily  tb_ioc_consumer_voice_source
+//    sipete_v_is_tg_ss_daily  tb_ioc_consumer_voice_source -->TB_IOC_CONSUMER_VOICE_SOURCE
 //    @Test
 //    public void testSipeteVIsTgSsDailyRepository() throws Exception {
 //        systemService.saveSipeteVIsTgSsDailyRepository();

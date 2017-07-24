@@ -293,6 +293,7 @@ public class SystemServiceImpl implements SystemService {
             //因为业务需要不删除数据
             tbIocConsumerVoiceTrafficRepository.save(iocConsumerVoiceTrafficList);
         }
+        tbIocConsumerVoiceTrafficRepository.analysis_data_consumer_voice();
         logger.info(new Date() + " sipete_v_is_tg_ss_daily-->TB_IOC_CONSUMER_VOICE_SOURCE");
 
     }
