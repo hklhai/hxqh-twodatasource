@@ -59,8 +59,9 @@ public class ApplicationTests {
 //    @Test
 //    public void testTPerfEnterprise4tiocRepository() throws Exception {
 //        systemService.saveTPerfEnterprise4tiocRepository();
+////        systemService.analysis_source_ent_4tioc1();
 //    }
-//
+////
 //
 //    //调用存储过程  analysis_source_ent_4tioc1
 //    //V_PERF_ENTERPRISE_4TIOC1           tb_ioctperfenterprise4tioc      Analysis_Source_ENT_4TIOC1
@@ -148,19 +149,19 @@ public class ApplicationTests {
 //    public void testsaveVFfm() throws Exception {
 //        systemService.saveVFfm();
 //    }
-//
+
 //    @Test
 //    public void testsaveVFfmAchievement() throws Exception {
 //        systemService.saveVFfmAchievement();
 //    }
 
-    //调用存储过程V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET
+//    //调用存储过程V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET
 //    @Test
 //    public void analysis_data_pro_ticket() throws Exception {
 //        systemService.analysis_data_pro_ticket();
 //    }
-
-
+//
+//
 //    //调用存储过程v_ffm_achievement  tb_ioc_pro_ticket--->Analysis_Data_PRO_TICKET_FFM
 //    @Test
 //    public void analysis_data_pro_ticket_ffm() throws Exception {

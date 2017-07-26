@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.Null;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -203,28 +204,23 @@ public class SystemServiceImpl implements SystemService {
     @Transactional
     @Override
     public void saveTPerfEnterprise4tiocRepository() throws Exception {
+        //判断Oracle数据库中是否有记录，如果没有从MYSQL中全量导入一天数据；如果有数据，查询日期最大做增量导入
 
-        //查询当前最大值
-        List<Loctperfenterprise4tioc> maxDateData = loctperfenterprise4tiocRepository.findMaxDateData();
-        Loctperfenterprise4tioc tioc = null;
-        if (maxDateData.size() == 0) {//maxDateData.getIoctperfenterpriseid()!=null&&maxDateData.getAdddate()!=null
-            //从MYSQL 中查询数据
-            if (maxDateData.size() >= 1) {
-                tioc = maxDateData.get(0);
-            }
-            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(tioc.geteRsiTimedata());
-
+        //1.查询Oracle当前最大时间
+        String maxDate = loctperfenterprise4tiocRepository.findMaxDateData();
+        if (null != maxDate) {
+            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(maxDate);
             List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
             dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
             loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
         } else {
-            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findAllDataTEST();
-//            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findAllData();
+            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findAll();
             List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
             dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
             loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
         }
-        logger.info(new Date() + " v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC");
+        logger.info(new Date() + " v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC--->analysis_source_ent_4tioc1");
+
     }
 
     private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
@@ -347,6 +343,7 @@ public class SystemServiceImpl implements SystemService {
         logger.info(new Date() + " v_ixtsel_4ioc-->TB_IOC_MOBILE_IPTRANSIT_SOURCE-->analysis_data_mobile_ip_trans");
 
     }
+
     /****Add bY Hy Chang Area End****/
 
 
@@ -376,9 +373,8 @@ public class SystemServiceImpl implements SystemService {
         tbIocConsumerVoiceTrafficRepository.p_truncate_twodatasource_trun_tb_ffm();
         tbFfmRepository.save(ffmList);
         //调用存储过程
-        tbIocConsumerVoiceTrafficRepository.analysis_data_pro_ticket();
-
-        logger.info(new Date() + " V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET");
+//        tbIocConsumerVoiceTrafficRepository.analysis_data_pro_ticket();
+        logger.info(new Date() + " V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET ");
     }
 
     @Transactional
@@ -398,7 +394,7 @@ public class SystemServiceImpl implements SystemService {
         }
         //调用存储过程
         tbIocConsumerVoiceTrafficRepository.analysis_data_pro_ticket_ffm();
-        logger.info(new Date() + " v_ffm_achievement-->tb_ioc_pro_ticket--->Analysis_Data_PRO_TICKET_FFM");
+        logger.info(new Date() + " v_ffm_achievement-->TB_IOC_PRO_TICKET_FFM--->Analysis_Data_PRO_TICKET_FFM");
     }
 
     @Override

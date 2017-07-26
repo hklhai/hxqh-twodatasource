@@ -1,5 +1,6 @@
 package com.hxqh.twodatasource.controller;
 
+import com.hxqh.twodatasource.repository.primary.TbIocConsumerVoiceTrafficRepository;
 import com.hxqh.twodatasource.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -13,12 +14,13 @@ public class HxqhTimer {
 
     @Autowired
     private SystemService systemService;
-
+    @Autowired
+    private TbIocConsumerVoiceTrafficRepository tbIocConsumerVoiceTrafficRepository;
 
     //每天早八点到晚八点，间隔5分钟执行任务
     //MYSQL(Source)   -->     Oracle(Target)
     //t_alert_env             tb_iocenterpriseevent
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 */5 * * * * ")
     public void execTAlertEnv() {
         try {
             systemService.saveAlertEnvs();
@@ -31,7 +33,7 @@ public class HxqhTimer {
     }
 
     //ttwifi_monitor_mttr_proactive             tb_IOCTICKETSCREEN100
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 */5 * * * * ")
     public void execWifiMonitor() {
         try {
             systemService.saveTtwifiMonitor();
@@ -46,7 +48,7 @@ public class HxqhTimer {
 
     //每天早八点到晚八点，间隔5分钟执行任务
     //T_LVL_ENTERPRISE_CUST             tb_IOCCUSTOMERUSER
-    @Scheduled(cron = "0 0/60 8-20 * * ?")
+    @Scheduled(cron = "0 */5 * * * * ")
     public void execTLvlEnterpriseCust() {
         try {
             systemService.saveEnterpriseCusts();
@@ -57,7 +59,7 @@ public class HxqhTimer {
     }
 
     //T_PORTDOWN_4IOC             tb_IOCTPORTDOWN4IOC
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 */5 * * * * ")
     public void execPortdown() {
         try {
             systemService.saveTPortdown();
@@ -69,7 +71,7 @@ public class HxqhTimer {
     }
 
     //ttwifi_mttr_proactive_last_month             tb_iocticketScreen96
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 */5 * * * * ")
     public void execMttrProactive() {
         try {
             systemService.saveTtwifiMttr();
@@ -81,7 +83,7 @@ public class HxqhTimer {
     }
 
     //t_sto_koordinat             TB_IOC_CENTER_MAP
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 */5 * * * * ")
     public void execStoKoordinat() {
         try {
             systemService.saveTStoKoordinat();
@@ -92,11 +94,10 @@ public class HxqhTimer {
 
 
     //v_perf_enterprise_4tioc1             TB_IOC_ENT_4TIOC
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 */5 * * * * ")
     public void execPerfEnterprise4tiocRepository() {
         try {
             systemService.saveTPerfEnterprise4tiocRepository();
-
             systemService.analysis_source_ent_4tioc1();
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,19 +105,18 @@ public class HxqhTimer {
     }
 
     //sipete_v_is_tg_ss_daily             TB_IOC_CONSUMER_VOICE_TRAFFIC
-    @Scheduled(cron = "0 0/15 8-20 * * ?")
+    @Scheduled(cron = "0 */15 * * * * ")
     public void execSipeteVIsTgSsDailyRepository() {
         try {
             systemService.saveSipeteVIsTgSsDailyRepository();
-
-            //systemService.analysis_source_ent_4tioc1();
+            systemService.analysis_source_ent_4tioc1();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //t_tsel_agg_topolgy             TB_IOC_MOBILE_BACKHAUL_TTC
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 */5 * * * * ")
     public void execMOBILE_BACKHAUL_TTCRepository() {
         try {
             systemService.saveMOBILE_BACKHAUL_TTCRepository();
@@ -127,7 +127,7 @@ public class HxqhTimer {
     }
 
     //v_ixtsel_4ioc             TB_IOC_MOBILE_BACKHAUL_TTC
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    @Scheduled(cron = "0 */5 * * * * ")
     public void exec_mobile_ip_transitRepository() {
         try {
             systemService.save_mobile_ip_transitRepository();
@@ -138,18 +138,17 @@ public class HxqhTimer {
         }
     }
 
-
-    @Scheduled(cron = "0 0/10 8-20 * * ?")
+    @Scheduled(cron = "0 */10 * * * * ")
     public void exec_saveVFfm() {
         try {
             systemService.saveVFfm();
-
+            systemService.analysis_data_pro_ticket();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Scheduled(cron = "0 0/10 8-20 * * ?")
+    @Scheduled(cron = "0 */10 * * * * ")
     public void saveVFfmAchievement() {
         try {
             systemService.saveVFfmAchievement();
