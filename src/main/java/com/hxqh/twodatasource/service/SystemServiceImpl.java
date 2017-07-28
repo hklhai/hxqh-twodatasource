@@ -1,5 +1,6 @@
 package com.hxqh.twodatasource.service;
 
+import com.hxqh.twodatasource.pojo.GroupNode;
 import com.hxqh.twodatasource.repository.primary.*;
 import com.hxqh.twodatasource.repository.second.*;
 import org.apache.commons.beanutils.BeanUtils;
@@ -13,7 +14,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by Ocean lin on 2017/7/9.
@@ -204,36 +209,32 @@ public class SystemServiceImpl implements SystemService {
     @Transactional
     @Override
     public void saveTPerfEnterprise4tiocRepository() throws Exception {
-        //判断Oracle数据库中是否有记录，如果没有从MYSQL中全量导入一天数据；如果有数据，查询日期最大做增量导入
+        //查询Oracle最大中最大值mysqlid
+        BigDecimal mySQLId_Oracle = loctperfenterprise4tiocRepository.findMaxMySQLId();
+        BigDecimal mySQLId_MySQL = enterprise4tiocRepository.findMaxSQLId();
 
-        //1.查询Oracle当前最大时间
-        String maxDate = loctperfenterprise4tiocRepository.findMaxDateData();
-        if (null != maxDate) {
-            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(maxDate);
-            List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
-            dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
-            loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
-        } else {
-            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findAll();
+        if(mySQLId_MySQL.compareTo(mySQLId_Oracle)>0)
+        {
+            //可以增加分批次的交互逻辑
+            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(mySQLId_Oracle,mySQLId_MySQL);
             List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
             dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
             loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
         }
         logger.info(new Date() + " v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC--->analysis_source_ent_4tioc1");
-
     }
 
     private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
         for (TPerfEnterprise4tioc tPerfEnterprise4tioc : perfEnterprise4tiocList) {
             Loctperfenterprise4tioc tioc = new Loctperfenterprise4tioc();
-            BeanUtils.copyProperties(tioc, tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey());
+            BeanUtils.copyProperties(tioc, tPerfEnterprise4tioc);
 
             tioc.seteRsiTimedata(tPerfEnterprise4tioc.geteRsiTimedata());
             tioc.setAdddate(new Date());
 
-            tioc.setCusttype(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getCusttype());
-            tioc.seteRsiBitspersecondin(BigDecimal.valueOf(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getErsibitspersecondin()));
-            tioc.seteRsiBitspersecondout(BigDecimal.valueOf(tPerfEnterprise4tioc.gettPerfEnterprise4tiocKey().getErsibitspersecondout()));
+            tioc.setCusttype(tPerfEnterprise4tioc.getCusttype());
+            tioc.seteRsiBitspersecondin(BigDecimal.valueOf(tPerfEnterprise4tioc.getErsibitspersecondin()));
+            tioc.seteRsiBitspersecondout(BigDecimal.valueOf(tPerfEnterprise4tioc.getErsibitspersecondout()));
 
             loctperfenterprise4tiocs.add(tioc);
         }
@@ -406,6 +407,64 @@ public class SystemServiceImpl implements SystemService {
     public void analysis_data_pro_ticket_ffm() {
         tbIocConsumerVoiceTrafficRepository.analysis_data_pro_ticket_ffm();
     }
+
+    @Override
+    public void mutilThreadIOC_ENT_4TIOC() {
+//        //1.查询MySQL最大ID
+//        BigDecimal mysqlMaxId = null;
+//        //2.查询Oracle最大ID
+//        BigDecimal oracleMaxId = null;
+//
+//        //3.大于20W 采用多线程
+//
+//        //4.小于20W正常走插入程序
+//        List<GroupNode> groupNodes = groupNode(oracleMaxId, mysqlMaxId, 1000);
+//        multiThread(groupNodes);
+    }
+
+    private static List<GroupNode> groupNode(BigDecimal start, BigDecimal end, int count) {
+        List<GroupNode> groupNodes = new LinkedList<>();
+
+        BigDecimal subtract = end.subtract(start).add(new BigDecimal(1));
+        Integer size = subtract.intValue();
+        Integer num = (size) % count == 0 ? (size / count) : (size / count + 1);
+
+        for (int j = 0; j < num; j++) {
+            int i = j + 1;
+            if (i == 1 || i == num) {
+                start = BigDecimal.valueOf((i - 1) * count).add(new BigDecimal(1));
+                end = BigDecimal.valueOf((i * count) > size ? size : (i * count));
+                groupNodes.add(new GroupNode(start, end));
+            } else {
+                start = BigDecimal.valueOf((i - 1) * count);
+                end = BigDecimal.valueOf((i * count) > size ? size : (i * count));
+                groupNodes.add(new GroupNode(start.add(new BigDecimal(1)), end));
+            }
+        }
+        return groupNodes;
+    }
+
+//    private void multiThread(List<GroupNode> groupNodes) {
+//
+//        /**
+//         * 使用线程池进行线程管理。
+//         */
+//        ExecutorService es = Executors.newCachedThreadPool();
+//        /**
+//         * 使用计数栅栏
+//         */
+//        CountDownLatch doneSignal = new CountDownLatch(3);
+//        try {
+//
+//            for (int i = 0; i < groupNodes.size(); i++) {
+//                es.submit(persist(groupNodes.get(i)));
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+
 
 
 }

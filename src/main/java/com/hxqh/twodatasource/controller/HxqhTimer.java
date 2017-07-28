@@ -104,6 +104,18 @@ public class HxqhTimer {
         }
     }
 
+
+    //v_perf_enterprise_4tioc1             TB_IOC_ENT_4TIOC
+    @Scheduled(cron = "0 */5 * * * * ")
+    public void mutilThreadIOC_ENT_4TIOC() {
+        try {
+//            systemService.mutilThreadIOC_ENT_4TIOC();
+//            systemService.analysis_source_ent_4tioc1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     //sipete_v_is_tg_ss_daily             TB_IOC_CONSUMER_VOICE_TRAFFIC
     @Scheduled(cron = "0 */15 * * * * ")
     public void execSipeteVIsTgSsDailyRepository() {

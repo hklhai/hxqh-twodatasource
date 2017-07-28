@@ -58,7 +58,17 @@ public class Loctperfenterprise4tioc implements Serializable {
 
     private String treg;
 
+    private BigDecimal mysqlid;
+
     public Loctperfenterprise4tioc() {
+    }
+
+    public BigDecimal getMysqlid() {
+        return mysqlid;
+    }
+
+    public void setMysqlid(BigDecimal mysqlid) {
+        this.mysqlid = mysqlid;
     }
 
     public BigDecimal geteRsiBitspersecondin() {

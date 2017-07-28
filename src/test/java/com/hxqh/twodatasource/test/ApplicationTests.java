@@ -56,11 +56,11 @@ public class ApplicationTests {
 //        systemService.saveTtwifiMttr();
 //    }
 //
-//    @Test
-//    public void testTPerfEnterprise4tiocRepository() throws Exception {
-//        systemService.saveTPerfEnterprise4tiocRepository();
-////        systemService.analysis_source_ent_4tioc1();
-//    }
+    @Test
+    public void testTPerfEnterprise4tiocRepository() throws Exception {
+        systemService.saveTPerfEnterprise4tiocRepository();
+//        systemService.analysis_source_ent_4tioc1();
+    }
 ////
 //
 //    //调用存储过程  analysis_source_ent_4tioc1

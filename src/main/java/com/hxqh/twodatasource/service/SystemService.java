@@ -60,6 +60,8 @@ public interface SystemService {
     void analysis_data_pro_ticket();
 
     void analysis_data_pro_ticket_ffm();
+
+    void mutilThreadIOC_ENT_4TIOC();
 }
 
 

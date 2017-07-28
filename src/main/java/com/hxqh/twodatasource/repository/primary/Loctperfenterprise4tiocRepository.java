@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 @Repository
 public interface Loctperfenterprise4tiocRepository extends CrudRepository<Loctperfenterprise4tioc, BigDecimal> {
 
-    @Query("select max(o.eRsiTimedata) from Loctperfenterprise4tioc o")
-    String findMaxDateData();
+    @Query("select max(o.mysqlid) from Loctperfenterprise4tioc o")
+    BigDecimal findMaxMySQLId();
 
     @Procedure(name = "analysis_source_ent_4tioc1")
     void analysis_source_ent_4tioc1();
