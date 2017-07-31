@@ -87,6 +87,7 @@ public class HxqhTimer {
     public void execStoKoordinat() {
         try {
             systemService.saveTStoKoordinat();
+            //TODO
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -121,7 +122,8 @@ public class HxqhTimer {
     public void execSipeteVIsTgSsDailyRepository() {
         try {
             systemService.saveSipeteVIsTgSsDailyRepository();
-            systemService.analysis_source_ent_4tioc1();
+            //systemService.analysis_source_ent_4tioc1();
+            //TODO
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -133,6 +135,7 @@ public class HxqhTimer {
         try {
             systemService.saveMOBILE_BACKHAUL_TTCRepository();
             //systemService.analysis_source_ent_4tioc1();
+            //TODO
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -143,7 +146,7 @@ public class HxqhTimer {
     public void exec_mobile_ip_transitRepository() {
         try {
             systemService.save_mobile_ip_transitRepository();
-
+            //TODO
             //  systemService.analysis_source_ent_4tioc1();
         } catch (Exception e) {
             e.printStackTrace();

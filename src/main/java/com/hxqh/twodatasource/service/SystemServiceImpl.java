@@ -212,14 +212,14 @@ public class SystemServiceImpl implements SystemService {
         //查询Oracle最大中最大值mysqlid
         BigDecimal mySQLId_Oracle = loctperfenterprise4tiocRepository.findMaxMySQLId();
         BigDecimal mySQLId_MySQL = enterprise4tiocRepository.findMaxSQLId();
-
-        if(mySQLId_MySQL.compareTo(mySQLId_Oracle)>0)
-        {
-            //可以增加分批次的交互逻辑
-            List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(mySQLId_Oracle,mySQLId_MySQL);
-            List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
-            dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
-            loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
+        if(null!=mySQLId_MySQL&&null!=mySQLId_Oracle) {
+            if (mySQLId_MySQL.compareTo(mySQLId_Oracle) > 0) {
+                //可以增加分批次的交互逻辑
+                List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(mySQLId_Oracle, mySQLId_MySQL);
+                List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
+                dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
+                loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
+            }
         }
         logger.info(new Date() + " v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC--->analysis_source_ent_4tioc1");
     }
