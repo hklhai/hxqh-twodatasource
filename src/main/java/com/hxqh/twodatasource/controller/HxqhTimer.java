@@ -97,7 +97,7 @@ public class HxqhTimer {
 
 
     //v_perf_enterprise_4tioc1             TB_IOC_ENT_4TIOC
-    @Scheduled(cron = "0 */5 * * * * ")
+    @Scheduled(cron = "0 */6 * * * * ")
     public void execPerfEnterprise4tiocRepository() {
         try {
 
