@@ -117,7 +117,7 @@ public class HxqhTimer {
                     if (node.getMysqlEnd().compareTo(arangeValue) > 0) {
                         BigDecimal tmp = node.getOracleEnd();
                         int i = 0;
-                        while (node.getMysqlEnd().compareTo(tmp) > 0 && i < 2000000) {
+                        while (node.getMysqlEnd().compareTo(tmp) > 0 && i < 200000) {
                             BigDecimal addVal = tmp.add(new BigDecimal(1000));
                             systemService.saveTPerfEnterprise4tiocRepository(tmp, addVal);
                             //获取实际List长度
