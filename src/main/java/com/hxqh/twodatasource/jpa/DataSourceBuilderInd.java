@@ -24,12 +24,12 @@ public class DataSourceBuilderInd {
 
     private Map<String, String> properties = new HashMap<String, String>();
 
-    public static DataSourceBuilder create() {
-        return new DataSourceBuilder(null);
+    public static DataSourceBuilderInd create() {
+        return new DataSourceBuilderInd(null);
     }
 
-    public static DataSourceBuilder create(ClassLoader classLoader) {
-        return new DataSourceBuilder(classLoader);
+    public static DataSourceBuilderInd create(ClassLoader classLoader) {
+        return new DataSourceBuilderInd(classLoader);
     }
 
     public DataSourceBuilderInd(ClassLoader classLoader) {

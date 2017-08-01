@@ -113,7 +113,7 @@ public class HxqhTimer {
                 //如果mysql数据源没有更新数据不必迁移
                 if (node.getMysqlEnd().compareTo(node.getOracleEnd()) > 0) {
                     //如果迁移数据大于100000则分批次迁移
-                    BigDecimal arangeValue = node.getOracleEnd().add(new BigDecimal(200000));
+                    BigDecimal arangeValue = node.getOracleEnd().add(new BigDecimal(50000));
                     if (node.getMysqlEnd().compareTo(arangeValue) > 0) {
                         BigDecimal tmp = node.getOracleEnd();
                         int i = 0;
