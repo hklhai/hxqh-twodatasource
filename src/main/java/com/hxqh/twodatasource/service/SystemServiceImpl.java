@@ -100,7 +100,7 @@ public class SystemServiceImpl implements SystemService {
             locenterpriseeventRepository.deleteAll();
             locenterpriseeventRepository.save(locenterpriseeventList);
         }
-        logger.info(new Date() + " t_alert_env-->TB_IOCENTERPRISEEVENT");
+        logger.info(" t_alert_env-->TB_IOCENTERPRISEEVENT");
     }
 
     @Transactional
@@ -121,7 +121,7 @@ public class SystemServiceImpl implements SystemService {
             loccustomeruserRepository.deleteAll();
             loccustomeruserRepository.save(loccustomeruserList);
         }
-        logger.info(new Date() + " v_lvl_enterprise_cust-->TB_IOCCUSTOMERUSER");
+        logger.info(" v_lvl_enterprise_cust-->TB_IOCCUSTOMERUSER");
     }
 
     @Transactional
@@ -140,7 +140,7 @@ public class SystemServiceImpl implements SystemService {
             locticketscreen100Repository.deleteAll();
             locticketscreen100Repository.save(locticketscreen100List);
         }
-        logger.info(new Date() + " ttwifi_monitor_mttr_proactive-->TB_IOCTICKETSCREEN100");
+        logger.info(" ttwifi_monitor_mttr_proactive-->TB_IOCTICKETSCREEN100");
     }
 
     @Transactional
@@ -159,7 +159,7 @@ public class SystemServiceImpl implements SystemService {
             loctportdown4iocRepository.deleteAll();
             loctportdown4iocRepository.save(loctportdown4iocs);
         }
-        logger.info(new Date() + " v_portdown_4ioc-->TB_IOCTPORTDOWN4IOC");
+        logger.info(" v_portdown_4ioc-->TB_IOCTPORTDOWN4IOC");
 
     }
 
@@ -178,7 +178,7 @@ public class SystemServiceImpl implements SystemService {
             locticketscreen96Repository.deleteAll();
             locticketscreen96Repository.save(locticketscreen96s);
         }
-        logger.info(new Date() + " ttwifi_mttr_proactive_last_month-->TB_IOCTICKETSCREEN96");
+        logger.info(" ttwifi_mttr_proactive_last_month-->TB_IOCTICKETSCREEN96");
 
     }
 
@@ -202,7 +202,7 @@ public class SystemServiceImpl implements SystemService {
             openstreetmapRepository.deleteAll();
             openstreetmapRepository.save(openstreetmapList);
         }
-        logger.info(new Date() + " t_sto_koordinat-->TB_IOC_CENTER_MAP");
+        logger.info(" t_sto_koordinat-->TB_IOC_CENTER_MAP");
 
     }
 
@@ -211,17 +211,40 @@ public class SystemServiceImpl implements SystemService {
     public void saveTPerfEnterprise4tiocRepository() throws Exception {
         //查询Oracle最大中最大值mysqlid
         BigDecimal mySQLId_Oracle = loctperfenterprise4tiocRepository.findMaxMySQLId();
+//        BigDecimal mySQLId_Oracle =new BigDecimal(15447214);
         BigDecimal mySQLId_MySQL = enterprise4tiocRepository.findMaxSQLId();
+        if(null==mySQLId_Oracle)
+            mySQLId_Oracle = new BigDecimal(0);
+
         if(null!=mySQLId_MySQL&&null!=mySQLId_Oracle) {
             if (mySQLId_MySQL.compareTo(mySQLId_Oracle) > 0) {
-                //可以增加分批次的交互逻辑
-                List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(mySQLId_Oracle, mySQLId_MySQL);
-                List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
-                dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
-                loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
+                //增加分批次的交互逻辑
+                BigDecimal arangeValue = mySQLId_Oracle.add(new BigDecimal(100000));
+                if(mySQLId_MySQL.compareTo(arangeValue)>0)
+                {
+                    BigDecimal tmp = mySQLId_Oracle;
+                    int i= 0;
+                    while(mySQLId_MySQL.compareTo(tmp)>0&&i<20000)
+                    {
+
+                        BigDecimal addVal = tmp.add(new BigDecimal(1000));
+                        List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(tmp,addVal);
+                        List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
+                        dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
+                        loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
+                        tmp= tmp.add(new BigDecimal(1000));
+                        logger.info(" v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC "+tmp+" "+tmp.add(new BigDecimal(1000)));
+                        i = perfEnterprise4tiocList.size()+i;
+                    }
+                }else {
+                    List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(mySQLId_Oracle, mySQLId_MySQL);
+                    List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
+                    dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
+                    loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
+                }
             }
         }
-        logger.info(new Date() + " v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC--->analysis_source_ent_4tioc1");
+        logger.info(" v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC--->analysis_source_ent_4tioc1");
     }
 
     private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
@@ -291,7 +314,7 @@ public class SystemServiceImpl implements SystemService {
             tbIocConsumerVoiceTrafficRepository.save(iocConsumerVoiceTrafficList);
         }
         tbIocConsumerVoiceTrafficRepository.analysis_data_consumer_voice();
-        logger.info(new Date() + " sipete_v_is_tg_ss_daily-->TB_IOC_CONSUMER_VOICE_SOURCE");
+        logger.info(" sipete_v_is_tg_ss_daily-->TB_IOC_CONSUMER_VOICE_SOURCE");
 
     }
 
@@ -313,7 +336,7 @@ public class SystemServiceImpl implements SystemService {
             tbIocMobileBackHaulTtcRepository.save(backhaulTtcList);
         }
         tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_back_ttc();
-        logger.info(new Date() + " t_tsel_agg_topolgy-->TB_IOC_MOB_BACKHAUL_TTC_SOURCE");
+        logger.info(" t_tsel_agg_topolgy-->TB_IOC_MOB_BACKHAUL_TTC_SOURCE");
     }
 
 
@@ -341,7 +364,7 @@ public class SystemServiceImpl implements SystemService {
         }
         tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_ip_trans();
 
-        logger.info(new Date() + " v_ixtsel_4ioc-->TB_IOC_MOBILE_IPTRANSIT_SOURCE-->analysis_data_mobile_ip_trans");
+        logger.info(" v_ixtsel_4ioc-->TB_IOC_MOBILE_IPTRANSIT_SOURCE-->analysis_data_mobile_ip_trans");
 
     }
 
@@ -375,7 +398,7 @@ public class SystemServiceImpl implements SystemService {
         tbFfmRepository.save(ffmList);
         //调用存储过程
 //        tbIocConsumerVoiceTrafficRepository.analysis_data_pro_ticket();
-        logger.info(new Date() + " V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET ");
+        logger.info(" v_ffm --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET ");
     }
 
     @Transactional
@@ -395,7 +418,7 @@ public class SystemServiceImpl implements SystemService {
         }
         //调用存储过程
         tbIocConsumerVoiceTrafficRepository.analysis_data_pro_ticket_ffm();
-        logger.info(new Date() + " v_ffm_achievement-->TB_IOC_PRO_TICKET_FFM--->Analysis_Data_PRO_TICKET_FFM");
+        logger.info(" v_ffm_achievement-->TB_IOC_PRO_TICKET_FFM--->Analysis_Data_PRO_TICKET_FFM");
     }
 
     @Override
@@ -422,27 +445,6 @@ public class SystemServiceImpl implements SystemService {
 //        multiThread(groupNodes);
     }
 
-    private static List<GroupNode> groupNode(BigDecimal start, BigDecimal end, int count) {
-        List<GroupNode> groupNodes = new LinkedList<>();
-
-        BigDecimal subtract = end.subtract(start).add(new BigDecimal(1));
-        Integer size = subtract.intValue();
-        Integer num = (size) % count == 0 ? (size / count) : (size / count + 1);
-
-        for (int j = 0; j < num; j++) {
-            int i = j + 1;
-            if (i == 1 || i == num) {
-                start = BigDecimal.valueOf((i - 1) * count).add(new BigDecimal(1));
-                end = BigDecimal.valueOf((i * count) > size ? size : (i * count));
-                groupNodes.add(new GroupNode(start, end));
-            } else {
-                start = BigDecimal.valueOf((i - 1) * count);
-                end = BigDecimal.valueOf((i * count) > size ? size : (i * count));
-                groupNodes.add(new GroupNode(start.add(new BigDecimal(1)), end));
-            }
-        }
-        return groupNodes;
-    }
 
 //    private void multiThread(List<GroupNode> groupNodes) {
 //

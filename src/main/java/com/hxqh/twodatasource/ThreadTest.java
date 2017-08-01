@@ -18,14 +18,14 @@ public class ThreadTest {
     public static void main(String args[]) {
 
 
-        //根据最大值与最小值 分组数返回List
-//        List<GroupNode> groupNodes = groupNode(new BigDecimal(1), new BigDecimal(430), 100);
+//        //根据最大值与最小值 分组数返回List
+//        List<GroupNode> groupNodes = groupNode(new BigDecimal(10095343), new BigDecimal(10357484), 10000);
 //        for (int i = 0; i < groupNodes.size(); i++) {
 //            System.out.println(groupNodes.get(i));
 //        }
-
-    }
-
+//
+//    }
+//
 //    private static List<GroupNode> groupNode(BigDecimal start, BigDecimal end, int count) {
 //        List<GroupNode> groupNodes = new LinkedList<>();
 //
@@ -46,7 +46,7 @@ public class ThreadTest {
 //            }
 //        }
 //        return groupNodes;
-//    }
+    }
 
 
 }

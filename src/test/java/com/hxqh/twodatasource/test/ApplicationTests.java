@@ -56,11 +56,11 @@ public class ApplicationTests {
 //        systemService.saveTtwifiMttr();
 //    }
 //
-//    @Test
-//    public void testTPerfEnterprise4tiocRepository() throws Exception {
-//        systemService.saveTPerfEnterprise4tiocRepository();
-////        systemService.analysis_source_ent_4tioc1();
-//    }
+    @Test
+        public void testTPerfEnterprise4tiocRepository() throws Exception {
+        systemService.saveTPerfEnterprise4tiocRepository();
+//        systemService.analysis_source_ent_4tioc1();
+    }
 ////
 //
 //    //调用存储过程  analysis_source_ent_4tioc1
@@ -155,7 +155,7 @@ public class ApplicationTests {
 //        systemService.saveVFfmAchievement();
 //    }
 
-//    //调用存储过程V_FFM --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET
+//    //调用存储过程v_ffm --->tb_ioc_pro_ticket --->Analysis_Data_PRO_TICKET
 //    @Test
 //    public void analysis_data_pro_ticket() throws Exception {
 //        systemService.analysis_data_pro_ticket();

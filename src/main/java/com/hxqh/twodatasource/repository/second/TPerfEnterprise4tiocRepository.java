@@ -14,7 +14,7 @@ import java.util.List;
 public interface TPerfEnterprise4tiocRepository extends JpaRepository<TPerfEnterprise4tioc, TPerfEnterprise4tiocKey> {
 
 
-    @Query("select o from  TPerfEnterprise4tioc o where o.mysqlid < ?2 and o.mysqlid > ?1")
+    @Query("select o from TPerfEnterprise4tioc o where o.mysqlid between ?1 and  ?2 ")
     List<TPerfEnterprise4tioc> findData(BigDecimal min, BigDecimal max);
 
     @Query("select max(o.mysqlid) from  TPerfEnterprise4tioc o ")

@@ -64,7 +64,6 @@ public class HxqhTimer {
         try {
             systemService.saveTPortdown();
             systemService.analysis_source_portdown();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,7 +94,7 @@ public class HxqhTimer {
 
 
     //v_perf_enterprise_4tioc1             TB_IOC_ENT_4TIOC
-    @Scheduled(cron = "0 */5 * * * * ")
+    @Scheduled(cron = "0 */1 * * * * ")
     public void execPerfEnterprise4tiocRepository() {
         try {
             systemService.saveTPerfEnterprise4tiocRepository();
