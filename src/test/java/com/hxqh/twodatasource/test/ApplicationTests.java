@@ -1,6 +1,9 @@
 package com.hxqh.twodatasource.test;
 
+import com.hxqh.twodatasource.pojo.GroupNode;
+import com.hxqh.twodatasource.repository.primary.Loctperfenterprise4tioc;
 import com.hxqh.twodatasource.repository.primary.TbIocConsumerVoiceTrafficRepository;
+import com.hxqh.twodatasource.repository.second.TPerfEnterprise4tioc;
 import com.hxqh.twodatasource.service.SystemService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,6 +11,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ocean lin on 2017/7/7.
@@ -46,7 +53,7 @@ public class ApplicationTests {
 //        systemService.saveTPortdown();
 //    }
 
-//    @Test
+    //    @Test
 //    public void testTStoKoordinat() throws Exception {
 //        systemService.saveTStoKoordinat();
 //    }
@@ -57,10 +64,45 @@ public class ApplicationTests {
 //    }
 //
     @Test
-        public void testTPerfEnterprise4tiocRepository() throws Exception {
-        systemService.saveTPerfEnterprise4tiocRepository();
-//        systemService.analysis_source_ent_4tioc1();
+    public void testTPerfEnterprise4tiocRepository() throws Exception {
+
+        GroupNode node = systemService.getEnterprise4tiocMax();
+
+        //确保数据源中包含数据
+        if (null != node.getMysqlStart() && null != node.getMysqlEnd()) {
+
+            if (null == node.getOracleEnd())
+                node.setOracleEnd(node.getMysqlStart());
+            if (node.getMysqlStart().compareTo(node.getOracleEnd()) > 0)
+                node.setOracleEnd(node.getMysqlStart());
+
+            //如果mysql数据源没有更新数据不必迁移
+            if (node.getMysqlEnd().compareTo(node.getOracleEnd()) > 0) {
+                //如果迁移数据大于100000则分批次迁移
+                BigDecimal arangeValue = node.getOracleEnd().add(new BigDecimal(200000));
+                if (node.getMysqlEnd().compareTo(arangeValue) > 0) {
+                    BigDecimal tmp = node.getOracleEnd();
+                    int i = 0;
+                    while (node.getMysqlEnd().compareTo(tmp) > 0 && i < 2000000) {
+                        BigDecimal addVal = tmp.add(new BigDecimal(1000));
+                        systemService.saveTPerfEnterprise4tiocRepository(tmp, addVal);
+                        //获取实际List长度
+                        Long enterprise4tiocLength = systemService.getEnterprise4tiocLength(tmp, addVal);
+
+                        tmp = tmp.add(new BigDecimal(1000));
+                        i = enterprise4tiocLength.intValue() + i;
+                    }
+                } else {
+                    systemService.saveTPerfEnterprise4tiocRepository(node.getOracleEnd(), node.getMysqlEnd());
+                }
+            }
+        }
     }
+
+
+//        systemService.saveTPerfEnterprise4tiocRepository();
+//        systemService.analysis_source_ent_4tioc1();
+}
 ////
 //
 //    //调用存储过程  analysis_source_ent_4tioc1
@@ -96,13 +138,13 @@ public class ApplicationTests {
 //        systemService.analysis_data_mttr_targets();
 //    }
 
-    //    //T_LVL_ENTERPRISE_CUST             tb_IOCCUSTOMERUSER
+//    //T_LVL_ENTERPRISE_CUST             tb_IOCCUSTOMERUSER
 //    @Test
 //    public void analysis_data_cust_for_dws() throws Exception {
 //        systemService.analysis_data_cust_for_dws();
 //    }
 
-    // TB_IOC_CONSUMER_VOICE_SOURCE     ----->Analysis_Data_CONSUMER_Voice
+// TB_IOC_CONSUMER_VOICE_SOURCE     ----->Analysis_Data_CONSUMER_Voice
 //    @Test
 //    public void analysis_data_consumer_voice() throws Exception {
 //        systemService.analysis_data_consumer_voice();
@@ -119,7 +161,7 @@ public class ApplicationTests {
 //        systemService.saveMOBILE_BACKHAUL_TTCRepository();
 //    }
 
-    //v_ixtsel_4ioc    TB_IOC_MOBILE_IPTRANSIT_SOURCE
+//v_ixtsel_4ioc    TB_IOC_MOBILE_IPTRANSIT_SOURCE
 //    @Test
 //    public void testsave_mobile_ip_transitRepository() throws Exception {
 //        systemService.save_mobile_ip_transitRepository();
@@ -139,7 +181,7 @@ public class ApplicationTests {
 //        tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_ip_trans();
 //    }
 
-    //tTruncat测试
+//tTruncat测试
 //    @Test
 //    public void testTruncate() throws Exception {
 //        systemService.testTruncate();
@@ -169,8 +211,6 @@ public class ApplicationTests {
 //    }
 
 
-
-}
 
 
 

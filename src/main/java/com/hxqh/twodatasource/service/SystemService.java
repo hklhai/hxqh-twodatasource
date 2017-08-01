@@ -1,10 +1,12 @@
 package com.hxqh.twodatasource.service;
 
 
+import com.hxqh.twodatasource.pojo.GroupNode;
 import com.hxqh.twodatasource.repository.primary.Openstreetmap;
 import com.hxqh.twodatasource.repository.second.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -26,7 +28,9 @@ public interface SystemService {
 
     void saveTStoKoordinat() throws Exception;
 
-    void saveTPerfEnterprise4tiocRepository() throws Exception;
+    GroupNode getEnterprise4tiocMax();
+
+    void saveTPerfEnterprise4tiocRepository(BigDecimal tmp, BigDecimal addVal) throws Exception;
 
     void analysis_source_ent_4tioc1();
 
@@ -62,6 +66,8 @@ public interface SystemService {
     void analysis_data_pro_ticket_ffm();
 
     void mutilThreadIOC_ENT_4TIOC();
+
+    Long getEnterprise4tiocLength(BigDecimal tmp, BigDecimal addVal);
 }
 
 

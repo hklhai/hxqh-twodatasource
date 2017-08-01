@@ -19,4 +19,10 @@ public interface TPerfEnterprise4tiocRepository extends JpaRepository<TPerfEnter
 
     @Query("select max(o.mysqlid) from  TPerfEnterprise4tioc o ")
     BigDecimal findMaxSQLId();
+
+    @Query("select min(o.mysqlid) from  TPerfEnterprise4tioc o ")
+    BigDecimal findMinSQLId();
+
+    @Query("select count(o.mysqlid) from TPerfEnterprise4tioc o where o.mysqlid between ?1 and  ?2 ")
+    Long getEnterprise4tiocLength(BigDecimal tmp, BigDecimal addVal);
 }

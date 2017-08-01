@@ -206,46 +206,31 @@ public class SystemServiceImpl implements SystemService {
 
     }
 
+    @Override
+    public GroupNode getEnterprise4tiocMax() {
+        BigDecimal mysqlStart = enterprise4tiocRepository.findMinSQLId();
+        BigDecimal mysqlEnd = enterprise4tiocRepository.findMaxSQLId();
+        BigDecimal oracleEnd = loctperfenterprise4tiocRepository.findMaxMySQLId();
+
+        GroupNode node = new GroupNode(mysqlStart,mysqlEnd,oracleEnd);
+        return node;
+    }
+
     @Transactional
     @Override
-    public void saveTPerfEnterprise4tiocRepository() throws Exception {
-        //查询Oracle最大中最大值mysqlid
-        BigDecimal mySQLId_Oracle = loctperfenterprise4tiocRepository.findMaxMySQLId();
-//        BigDecimal mySQLId_Oracle =new BigDecimal(15447214);
-        BigDecimal mySQLId_MySQL = enterprise4tiocRepository.findMaxSQLId();
-        if(null==mySQLId_Oracle)
-            mySQLId_Oracle = new BigDecimal(0);
-
-        if(null!=mySQLId_MySQL&&null!=mySQLId_Oracle) {
-            if (mySQLId_MySQL.compareTo(mySQLId_Oracle) > 0) {
-                //增加分批次的交互逻辑
-                BigDecimal arangeValue = mySQLId_Oracle.add(new BigDecimal(100000));
-                if(mySQLId_MySQL.compareTo(arangeValue)>0)
-                {
-                    BigDecimal tmp = mySQLId_Oracle;
-                    int i= 0;
-                    while(mySQLId_MySQL.compareTo(tmp)>0&&i<20000)
-                    {
-
-                        BigDecimal addVal = tmp.add(new BigDecimal(1000));
-                        List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(tmp,addVal);
-                        List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
-                        dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
-                        loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
-                        tmp= tmp.add(new BigDecimal(1000));
-                        logger.info(" v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC "+tmp+" "+tmp.add(new BigDecimal(1000)));
-                        i = perfEnterprise4tiocList.size()+i;
-                    }
-                }else {
-                    List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(mySQLId_Oracle, mySQLId_MySQL);
-                    List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
-                    dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
-                    loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
-                }
-            }
-        }
-        logger.info(" v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC--->analysis_source_ent_4tioc1");
+    public void saveTPerfEnterprise4tiocRepository(BigDecimal tmp, BigDecimal addVal) throws Exception {
+        List<TPerfEnterprise4tioc> perfEnterprise4tiocList = enterprise4tiocRepository.findData(tmp, addVal);
+        List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
+        dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
+        loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
+        logger.info(" v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC "+tmp+"->"+addVal);
     }
+
+    @Override
+    public Long getEnterprise4tiocLength(BigDecimal tmp, BigDecimal addVal) {
+       return enterprise4tiocRepository.getEnterprise4tiocLength(tmp, addVal);
+    }
+
 
     private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
         for (TPerfEnterprise4tioc tPerfEnterprise4tioc : perfEnterprise4tiocList) {
@@ -466,7 +451,6 @@ public class SystemServiceImpl implements SystemService {
 //        }
 //
 //    }
-
 
 
 }

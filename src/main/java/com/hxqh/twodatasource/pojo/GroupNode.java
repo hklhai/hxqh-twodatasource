@@ -6,36 +6,37 @@ import java.math.BigDecimal;
  * Created by Ocean lin on 2017/7/27.
  */
 public class GroupNode {
-    private BigDecimal start;
-    private BigDecimal end;
+    private BigDecimal mysqlStart;
+    private BigDecimal mysqlEnd;
+    private BigDecimal oracleEnd;
 
-    public GroupNode(BigDecimal start, BigDecimal end) {
-        this.start = start;
-        this.end = end;
+    public GroupNode(BigDecimal mysqlStart, BigDecimal mysqlEnd, BigDecimal oracleEnd) {
+        this.mysqlStart = mysqlStart;
+        this.mysqlEnd = mysqlEnd;
+        this.oracleEnd = oracleEnd;
     }
 
-    public BigDecimal getStart() {
-        return start;
+    public BigDecimal getMysqlStart() {
+        return mysqlStart;
     }
 
-    public void setStart(BigDecimal start) {
-        this.start = start;
+    public void setMysqlStart(BigDecimal mysqlStart) {
+        this.mysqlStart = mysqlStart;
     }
 
-    public BigDecimal getEnd() {
-        return end;
+    public BigDecimal getMysqlEnd() {
+        return mysqlEnd;
     }
 
-    public void setEnd(BigDecimal end) {
-        this.end = end;
+    public void setMysqlEnd(BigDecimal mysqlEnd) {
+        this.mysqlEnd = mysqlEnd;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("GroupNode{");
-        sb.append("start=").append(start);
-        sb.append(", end=").append(end);
-        sb.append('}');
-        return sb.toString();
+    public BigDecimal getOracleEnd() {
+        return oracleEnd;
+    }
+
+    public void setOracleEnd(BigDecimal oracleEnd) {
+        this.oracleEnd = oracleEnd;
     }
 }

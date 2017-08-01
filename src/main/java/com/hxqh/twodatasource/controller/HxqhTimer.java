@@ -1,10 +1,13 @@
 package com.hxqh.twodatasource.controller;
 
+import com.hxqh.twodatasource.pojo.GroupNode;
 import com.hxqh.twodatasource.repository.primary.TbIocConsumerVoiceTrafficRepository;
 import com.hxqh.twodatasource.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
 
 /**
  * Created by Ocean lin on 2017/7/9.
@@ -94,10 +97,40 @@ public class HxqhTimer {
 
 
     //v_perf_enterprise_4tioc1             TB_IOC_ENT_4TIOC
-    @Scheduled(cron = "0 */1 * * * * ")
+    @Scheduled(cron = "0 */5 * * * * ")
     public void execPerfEnterprise4tiocRepository() {
         try {
-            systemService.saveTPerfEnterprise4tiocRepository();
+
+            GroupNode node = systemService.getEnterprise4tiocMax();
+            //确保数据源中包含数据
+            if (null != node.getMysqlStart() && null != node.getMysqlEnd()) {
+
+                if (null == node.getOracleEnd())
+                    node.setOracleEnd(node.getMysqlStart());
+                if (node.getMysqlStart().compareTo(node.getOracleEnd()) > 0)
+                    node.setOracleEnd(node.getMysqlStart());
+
+                //如果mysql数据源没有更新数据不必迁移
+                if (node.getMysqlEnd().compareTo(node.getOracleEnd()) > 0) {
+                    //如果迁移数据大于100000则分批次迁移
+                    BigDecimal arangeValue = node.getOracleEnd().add(new BigDecimal(200000));
+                    if (node.getMysqlEnd().compareTo(arangeValue) > 0) {
+                        BigDecimal tmp = node.getOracleEnd();
+                        int i = 0;
+                        while (node.getMysqlEnd().compareTo(tmp) > 0 && i < 2000000) {
+                            BigDecimal addVal = tmp.add(new BigDecimal(1000));
+                            systemService.saveTPerfEnterprise4tiocRepository(tmp, addVal);
+                            //获取实际List长度
+                            Long enterprise4tiocLength = systemService.getEnterprise4tiocLength(tmp, addVal);
+
+                            tmp = tmp.add(new BigDecimal(1000));
+                            i = enterprise4tiocLength.intValue() + i;
+                        }
+                    } else {
+                        systemService.saveTPerfEnterprise4tiocRepository(node.getOracleEnd(), node.getMysqlEnd());
+                    }
+                }
+            }
             systemService.analysis_source_ent_4tioc1();
         } catch (Exception e) {
             e.printStackTrace();
