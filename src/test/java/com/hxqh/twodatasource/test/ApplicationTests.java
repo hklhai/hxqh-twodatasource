@@ -81,12 +81,12 @@ public class ApplicationTests {
 //            //如果mysql数据源没有更新数据不必迁移
 //            if (node.getMysqlEnd().compareTo(node.getOracleEnd()) > 0) {
 //                //如果迁移数据大于100000则分批次迁移
-//                BigDecimal arangeValue = node.getOracleEnd().add(new BigDecimal(200000));
+//                BigDecimal arangeValue = node.getOracleEnd().add(new BigDecimal(9000));
 //                if (node.getMysqlEnd().compareTo(arangeValue) > 0) {
 //                    BigDecimal tmp = node.getOracleEnd();
 //                    int i = 0;
-//                    while (node.getMysqlEnd().compareTo(tmp) > 0 && i < 2000000) {
-//                        BigDecimal addVal = tmp.add(new BigDecimal(1000));
+//                    while (node.getMysqlEnd().compareTo(tmp) > 0 && i < 100000) {
+//                        BigDecimal addVal = tmp.add(new BigDecimal(1001));
 //                        systemService.saveTPerfEnterprise4tiocRepository(tmp, addVal);
 //                        //获取实际List长度
 //                        Long enterprise4tiocLength = systemService.getEnterprise4tiocLength(tmp, addVal);

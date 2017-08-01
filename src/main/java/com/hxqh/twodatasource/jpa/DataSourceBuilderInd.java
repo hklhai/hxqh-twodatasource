@@ -22,7 +22,8 @@ public class DataSourceBuilderInd {
 
     private ClassLoader classLoader;
 
-    private Map<String, String> properties = new HashMap<String, String>();
+    private Map<String, String> properties = new HashMap<>();
+
 
     public static DataSourceBuilderInd create() {
         return new DataSourceBuilderInd(null);
@@ -54,6 +55,16 @@ public class DataSourceBuilderInd {
     }
 
     private void bind(DataSource result) {
+
+        properties.put("initialSize","10");
+        properties.put("maxIdle","10");
+        properties.put("minIdle","5");
+        properties.put("maxActive","15");
+        properties.put("removeAbandoned","true");
+        properties.put("removeAbandonedTimeout","180");
+        properties.put("maxWait","3000");
+        properties.put("removeAbandonedOnBorrow","true");
+
         MutablePropertyValues properties = new MutablePropertyValues(this.properties);
         new RelaxedDataBinder(result).withAlias("url", "jdbcUrl")
                 .withAlias("username", "user").bind(properties);
