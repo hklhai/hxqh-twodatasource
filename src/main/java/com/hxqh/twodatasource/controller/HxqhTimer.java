@@ -149,17 +149,29 @@ public class HxqhTimer {
         }
     }
 
-    //sipete_v_is_tg_ss_daily             TB_IOC_CONSUMER_VOICE_TRAFFIC
-    @Scheduled(cron = "0 */15 * * * * ")
-    public void execSipeteVIsTgSsDailyRepository() {
+//    //sipete_v_is_tg_ss_daily             TB_IOC_CONSUMER_VOICE_SOURCE
+//    @Scheduled(cron = "0 */15 * * * * ")
+//    public void execSipeteVIsTgSsDailyRepository() {
+//        try {
+////            systemService.saveSipeteVIsTgSsDailyRepository();
+////            systemService.analysis_source_ent_4tioc1();
+//            //TODO
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    @Scheduled(cron = "0 */5 * * * * ")
+    public void iocConsumerVoiceSource() {
         try {
-            systemService.saveSipeteVIsTgSsDailyRepository();
-            //systemService.analysis_source_ent_4tioc1();
-            //TODO
+            systemService.saveIocConsumerVoiceSource();
+            systemService.analysis_source_ent_4tioc1();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     //t_tsel_agg_topolgy             TB_IOC_MOBILE_BACKHAUL_TTC
     @Scheduled(cron = "0 */5 * * * * ")

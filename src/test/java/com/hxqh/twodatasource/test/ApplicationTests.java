@@ -1,9 +1,6 @@
 package com.hxqh.twodatasource.test;
 
-import com.hxqh.twodatasource.pojo.GroupNode;
-import com.hxqh.twodatasource.repository.primary.Loctperfenterprise4tioc;
 import com.hxqh.twodatasource.repository.primary.TbIocConsumerVoiceTrafficRepository;
-import com.hxqh.twodatasource.repository.second.TPerfEnterprise4tioc;
 import com.hxqh.twodatasource.service.SystemService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,10 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ocean lin on 2017/7/7.
@@ -104,7 +97,7 @@ public class ApplicationTests {
 
 //        systemService.saveTPerfEnterprise4tiocRepository();
 //        systemService.analysis_source_ent_4tioc1();
-}
+//}
 ////
 //
 //    //调用存储过程  analysis_source_ent_4tioc1
@@ -153,11 +146,12 @@ public class ApplicationTests {
 //    }
 
 
-//    sipete_v_is_tg_ss_daily  tb_ioc_consumer_voice_source -->TB_IOC_CONSUMER_VOICE_SOURCE
-//    @Test
+    //    sipete_v_is_tg_ss_daily  tb_ioc_consumer_voice_source -->TB_IOC_CONSUMER_VOICE_SOURCE
+//    @Test  //not used  not used not used
 //    public void testSipeteVIsTgSsDailyRepository() throws Exception {
 //        systemService.saveSipeteVIsTgSsDailyRepository();
 //    }
+
 //    @Test
 //    public void testsaveMOBILE_BACKHAUL_TTCRepository() throws Exception {
 //        systemService.saveMOBILE_BACKHAUL_TTCRepository();
@@ -212,6 +206,15 @@ public class ApplicationTests {
 //        systemService.analysis_data_pro_ticket_ffm();
 //    }
 
+
+    //    sipete_v_is_tg_ss_daily  tb_ioc_consumer_voice_source -->TB_IOC_CONSUMER_VOICE_SOURCE
+//    @Test
+//    public void testSaveIocConsumerVoiceSource() throws Exception {
+//        systemService.saveIocConsumerVoiceSource();
+//    }
+
+
+}
 
 
 

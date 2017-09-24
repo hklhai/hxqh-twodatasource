@@ -68,6 +68,8 @@ public interface SystemService {
     void mutilThreadIOC_ENT_4TIOC();
 
     Long getEnterprise4tiocLength(BigDecimal tmp, BigDecimal addVal);
+
+    void saveIocConsumerVoiceSource() throws InvocationTargetException, IllegalAccessException;
 }
 
 

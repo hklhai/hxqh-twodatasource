@@ -1,5 +1,6 @@
 package com.hxqh.twodatasource.service;
 
+import com.hxqh.twodatasource.common.ListUtils;
 import com.hxqh.twodatasource.pojo.GroupNode;
 import com.hxqh.twodatasource.repository.primary.*;
 import com.hxqh.twodatasource.repository.second.*;
@@ -55,6 +56,8 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     private TbFfmRepository tbFfmRepository;
 
+    @Autowired
+    private  IocConsumerVoiceSourceRepository iocConsumerVoiceSourceRepository;
 
     /***************************MYSQL********************************/
     @Autowired
@@ -212,7 +215,7 @@ public class SystemServiceImpl implements SystemService {
         BigDecimal mysqlEnd = enterprise4tiocRepository.findMaxSQLId();
         BigDecimal oracleEnd = loctperfenterprise4tiocRepository.findMaxMySQLId();
 
-        GroupNode node = new GroupNode(mysqlStart,mysqlEnd,oracleEnd);
+        GroupNode node = new GroupNode(mysqlStart, mysqlEnd, oracleEnd);
         return node;
     }
 
@@ -223,14 +226,13 @@ public class SystemServiceImpl implements SystemService {
         List<Loctperfenterprise4tioc> loctperfenterprise4tiocs = new ArrayList<>();
         dealData(perfEnterprise4tiocList, loctperfenterprise4tiocs);
         loctperfenterprise4tiocRepository.save(loctperfenterprise4tiocs);
-        logger.info(" v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC "+tmp+"->"+addVal);
+        logger.info(" v_perf_enterprise_4tioc1-->TB_IOC_ENT_4TIOC " + tmp + "->" + addVal);
     }
 
     @Override
     public Long getEnterprise4tiocLength(BigDecimal tmp, BigDecimal addVal) {
-       return enterprise4tiocRepository.getEnterprise4tiocLength(tmp, addVal);
+        return enterprise4tiocRepository.getEnterprise4tiocLength(tmp, addVal);
     }
-
 
     private void dealData(List<TPerfEnterprise4tioc> perfEnterprise4tiocList, List<Loctperfenterprise4tioc> loctperfenterprise4tiocs) throws IllegalAccessException, InvocationTargetException {
         for (TPerfEnterprise4tioc tPerfEnterprise4tioc : perfEnterprise4tiocList) {
@@ -278,6 +280,26 @@ public class SystemServiceImpl implements SystemService {
         loccustomeruserRepository.analysis_data_cust_for_dws();
     }
 
+    @Transactional
+    @Override
+    public void saveIocConsumerVoiceSource() throws InvocationTargetException, IllegalAccessException {
+        List<SipeteVIsTgSsDaily> vIsTgSsDailyList = sipeteVIsTgSsDailyRepository.findAll();
+        if (vIsTgSsDailyList != null) {
+            List<IocConsumerVoiceSource> voiceSourceList = new LinkedList<>();
+            for (SipeteVIsTgSsDaily s : vIsTgSsDailyList) {
+                IocConsumerVoiceSource voiceSource = new IocConsumerVoiceSource();
+                BeanUtils.copyProperties(voiceSource, s.getSipeteVIsTgSsDailyKey());
+                voiceSource.setTs(new Date());
+                voiceSourceList.add(voiceSource);
+            }
+            //拆分List
+            List<List<IocConsumerVoiceSource>> split = ListUtils.split(voiceSourceList, 1000);
+            for (int i = 0; i <split.size() ; i++) {
+                iocConsumerVoiceSourceRepository.save(split.get(0));
+            }
+
+        }
+    }
 
     /**
      * Add By Hy Chang Area Start
@@ -298,9 +320,8 @@ public class SystemServiceImpl implements SystemService {
             //因为业务需要不删除数据
             tbIocConsumerVoiceTrafficRepository.save(iocConsumerVoiceTrafficList);
         }
-        tbIocConsumerVoiceTrafficRepository.analysis_data_consumer_voice();
+//        tbIocConsumerVoiceTrafficRepository.analysis_data_consumer_voice();
         logger.info(" sipete_v_is_tg_ss_daily-->TB_IOC_CONSUMER_VOICE_SOURCE");
-
     }
 
 
