@@ -165,8 +165,7 @@ public class HxqhTimer {
     public void iocConsumerVoiceSource() {
         try {
             systemService.saveIocConsumerVoiceSource();
-            systemService.analysis_source_ent_4tioc1();
-
+//            systemService.analysis_source_ent_4tioc1();
         } catch (Exception e) {
             e.printStackTrace();
         }
