@@ -349,10 +349,14 @@ public class SystemServiceImpl implements SystemService {
     @Transactional
     @Override
     public void save_mobile_ip_transitRepository() throws InvocationTargetException, IllegalAccessException {
-        //1.检查 Oracle 最大时间记录
-        Date date = tbIocConsumerVoiceTrafficRepository.getMaxDateRecord();
-        //2.查询MYSQL之后数据
-        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findMaxDateData(date);
+//        //1.检查 Oracle 最大时间记录
+//        Date date = tbIocConsumerVoiceTrafficRepository.getMaxDateRecord();
+//        //2.查询MYSQL之后数据
+//        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findMaxDateData(date);
+
+
+        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findAll();
+
         //3.存入Oracle
         if (tIxtsel4iocList.size() > 0) {
             List<TbIocMobileIpTransit> transits = new ArrayList<>();
