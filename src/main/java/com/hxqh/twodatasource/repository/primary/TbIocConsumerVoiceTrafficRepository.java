@@ -38,7 +38,7 @@ public interface TbIocConsumerVoiceTrafficRepository extends CrudRepository<TbIo
     void analysis_data_mobile_ip_trans();
 
 
-    @Query("select max(x.ipid) as tanggal from TbIocConsumerVoiceTraffic x")
+    @Query("select max(x.ipid) as tanggal from TbIocMobileIpTransit x")
     Long getMaxRecord();
 
 
