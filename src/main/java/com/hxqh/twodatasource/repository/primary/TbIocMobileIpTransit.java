@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="TB_IOC_MOBILE_IPTRANSIT_SOURCE")
+@Table(name="TB_TEST_IPTRANSIT")
  public class TbIocMobileIpTransit implements Serializable {
 	private static final long serialVersionUID = 1L;
 

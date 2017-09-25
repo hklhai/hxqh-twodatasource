@@ -157,11 +157,11 @@ public class ApplicationTests {
 //        systemService.saveMOBILE_BACKHAUL_TTCRepository();
 //    }
 
-//v_ixtsel_4ioc    TB_IOC_MOBILE_IPTRANSIT_SOURCE
-//    @Test
-//    public void testsave_mobile_ip_transitRepository() throws Exception {
-//        systemService.save_mobile_ip_transitRepository();
-//    }
+//v_ixtsel_4ioc    TB_IOC_MOBILE_IPTRANSIT_SOURCE   罗测试使用
+    @Test
+    public void testsave_mobile_ip_transitRepository() throws Exception {
+        systemService.save_mobile_ip_transitRepository();
+    }
 
 
 //    TB_IOC_MOB_BACKHAUL_TTC_SOURCE   --->  Analysis_Data_MOBILE_Back_TTC
