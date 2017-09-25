@@ -57,7 +57,7 @@ public class SystemServiceImpl implements SystemService {
     private TbFfmRepository tbFfmRepository;
 
     @Autowired
-    private  IocConsumerVoiceSourceRepository iocConsumerVoiceSourceRepository;
+    private IocConsumerVoiceSourceRepository iocConsumerVoiceSourceRepository;
 
     /***************************MYSQL********************************/
     @Autowired
@@ -294,7 +294,7 @@ public class SystemServiceImpl implements SystemService {
             }
             //拆分List
             List<List<IocConsumerVoiceSource>> split = ListUtils.split(voiceSourceList, 1000);
-            for (int i = 0; i <split.size() ; i++) {
+            for (int i = 0; i < split.size(); i++) {
                 iocConsumerVoiceSourceRepository.save(split.get(0));
             }
 
@@ -349,28 +349,30 @@ public class SystemServiceImpl implements SystemService {
     @Transactional
     @Override
     public void save_mobile_ip_transitRepository() throws InvocationTargetException, IllegalAccessException {
-//        //1.检查 Oracle 最大时间记录
-//        Date date = tbIocConsumerVoiceTrafficRepository.getMaxDateRecord();
-//        //2.查询MYSQL之后数据
-//        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findMaxDateData(date);
-
-
-        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findAll();
+        //1.检查 Oracle 最大时间记录
+        Long maxOracle = tbIocConsumerVoiceTrafficRepository.getMaxRecord();
+        //2.查询MYSQL之后数据Date
+        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findETLData(maxOracle);
 
         //3.存入Oracle
         if (tIxtsel4iocList.size() > 0) {
             List<TbIocMobileIpTransit> transits = new ArrayList<>();
             for (TIxtsel4ioc t : tIxtsel4iocList) {
                 TbIocMobileIpTransit tn = new TbIocMobileIpTransit();
-                BeanUtils.copyProperties(tn, t.gettIxtsel4iocKey());
-                tn.setWrongs(BigDecimal.valueOf(t.gettIxtsel4iocKey().getWrong()));
+                BeanUtils.copyProperties(tn, t);
+                tn.setWrongs(BigDecimal.valueOf(t.getWrong()));
                 tn.setTs(new Date());
-                tn.setInterface_(t.gettIxtsel4iocKey().getIocinterface());
+                tn.setInterface_(t.getIocinterface());
+                tn.setIpid(t.getId());
                 tn.setTimedata(t.getTimedata());
-
                 transits.add(tn);
             }
-            tbIocMobileIpTransitRepository.save(transits);
+            //拆分List
+            List<List<TbIocMobileIpTransit>> split = ListUtils.split(transits, 1000);
+            for (int i = 0; i < split.size(); i++) {
+                tbIocMobileIpTransitRepository.save(split.get(0));
+                logger.info(" v_ixtsel_4ioc-->TB_IOC_MOBILE_IPTRANSIT_SOURCE-->"+split.get(0).get(0).getIpid());
+            }
         }
         tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_ip_trans();
 

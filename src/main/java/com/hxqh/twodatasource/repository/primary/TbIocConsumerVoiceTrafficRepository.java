@@ -38,8 +38,8 @@ public interface TbIocConsumerVoiceTrafficRepository extends CrudRepository<TbIo
     void analysis_data_mobile_ip_trans();
 
 
-    @Query("select max(x.tanggal) as tanggal from TbIocConsumerVoiceTraffic x")
-    Date getMaxDateRecord();
+    @Query("select max(x.ipid) as tanggal from TbIocConsumerVoiceTraffic x")
+    Long getMaxRecord();
 
 
     @Procedure(name = "analysis_data_pro_ticket")

@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="TB_TEST_IPTRANSIT")
+@Table(name="TB_IOC_MOBILE_IPTRANSIT_SOURCE")
  public class TbIocMobileIpTransit implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,17 @@ import java.util.Date;
 
 	private BigDecimal wrongs;
 
+	private Long ipid;
+
 	public TbIocMobileIpTransit() {
+	}
+
+	public Long getIpid() {
+		return ipid;
+	}
+
+	public void setIpid(Long ipid) {
+		this.ipid = ipid;
 	}
 
 	public long getTransitId() {

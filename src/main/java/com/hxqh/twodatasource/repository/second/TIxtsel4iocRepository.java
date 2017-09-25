@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * Created by Hy Chang on 2017/7/17.
  */
-public interface TIxtsel4iocRepository extends JpaRepository<TIxtsel4ioc, TIxtsel4iocKey> {
-    @Query("select o from TIxtsel4ioc o where o.timedata >:da")
-    List<TIxtsel4ioc> findMaxDateData(@Param("da") Date da);
+public interface TIxtsel4iocRepository extends JpaRepository<TIxtsel4ioc, Long> {
+    @Query("select o from TIxtsel4ioc o where o.id >:da")
+    List<TIxtsel4ioc> findETLData(@Param("da") Long da);
 
 }
