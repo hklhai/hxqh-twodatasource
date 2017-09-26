@@ -2,8 +2,7 @@ package com.hxqh.twodatasource.service;
 
 
 import com.hxqh.twodatasource.pojo.GroupNode;
-import com.hxqh.twodatasource.repository.primary.Openstreetmap;
-import com.hxqh.twodatasource.repository.second.*;
+import com.hxqh.twodatasource.repository.primary.TbIocMobileIpTransit;
 
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
@@ -49,7 +48,9 @@ public interface SystemService {
 
     void saveMOBILE_BACKHAUL_TTCRepository() throws InvocationTargetException, IllegalAccessException;
 
-    void save_mobile_ip_transitRepository() throws InvocationTargetException, IllegalAccessException;
+    void save_mobile_ip_transitRepository(List<TbIocMobileIpTransit> ipTransits) throws InvocationTargetException, IllegalAccessException;
+
+    void analysis_data_mobile_ip_trans();
 
     /***Add Hy Chang  end ****/
 

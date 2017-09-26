@@ -1,13 +1,23 @@
 package com.hxqh.twodatasource.test;
 
+import com.hxqh.twodatasource.common.ListUtils;
 import com.hxqh.twodatasource.repository.primary.TbIocConsumerVoiceTrafficRepository;
+import com.hxqh.twodatasource.repository.primary.TbIocMobileIpTransit;
+import com.hxqh.twodatasource.repository.second.TIxtsel4ioc;
+import com.hxqh.twodatasource.repository.second.TIxtsel4iocRepository;
 import com.hxqh.twodatasource.service.SystemService;
+import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Ocean lin on 2017/7/7.
@@ -20,6 +30,9 @@ public class ApplicationTests {
     private SystemService systemService;
     @Autowired
     private TbIocConsumerVoiceTrafficRepository tbIocConsumerVoiceTrafficRepository;
+
+    @Autowired
+    private TIxtsel4iocRepository tIxtsel4iocRepository;
 
     @Test
     public void test() throws Exception {
@@ -157,10 +170,38 @@ public class ApplicationTests {
 //        systemService.saveMOBILE_BACKHAUL_TTCRepository();
 //    }
 
-//v_ixtsel_4ioc    TB_IOC_MOBILE_IPTRANSIT_SOURCE   罗测试使用
+    //v_ixtsel_4ioc    TB_IOC_MOBILE_IPTRANSIT_SOURCE
     @Test
     public void testsave_mobile_ip_transitRepository() throws Exception {
-        systemService.save_mobile_ip_transitRepository();
+
+        //1.检查 Oracle 最大时间记录
+        Long maxOracle = tbIocConsumerVoiceTrafficRepository.getMaxRecord();
+        //2.查询MYSQL之后数据Date
+        if (null == maxOracle) {
+            maxOracle = 0l;
+        }
+        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findETLData(maxOracle);
+
+        //3.存入Oracle
+        if (tIxtsel4iocList.size() > 0) {
+            List<TbIocMobileIpTransit> transits = new ArrayList<>();
+            for (TIxtsel4ioc t : tIxtsel4iocList) {
+                TbIocMobileIpTransit tn = new TbIocMobileIpTransit();
+                BeanUtils.copyProperties(tn, t);
+                tn.setWrongs(BigDecimal.valueOf(t.getWrong()));
+                tn.setTs(new Date());
+                tn.setInterface_(t.getIocinterface());
+                tn.setIpid(t.getId());
+                tn.setTimedata(t.getTimedata());
+                transits.add(tn);
+            }
+            //拆分List
+            List<List<TbIocMobileIpTransit>> split = ListUtils.split(transits, 1000);
+            for (int i = 0; i < split.size(); i++) {
+                systemService.save_mobile_ip_transitRepository(split.get(0));
+            }
+            systemService.analysis_data_mobile_ip_trans();
+        }
     }
 
 

@@ -2,6 +2,7 @@ package com.hxqh.twodatasource.controller;
 
 import com.hxqh.twodatasource.pojo.GroupNode;
 import com.hxqh.twodatasource.repository.primary.TbIocConsumerVoiceTrafficRepository;
+import com.hxqh.twodatasource.repository.second.TIxtsel4iocRepository;
 import com.hxqh.twodatasource.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,6 +20,10 @@ public class HxqhTimer {
     private SystemService systemService;
     @Autowired
     private TbIocConsumerVoiceTrafficRepository tbIocConsumerVoiceTrafficRepository;
+
+    @Autowired
+    private TIxtsel4iocRepository tIxtsel4iocRepository;
+
 
     //每天早八点到晚八点，间隔5分钟执行任务
     //MYSQL(Source)   -->     Oracle(Target)
@@ -197,7 +202,7 @@ public class HxqhTimer {
     @Scheduled(cron = "0 */5 * * * * ")
     public void exec_mobile_ip_transitRepository() {
         try {
-            systemService.save_mobile_ip_transitRepository();
+//            systemService.save_mobile_ip_transitRepository();
             //TODO
             //  systemService.analysis_source_ent_4tioc1();
         } catch (Exception e) {

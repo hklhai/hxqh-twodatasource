@@ -345,40 +345,26 @@ public class SystemServiceImpl implements SystemService {
         logger.info(" t_tsel_agg_topolgy-->TB_IOC_MOB_BACKHAUL_TTC_SOURCE");
     }
 
-
+    /**
+     * modify lh 2017-9-26 06:57:55
+     *
+     * @param ipTransits
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
     @Transactional
     @Override
-    public void save_mobile_ip_transitRepository() throws InvocationTargetException, IllegalAccessException {
-        //1.检查 Oracle 最大时间记录
-        Long maxOracle = tbIocConsumerVoiceTrafficRepository.getMaxRecord();
-        //2.查询MYSQL之后数据Date
-        List<TIxtsel4ioc> tIxtsel4iocList = tIxtsel4iocRepository.findETLData(maxOracle);
-
-        //3.存入Oracle
-        if (tIxtsel4iocList.size() > 0) {
-            List<TbIocMobileIpTransit> transits = new ArrayList<>();
-            for (TIxtsel4ioc t : tIxtsel4iocList) {
-                TbIocMobileIpTransit tn = new TbIocMobileIpTransit();
-                BeanUtils.copyProperties(tn, t);
-                tn.setWrongs(BigDecimal.valueOf(t.getWrong()));
-                tn.setTs(new Date());
-                tn.setInterface_(t.getIocinterface());
-                tn.setIpid(t.getId());
-                tn.setTimedata(t.getTimedata());
-                transits.add(tn);
-            }
-            //拆分List
-            List<List<TbIocMobileIpTransit>> split = ListUtils.split(transits, 1000);
-            for (int i = 0; i < split.size(); i++) {
-                tbIocMobileIpTransitRepository.save(split.get(0));
-                logger.info(" v_ixtsel_4ioc-->TB_IOC_MOBILE_IPTRANSIT_SOURCE-->"+split.get(0).get(0).getIpid());
-            }
-        }
-        tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_ip_trans();
-
-        logger.info(" v_ixtsel_4ioc-->TB_IOC_MOBILE_IPTRANSIT_SOURCE-->analysis_data_mobile_ip_trans");
-
+    public void save_mobile_ip_transitRepository(List<TbIocMobileIpTransit> ipTransits) throws InvocationTargetException, IllegalAccessException {
+        tbIocMobileIpTransitRepository.save(ipTransits);
+        logger.info(" v_ixtsel_4ioc-->TB_IOC_MOBILE_IPTRANSIT_SOURCE-->" + ipTransits.get(0).getIpid());
     }
+
+    @Override
+    public void analysis_data_mobile_ip_trans() {
+        tbIocConsumerVoiceTrafficRepository.analysis_data_mobile_ip_trans();
+        logger.info(" v_ixtsel_4ioc-->TB_IOC_MOBILE_IPTRANSIT_SOURCE-->analysis_data_mobile_ip_trans");
+    }
+
 
     /****Add bY Hy Chang Area End****/
 
