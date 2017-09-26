@@ -10,10 +10,9 @@ import java.util.Date;
  * The persistent class for the TB_IOC_MOBILE_IP_TRANSIT database table.
  *
  *
- * TB_TEST_IPTRANSIT
  */
 @Entity
-@Table(name = "TB_TEST_IPTRANSIT")
+@Table(name = "TB_IOC_MOBILE_IPTRANSIT_SOURCE")
 public class TbIocMobileIpTransit implements Serializable {
     private static final long serialVersionUID = 1L;
 
