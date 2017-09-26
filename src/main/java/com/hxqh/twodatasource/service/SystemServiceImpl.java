@@ -295,7 +295,7 @@ public class SystemServiceImpl implements SystemService {
             //拆分List
             List<List<IocConsumerVoiceSource>> split = ListUtils.split(voiceSourceList, 1000);
             for (int i = 0; i < split.size(); i++) {
-                iocConsumerVoiceSourceRepository.save(split.get(0));
+                iocConsumerVoiceSourceRepository.save(split.get(i));
             }
 
         }

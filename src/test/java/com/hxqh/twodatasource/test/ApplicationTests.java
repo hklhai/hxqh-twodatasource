@@ -196,9 +196,9 @@ public class ApplicationTests {
                 transits.add(tn);
             }
             //拆分List
-            List<List<TbIocMobileIpTransit>> split = ListUtils.split(transits, 1000);
+            List<List<TbIocMobileIpTransit>> split = ListUtils.split(transits, 500);
             for (int i = 0; i < split.size(); i++) {
-                systemService.save_mobile_ip_transitRepository(split.get(0));
+                systemService.save_mobile_ip_transitRepository(split.get(i));
             }
             systemService.analysis_data_mobile_ip_trans();
         }
