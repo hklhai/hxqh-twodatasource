@@ -2,6 +2,7 @@ package com.hxqh.twodatasource.repository.second;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
 
 /**
