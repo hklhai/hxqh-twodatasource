@@ -50,6 +50,9 @@ public class TtwifiMttrProactiveKey implements Serializable {
     @Column(name = "pencapaian_platinum")
     private int pencapaianPlatinum;
 
+    @Column(name = "last_update")
+    private Date lastupdate;
+
 
     public TtwifiMttrProactiveKey() {
     }
@@ -164,6 +167,14 @@ public class TtwifiMttrProactiveKey implements Serializable {
 
     public void setPencapaianPlatinum(int pencapaianPlatinum) {
         this.pencapaianPlatinum = pencapaianPlatinum;
+    }
+
+    public Date getLastupdate() {
+        return lastupdate;
+    }
+
+    public void setLastupdate(Date lastupdate) {
+        this.lastupdate = lastupdate;
     }
 
     @Override
