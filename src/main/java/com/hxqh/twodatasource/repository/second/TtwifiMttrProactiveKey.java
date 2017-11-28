@@ -2,8 +2,10 @@ package com.hxqh.twodatasource.repository.second;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Ocean lin on 2017/7/11.
