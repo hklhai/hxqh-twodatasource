@@ -50,9 +50,8 @@ public class TtwifiMttrProactiveKey implements Serializable {
     @Column(name = "pencapaian_platinum")
     private int pencapaianPlatinum;
 
-
+    @Temporal(TemporalType.DATE)
     @Column(name = "last_update")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date lastupdate;
 
 
@@ -193,6 +192,7 @@ public class TtwifiMttrProactiveKey implements Serializable {
         if (targetGold != that.targetGold) return false;
         if (targetPlatinum != that.targetPlatinum) return false;
         if (targetSilver != that.targetSilver) return false;
+        if (lastupdate !=that.lastupdate) return false;
         return ym != null ? ym.equals(that.ym) : that.ym == null;
     }
 
