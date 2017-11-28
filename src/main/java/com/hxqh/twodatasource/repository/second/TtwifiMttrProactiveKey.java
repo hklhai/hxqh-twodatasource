@@ -50,7 +50,9 @@ public class TtwifiMttrProactiveKey implements Serializable {
     @Column(name = "pencapaian_platinum")
     private int pencapaianPlatinum;
 
+
     @Column(name = "last_update")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastupdate;
 
 
