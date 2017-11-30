@@ -26,7 +26,6 @@ public class TbFfm implements Serializable {
 
 	private String keterangan;
 
-	@Temporal(TemporalType.DATE)
 	private Date lastupdate;
 
 	public TbFfm() {
