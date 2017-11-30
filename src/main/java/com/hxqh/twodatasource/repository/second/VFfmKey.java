@@ -51,7 +51,6 @@ public class VFfmKey implements Serializable {
 
         if (jumlah != null ? !jumlah.equals(vFfmKey.jumlah) : vFfmKey.jumlah != null) return false;
         return keterangan != null ? keterangan.equals(vFfmKey.keterangan) : vFfmKey.keterangan == null;
-        return lastupdate != null ? lastupdate.equals(vFfmKey.lastupdate) : vFfmKey.lastupdate == null;
     }
 
     @Override
