@@ -26,6 +26,9 @@ public class TbFfm implements Serializable {
 
 	private String keterangan;
 
+	@Temporal(TemporalType.DATE)
+	private Date lastupdate;
+
 	public TbFfm() {
 	}
 
@@ -61,4 +64,11 @@ public class TbFfm implements Serializable {
 		this.keterangan = keterangan;
 	}
 
+	public Date getLastupdate() {
+		return lastupdate;
+	}
+
+	public void setLastupdate(Date lastupdate) {
+		this.lastupdate = lastupdate;
+	}
 }

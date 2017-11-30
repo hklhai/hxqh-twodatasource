@@ -29,8 +29,7 @@ public class TbFfmAchievement implements Serializable {
 
     private String keterangan;
 
-    @Temporal(TemporalType.DATE)
-    private Date aggts;
+
 
     public TbFfmAchievement() {
     }
@@ -83,11 +82,5 @@ public class TbFfmAchievement implements Serializable {
         this.keterangan = keterangan;
     }
 
-    public Date getAggts() {
-        return aggts;
-    }
 
-    public void setAggts(Date aggts) {
-        this.aggts = aggts;
-    }
 }
