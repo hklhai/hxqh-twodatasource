@@ -59,6 +59,8 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     private IocConsumerVoiceSourceRepository iocConsumerVoiceSourceRepository;
 
+    @Autowired
+    private TbEnterpriseProactiveRepository tbEnterpriseProactiveRepository;
     /***************************MYSQL********************************/
     @Autowired
     private TPerfEnterprise4tiocRepository enterprise4tiocRepository;
@@ -84,6 +86,8 @@ public class SystemServiceImpl implements SystemService {
     private VFfmRepository vFfmRepository;
     @Autowired
     private VFfmAchievementRepository vFfmAchievementRepository;
+    @Autowired
+    private VEnterpriseProactiveRepository enterpriseProactiveRepository;
 
     /***************************MYSQL********************************/
 
@@ -301,6 +305,7 @@ public class SystemServiceImpl implements SystemService {
         }
     }
 
+
     /**
      * Add By Hy Chang Area Start
      */
@@ -430,40 +435,31 @@ public class SystemServiceImpl implements SystemService {
     }
 
     @Override
-    public void mutilThreadIOC_ENT_4TIOC() {
-//        //1.查询MySQL最大ID
-//        BigDecimal mysqlMaxId = null;
-//        //2.查询Oracle最大ID
-//        BigDecimal oracleMaxId = null;
-//
-//        //3.大于20W 采用多线程
-//
-//        //4.小于20W正常走插入程序
-//        List<GroupNode> groupNodes = groupNode(oracleMaxId, mysqlMaxId, 1000);
-//        multiThread(groupNodes);
+    public void saveentErpriseProactive() throws InvocationTargetException, IllegalAccessException {
+        List<VEnterpriseProactive> exportData = new ArrayList<>();
+        List<TbEnterpriseProactive> enterpriseProactiveList = new ArrayList<>();
+
+
+        // 查询Oracle中最大的mid值
+        Long maxSQLId = tbEnterpriseProactiveRepository.findMaxSQLId();
+        // 如果不为null查询mysql大于该mid的值
+        if (null != maxSQLId) {
+            exportData = enterpriseProactiveRepository.findExportData(maxSQLId);
+        } else {
+            exportData = enterpriseProactiveRepository.findAll();
+        }
+        if (exportData.size() > 0) {
+            for (int i = 0; i < exportData.size(); i++) {
+                TbEnterpriseProactive tbEnterpriseProactive = new TbEnterpriseProactive();
+                BeanUtils.copyProperties(tbEnterpriseProactive, exportData.get(i));
+                tbEnterpriseProactive.setAddtime(new Date());
+                tbEnterpriseProactive.setMid(exportData.get(i).getId());
+                enterpriseProactiveList.add(tbEnterpriseProactive);
+            }
+            tbEnterpriseProactiveRepository.save(enterpriseProactiveList);
+            logger.info(" v_enterprise_proactive--->TB_ENTERPRISE_PROACTIVE ");
+        }
     }
-
-
-//    private void multiThread(List<GroupNode> groupNodes) {
-//
-//        /**
-//         * 使用线程池进行线程管理。
-//         */
-//        ExecutorService es = Executors.newCachedThreadPool();
-//        /**
-//         * 使用计数栅栏
-//         */
-//        CountDownLatch doneSignal = new CountDownLatch(3);
-//        try {
-//
-//            for (int i = 0; i < groupNodes.size(); i++) {
-//                es.submit(persist(groupNodes.get(i)));
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 
 
 }
