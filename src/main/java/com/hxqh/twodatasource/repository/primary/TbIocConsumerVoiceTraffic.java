@@ -181,6 +181,8 @@ public class TbIocConsumerVoiceTraffic implements Serializable {
 
     private String xch;
 
+    private Date aggts;
+
     public TbIocConsumerVoiceTraffic() {
     }
 
@@ -721,4 +723,11 @@ public class TbIocConsumerVoiceTraffic implements Serializable {
         this.xch = xch;
     }
 
+    public Date getAggts() {
+        return aggts;
+    }
+
+    public void setAggts(Date aggts) {
+        this.aggts = aggts;
+    }
 }

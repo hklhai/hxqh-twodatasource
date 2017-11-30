@@ -29,6 +29,8 @@ public class TbFfmAchievement implements Serializable {
 
     private String keterangan;
 
+
+
     public TbFfmAchievement() {
     }
 
@@ -79,5 +81,6 @@ public class TbFfmAchievement implements Serializable {
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
     }
+
 
 }

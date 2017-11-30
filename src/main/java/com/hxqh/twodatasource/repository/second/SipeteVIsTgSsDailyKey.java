@@ -196,6 +196,9 @@ public class SipeteVIsTgSsDailyKey implements Serializable {
 	@Column(name="XCH")
 	private String xch;
 
+	@Column(name="LAST_UPDATE")
+	private Date lastupdate;
+
 	public SipeteVIsTgSsDailyKey() {
 	}
 
@@ -721,6 +724,14 @@ public class SipeteVIsTgSsDailyKey implements Serializable {
 		this.xch = xch;
 	}
 
+	public Date getLastupdate() {
+		return lastupdate;
+	}
+
+	public void setLastupdate(Date lastupdate) {
+		this.lastupdate = lastupdate;
+	}
+
 	public boolean equals(Object object) {
 		if (this == object) return true;
 		if (object == null || getClass() != object.getClass()) return false;
@@ -789,6 +800,7 @@ public class SipeteVIsTgSsDailyKey implements Serializable {
 		if (unallnumb != null ? !unallnumb.equals(that.unallnumb) : that.unallnumb != null) return false;
 		if (unreas != null ? !unreas.equals(that.unreas) : that.unreas != null) return false;
 		if (xch != null ? !xch.equals(that.xch) : that.xch != null) return false;
+		if (lastupdate != null ? !lastupdate.equals(that.lastupdate) : that.lastupdate != null) return false;
 
 		return true;
 	}

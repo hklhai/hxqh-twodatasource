@@ -2,7 +2,7 @@ package com.hxqh.twodatasource.repository.second;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
-
+import java.util.Date;
 /**
  * Created by Ocean lin on 2017/7/18.
  */
@@ -12,6 +12,8 @@ public class VFfmKey implements Serializable {
     private String jumlah;
 
     private String keterangan;
+
+    private Date lastupdate;
 
     public VFfmKey() {
     }
@@ -30,6 +32,14 @@ public class VFfmKey implements Serializable {
 
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
+    }
+
+    public Date getLastupdate() {
+        return lastupdate;
+    }
+
+    public void setLastupdate(Date lastupdate) {
+        this.lastupdate = lastupdate;
     }
 
     @Override
