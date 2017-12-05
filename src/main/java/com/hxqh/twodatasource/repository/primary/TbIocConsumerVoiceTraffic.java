@@ -724,11 +724,11 @@ public class TbIocConsumerVoiceTraffic implements Serializable {
         this.xch = xch;
     }
 
-    public Date getAggts() {
-        return aggts;
+    public Date getLastupdate() {
+        return lastupdate;
     }
 
-    public void setAggts(Date aggts) {
-        this.aggts = aggts;
+    public void setLastupdate(Date lastupdate) {
+        this.lastupdate = lastupdate;
     }
 }
