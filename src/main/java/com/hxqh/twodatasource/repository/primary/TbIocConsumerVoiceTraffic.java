@@ -181,7 +181,8 @@ public class TbIocConsumerVoiceTraffic implements Serializable {
 
     private String xch;
 
-    private Date aggts;
+    @Column(name="LAST_UPDATE")
+    private Date lastupdate;
 
     public TbIocConsumerVoiceTraffic() {
     }
