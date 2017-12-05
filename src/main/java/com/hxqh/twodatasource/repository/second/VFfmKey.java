@@ -2,6 +2,8 @@ package com.hxqh.twodatasource.repository.second;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 /**
  * Created by Ocean lin on 2017/7/18.
@@ -13,6 +15,7 @@ public class VFfmKey implements Serializable {
 
     private String keterangan;
 
+    @Temporal(TemporalType.DATE)
     private Date lastupdate;
 
     public VFfmKey() {

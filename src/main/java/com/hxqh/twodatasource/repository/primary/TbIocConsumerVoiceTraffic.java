@@ -2,6 +2,8 @@ package com.hxqh.twodatasource.repository.primary;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -181,6 +183,7 @@ public class TbIocConsumerVoiceTraffic implements Serializable {
 
     private String xch;
 
+    @Temporal(TemporalType.DATE)
     @Column(name="LAST_UPDATE")
     private Date lastupdate;
 
