@@ -61,6 +61,7 @@ public class HxqhTimer {
     }
 
 
+
     //每天早八点到晚八点，间隔5分钟执行任务
     //T_LVL_ENTERPRISE_CUST             tb_IOCCUSTOMERUSER
     @Scheduled(cron = "0 */5 * * * * ")
@@ -101,6 +102,19 @@ public class HxqhTimer {
     public void execStoKoordinat() {
         try {
             systemService.saveTStoKoordinat();
+            //TODO
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    // v_enterprise_proactive            TB_ENTERPRISE_PROACTIVE
+    @Scheduled(cron = "0 */5 * * * * ")
+    public void enterprise_proactive() {
+        try {
+            systemService.saveentErpriseProactive();
             //TODO
         } catch (Exception e) {
             e.printStackTrace();

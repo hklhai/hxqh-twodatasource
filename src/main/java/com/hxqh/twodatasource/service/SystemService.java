@@ -66,11 +66,12 @@ public interface SystemService {
 
     void analysis_data_pro_ticket_ffm();
 
-    void mutilThreadIOC_ENT_4TIOC();
 
     Long getEnterprise4tiocLength(BigDecimal tmp, BigDecimal addVal);
 
     void saveIocConsumerVoiceSource() throws InvocationTargetException, IllegalAccessException;
+
+    void saveentErpriseProactive() throws InvocationTargetException, IllegalAccessException;
 }
 
 

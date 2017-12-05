@@ -38,6 +38,13 @@ public class ApplicationTests {
     public void test() throws Exception {
         Assert.assertTrue(1 == 1);
     }
+
+    // v_enterprise_proactive--->TB_ENTERPRISE_PROACTIVE
+//    @Test
+//    public void testEnterpriseProactive() throws Exception {
+//        systemService.saveentErpriseProactive();
+//    }
+
 //T_ALERT_ENV-->TB_IOCENTERPRISEEVENT
 //    @Test
 //    public void testTAlertEnv() throws Exception {
