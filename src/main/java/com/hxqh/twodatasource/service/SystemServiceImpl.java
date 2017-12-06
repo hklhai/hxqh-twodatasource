@@ -180,7 +180,7 @@ public class SystemServiceImpl implements SystemService {
                 Locticketscreen96 ioc = new Locticketscreen96();
                 BeanUtils.copyProperties(ioc, mttrProactiveLastMonth.getTtwifiMttrProactiveKey());
                 ioc.setAdddate(new Date());
-                ioc.setLastupdate(mttrProactiveLastMonth.getTtwifiMttrProactiveKey.getLastupdate());
+                ioc.setLastupdate(mttrProactiveLastMonth.getTtwifiMttrProactiveKey().getLastupdate());
                 locticketscreen96s.add(ioc);
             }
             locticketscreen96Repository.deleteAll();
