@@ -157,6 +157,10 @@ public class IocConsumerVoiceSource implements Serializable {
 
     private String xch;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name="LAST_UPDATE")
+    private Date lastupdate;
+
     public IocConsumerVoiceSource() {
     }
 
@@ -697,4 +701,11 @@ public class IocConsumerVoiceSource implements Serializable {
         this.xch = xch;
     }
 
+    public Date getLastupdate() {
+        return lastupdate;
+    }
+
+    public void setLastupdate(Date lastupdate) {
+        this.lastupdate = lastupdate;
+    }
 }

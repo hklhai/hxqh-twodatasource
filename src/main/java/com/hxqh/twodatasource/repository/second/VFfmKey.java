@@ -15,7 +15,7 @@ public class VFfmKey implements Serializable {
 
     private String keterangan;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastupdate;
 
     public VFfmKey() {
