@@ -63,8 +63,8 @@ public class Locticketscreen96 implements Serializable {
 
 	private String ym;
 
-	@Column(name="LAST_UPDATE")
-	private Date lastupdate;
+	@Column(name="AGG_TS")
+	private Date aggts;
 
 	public Locticketscreen96() {
 	}
@@ -197,11 +197,11 @@ public class Locticketscreen96 implements Serializable {
 		this.ym = ym;
 	}
 
-	public Date getLastupdate() {
-		return lastupdate;
+	public Date getAggts() {
+		return aggts;
 	}
 
-	public void setLastupdate(Date lastupdate) {
-		this.lastupdate = lastupdate;
+	public void setAggts(Date aggts) {
+		this.aggts = aggts;
 	}
 }
