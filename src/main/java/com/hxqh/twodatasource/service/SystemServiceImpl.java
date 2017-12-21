@@ -10,16 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.Null;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by Ocean lin on 2017/7/9.
@@ -61,6 +57,11 @@ public class SystemServiceImpl implements SystemService {
 
     @Autowired
     private TbEnterpriseProactiveRepository tbEnterpriseProactiveRepository;
+
+
+    @Autowired
+    private IocConsumerVoiceSourceChristmasRepository iocConsumerVoiceSourceChristmasRepository;
+
     /***************************MYSQL********************************/
     @Autowired
     private TPerfEnterprise4tiocRepository enterprise4tiocRepository;
@@ -285,6 +286,33 @@ public class SystemServiceImpl implements SystemService {
         loccustomeruserRepository.analysis_data_cust_for_dws();
     }
 
+
+    //  sipete_v_is_tg_ss_daily --> TB_IOC_CONSUMER_CHRISTMAS
+    @Transactional
+    @Override
+    public void iocConsumerVoiceSourceForChristmas() throws InvocationTargetException, IllegalAccessException {
+        List<SipeteVIsTgSsDaily> vIsTgSsDailyList = sipeteVIsTgSsDailyRepository.findAll();
+
+        // 完全清除Oracle  TB_IOC_CONSUMER_CHRISTMAS表数据
+        tbIocConsumerVoiceTrafficRepository.p_truncate_tb_ioc_consumer_christmas();
+
+        if (vIsTgSsDailyList != null) {
+            List<IocConsumerVoiceSourceChristmas> voiceSourceList = new LinkedList<>();
+            for (SipeteVIsTgSsDaily s : vIsTgSsDailyList) {
+                IocConsumerVoiceSourceChristmas voiceSource = new IocConsumerVoiceSourceChristmas();
+                BeanUtils.copyProperties(voiceSource, s.getSipeteVIsTgSsDailyKey());
+                voiceSource.setTs(new Date());
+                voiceSourceList.add(voiceSource);
+            }
+            //拆分List
+            List<List<IocConsumerVoiceSourceChristmas>> split = ListUtils.split(voiceSourceList, 1000);
+            for (int i = 0; i < split.size(); i++) {
+                iocConsumerVoiceSourceChristmasRepository.save(split.get(i));
+            }
+
+        }
+    }
+
     @Transactional
     @Override
     public void saveIocConsumerVoiceSource() throws InvocationTargetException, IllegalAccessException {
@@ -308,6 +336,8 @@ public class SystemServiceImpl implements SystemService {
 
 
     /**
+     * 2017-12-21 16:25:39  lh  未使用
+     * <p>
      * Add By Hy Chang Area Start
      */
     @Transactional

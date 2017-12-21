@@ -39,6 +39,14 @@ public class ApplicationTests {
         Assert.assertTrue(1 == 1);
     }
 
+    // 圣诞节测试
+    // sipete_v_is_tg_ss_daily--->TB_ENTERPRISE_PROACTIVE
+    @Test
+    public void iocConsumerVoiceSourceForChristmas() throws Exception {
+        systemService.iocConsumerVoiceSourceForChristmas();
+    }
+
+
     // v_enterprise_proactive--->TB_ENTERPRISE_PROACTIVE
 //    @Test
 //    public void testEnterpriseProactive() throws Exception {

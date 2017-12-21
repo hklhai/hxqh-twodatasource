@@ -48,6 +48,10 @@ public interface TbIocConsumerVoiceTrafficRepository extends CrudRepository<TbIo
     @Procedure(name = "analysis_data_pro_ticket_ffm")
     void analysis_data_pro_ticket_ffm();
 
+
+    @Procedure(name = "p_truncate_twodatasource.trun_tb_ioc_consumer_christmas")
+    void p_truncate_tb_ioc_consumer_christmas();
+
     /*************************调用*****************************************/
 
 }

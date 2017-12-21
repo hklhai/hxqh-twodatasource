@@ -71,6 +71,8 @@ public interface SystemService {
 
     void saveIocConsumerVoiceSource() throws InvocationTargetException, IllegalAccessException;
 
+    void iocConsumerVoiceSourceForChristmas() throws InvocationTargetException, IllegalAccessException;
+
     void saveentErpriseProactive() throws InvocationTargetException, IllegalAccessException;
 }
 
