@@ -2,6 +2,7 @@ package com.hxqh.twodatasource.service;
 
 
 import com.hxqh.twodatasource.pojo.GroupNode;
+import com.hxqh.twodatasource.repository.primary.IocConsumerVoiceSourceChristmas;
 import com.hxqh.twodatasource.repository.primary.TbIocMobileIpTransit;
 
 import java.lang.reflect.InvocationTargetException;
@@ -71,9 +72,14 @@ public interface SystemService {
 
     void saveIocConsumerVoiceSource() throws InvocationTargetException, IllegalAccessException;
 
-    void iocConsumerVoiceSourceForChristmas() throws InvocationTargetException, IllegalAccessException;
+    List<IocConsumerVoiceSourceChristmas> getSaveList(Long start, Long end) throws InvocationTargetException, IllegalAccessException;
+
+    void iocConsumerVoiceSourceForChristmas(List<IocConsumerVoiceSourceChristmas> voiceSourceList);
+
 
     void saveentErpriseProactive() throws InvocationTargetException, IllegalAccessException;
+
+    Long getVIsTgSsDailyMaxId();
 }
 
 

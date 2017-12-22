@@ -1,12 +1,9 @@
 package com.hxqh.twodatasource.test;
 
-import com.hxqh.twodatasource.common.ListUtils;
+import com.hxqh.twodatasource.repository.primary.IocConsumerVoiceSourceChristmas;
 import com.hxqh.twodatasource.repository.primary.TbIocConsumerVoiceTrafficRepository;
-import com.hxqh.twodatasource.repository.primary.TbIocMobileIpTransit;
-import com.hxqh.twodatasource.repository.second.TIxtsel4ioc;
 import com.hxqh.twodatasource.repository.second.TIxtsel4iocRepository;
 import com.hxqh.twodatasource.service.SystemService;
-import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,7 +37,20 @@ public class ApplicationTests {
     // sipete_v_is_tg_ss_daily--->TB_ENTERPRISE_PROACTIVE
     @Test
     public void iocConsumerVoiceSourceForChristmas() throws Exception {
-        systemService.iocConsumerVoiceSourceForChristmas();
+        // 1. 获取最大MYSQL中最大ID  1~509017
+        Long mysqlMaxId = systemService.getVIsTgSsDailyMaxId();
+        Long start = 1l;
+        Long end = 500l;
+        if (mysqlMaxId > 0) {
+            int k = (int) (mysqlMaxId / 1000) + 1;
+            for (int i = 0; i < k; i++) {
+                // 获取mysql数据id范围内数据插入Oracle
+                List<IocConsumerVoiceSourceChristmas> voiceSourceList = systemService.getSaveList(start, end);
+                systemService.iocConsumerVoiceSourceForChristmas(voiceSourceList);
+                start = start + 500l;
+                end = end + 500l;
+            }
+        }
     }
 
 

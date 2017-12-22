@@ -290,28 +290,41 @@ public class SystemServiceImpl implements SystemService {
     //  sipete_v_is_tg_ss_daily --> TB_IOC_CONSUMER_CHRISTMAS
     @Transactional
     @Override
-    public void iocConsumerVoiceSourceForChristmas() throws InvocationTargetException, IllegalAccessException {
-        List<SipeteVIsTgSsDaily> vIsTgSsDailyList = sipeteVIsTgSsDailyRepository.findAll();
+    public List<IocConsumerVoiceSourceChristmas> getSaveList(Long start, Long end) throws InvocationTargetException, IllegalAccessException {
+        List<SipeteVIsTgSsDaily> vIsTgSsDailyList = sipeteVIsTgSsDailyRepository.findStartAndEndData(start, end);
 
         // 完全清除Oracle  TB_IOC_CONSUMER_CHRISTMAS表数据
-        tbIocConsumerVoiceTrafficRepository.p_truncate_tb_ioc_consumer_christmas();
+        if (start == 1) {
+            tbIocConsumerVoiceTrafficRepository.trun_tb_ioc_consumer_christmas();
+        }
+
+        List<IocConsumerVoiceSourceChristmas> voiceSourceList = new LinkedList<>();
 
         if (vIsTgSsDailyList != null) {
-            List<IocConsumerVoiceSourceChristmas> voiceSourceList = new LinkedList<>();
             for (SipeteVIsTgSsDaily s : vIsTgSsDailyList) {
                 IocConsumerVoiceSourceChristmas voiceSource = new IocConsumerVoiceSourceChristmas();
-                BeanUtils.copyProperties(voiceSource, s.getSipeteVIsTgSsDailyKey());
+                BeanUtils.copyProperties(voiceSource, s);
+//                voiceSource.setMysqlid(s.getId());
                 voiceSource.setTs(new Date());
                 voiceSourceList.add(voiceSource);
             }
-            //拆分List
-            List<List<IocConsumerVoiceSourceChristmas>> split = ListUtils.split(voiceSourceList, 1000);
-            for (int i = 0; i < split.size(); i++) {
-                iocConsumerVoiceSourceChristmasRepository.save(split.get(i));
-            }
-
+//            //拆分List
+//            List<List<IocConsumerVoiceSourceChristmas>> split = ListUtils.split(voiceSourceList, 1000);
+//            for (int i = 0; i < split.size(); i++) {
+//                iocConsumerVoiceSourceChristmasRepository.save(split.get(i));
+//            }
         }
+        return voiceSourceList;
     }
+
+
+    @Transactional
+    @Override
+    public void iocConsumerVoiceSourceForChristmas(List<IocConsumerVoiceSourceChristmas> voiceSourceList) {
+        iocConsumerVoiceSourceChristmasRepository.save(voiceSourceList);
+        logger.info(" sipete_v_is_tg_ss_daily --> TB_IOC_CONSUMER_CHRISTMAS " + voiceSourceList.get(0));
+    }
+
 
     @Transactional
     @Override
@@ -321,7 +334,8 @@ public class SystemServiceImpl implements SystemService {
             List<IocConsumerVoiceSource> voiceSourceList = new LinkedList<>();
             for (SipeteVIsTgSsDaily s : vIsTgSsDailyList) {
                 IocConsumerVoiceSource voiceSource = new IocConsumerVoiceSource();
-                BeanUtils.copyProperties(voiceSource, s.getSipeteVIsTgSsDailyKey());
+                BeanUtils.copyProperties(voiceSource, s);
+                voiceSource.setMysqlid(s.getId());
                 voiceSource.setTs(new Date());
                 voiceSourceList.add(voiceSource);
             }
@@ -334,6 +348,11 @@ public class SystemServiceImpl implements SystemService {
         }
     }
 
+
+    @Override
+    public Long getVIsTgSsDailyMaxId() {
+        return sipeteVIsTgSsDailyRepository.findMaxMySQLId();
+    }
 
     /**
      * 2017-12-21 16:25:39  lh  未使用
@@ -349,7 +368,7 @@ public class SystemServiceImpl implements SystemService {
             List<TbIocConsumerVoiceTraffic> iocConsumerVoiceTrafficList = new ArrayList<>();
             for (SipeteVIsTgSsDaily s : vIsTgSsDailyList) {
                 TbIocConsumerVoiceTraffic tbIocConsumerVoiceTraffic = new TbIocConsumerVoiceTraffic();
-                BeanUtils.copyProperties(tbIocConsumerVoiceTraffic, s.getSipeteVIsTgSsDailyKey());
+                BeanUtils.copyProperties(tbIocConsumerVoiceTraffic, s);
                 tbIocConsumerVoiceTraffic.setTs(new Date());
                 iocConsumerVoiceTrafficList.add(tbIocConsumerVoiceTraffic);
             }

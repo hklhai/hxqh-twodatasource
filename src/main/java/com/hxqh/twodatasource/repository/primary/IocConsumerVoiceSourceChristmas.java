@@ -2,7 +2,6 @@ package com.hxqh.twodatasource.repository.primary;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -19,7 +18,9 @@ public class IocConsumerVoiceSourceChristmas implements Serializable {
     @SequenceGenerator(name = "TB_IOC_CONSUMER_CHRISTMAS_ID_GENERATOR", sequenceName = "SEQ_TB_IOC_CONSUMER_CHRISTMAS")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_IOC_CONSUMER_CHRISTMAS_ID_GENERATOR")
     @Column(name = "VOICE_TRAFFIC_ID")
-    private BigDecimal voiceTrafficId;
+    private Long voiceTrafficId;
+
+    private Long mysqlid;
 
     private String aictraf;
 
@@ -158,7 +159,7 @@ public class IocConsumerVoiceSourceChristmas implements Serializable {
     private String xch;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="LAST_UPDATE")
+    @Column(name = "LAST_UPDATE")
     private Date lastupdate;
 
     public IocConsumerVoiceSourceChristmas() {
@@ -685,12 +686,20 @@ public class IocConsumerVoiceSourceChristmas implements Serializable {
         this.unreas = unreas;
     }
 
-    public BigDecimal getVoiceTrafficId() {
-        return this.voiceTrafficId;
+    public Long getVoiceTrafficId() {
+        return voiceTrafficId;
     }
 
-    public void setVoiceTrafficId(BigDecimal voiceTrafficId) {
+    public void setVoiceTrafficId(Long voiceTrafficId) {
         this.voiceTrafficId = voiceTrafficId;
+    }
+
+    public Long getMysqlid() {
+        return mysqlid;
+    }
+
+    public void setMysqlid(Long mysqlid) {
+        this.mysqlid = mysqlid;
     }
 
     public String getXch() {

@@ -188,29 +188,29 @@ public class HxqhTimer {
 //    }
 
 
-
-    // 每6小时刷新
-    @Scheduled(cron = "0 */360 * * * * ")
-    public void iocConsumerVoiceSource() {
-        try {
-            systemService.saveIocConsumerVoiceSource();
-//            systemService.analysis_source_ent_4tioc1();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    // 每6小时刷新 圣诞节新增
-    @Scheduled(cron = "0 */360 * * * * ")
-    public void iocConsumerVoiceSourceForChristmas() {
-        try {
-            systemService.iocConsumerVoiceSourceForChristmas();
-//            systemService.analysis_source_ent_4tioc1();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    todo
+//    // 每6小时刷新
+//    @Scheduled(cron = "0 */360 * * * * ")
+//    public void iocConsumerVoiceSource() {
+//        try {
+//            systemService.saveIocConsumerVoiceSource();
+////            systemService.analysis_source_ent_4tioc1();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//
+//    // 每6小时刷新 圣诞节新增
+//    @Scheduled(cron = "0 */360 * * * * ")
+//    public void iocConsumerVoiceSourceForChristmas() {
+//        try {
+//            systemService.iocConsumerVoiceSourceForChristmas();
+////            systemService.analysis_source_ent_4tioc1();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 

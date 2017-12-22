@@ -33,7 +33,8 @@ import java.util.Date;
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOC_MOB_BACKHAUL", procedureName = "p_truncate_twodatasource.trun_TB_IOC_MOB_BACKHAUL"),
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_TB_IOC_MOBILE_IPTRANSIT", procedureName = "p_truncate_twodatasource.trun_TB_IOC_MOBILE_IPTRANSIT"),
                 @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_tb_ffm", procedureName = "p_truncate_twodatasource.trun_tb_ffm"),
-                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_tb_ffm_achievement", procedureName = "p_truncate_twodatasource.trun_tb_ffm_achievement")
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_tb_ffm_achievement", procedureName = "p_truncate_twodatasource.trun_tb_ffm_achievement"),
+                @NamedStoredProcedureQuery(name = "p_truncate_twodatasource.trun_tb_ioc_consumer_christmas", procedureName = "p_truncate_twodatasource.trun_tb_ioc_consumer_christmas")
 
         })
 public class TbIocConsumerVoiceTraffic implements Serializable {

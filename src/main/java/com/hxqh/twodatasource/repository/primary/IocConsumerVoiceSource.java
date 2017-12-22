@@ -19,7 +19,9 @@ public class IocConsumerVoiceSource implements Serializable {
     @SequenceGenerator(name = "TTB_IOC_CONSUMER_VOICE_TRAFFICVOICE_TRAFFIC_ID_GENERATOR", sequenceName = "SEQ_TB_IOC_MOB_VOICE_SOURCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TTB_IOC_CONSUMER_VOICE_TRAFFICVOICE_TRAFFIC_ID_GENERATOR")
     @Column(name = "VOICE_TRAFFIC_ID")
-    private BigDecimal voiceTrafficId;
+    private Long voiceTrafficId;
+
+    private Long mysqlid;
 
     private String aictraf;
 
@@ -158,7 +160,7 @@ public class IocConsumerVoiceSource implements Serializable {
     private String xch;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="LAST_UPDATE")
+    @Column(name = "LAST_UPDATE")
     private Date lastupdate;
 
     public IocConsumerVoiceSource() {
@@ -685,12 +687,20 @@ public class IocConsumerVoiceSource implements Serializable {
         this.unreas = unreas;
     }
 
-    public BigDecimal getVoiceTrafficId() {
-        return this.voiceTrafficId;
+    public Long getVoiceTrafficId() {
+        return voiceTrafficId;
     }
 
-    public void setVoiceTrafficId(BigDecimal voiceTrafficId) {
+    public void setVoiceTrafficId(Long voiceTrafficId) {
         this.voiceTrafficId = voiceTrafficId;
+    }
+
+    public Long getMysqlid() {
+        return mysqlid;
+    }
+
+    public void setMysqlid(Long mysqlid) {
+        this.mysqlid = mysqlid;
     }
 
     public String getXch() {
