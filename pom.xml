@@ -9,7 +9,21 @@
     <packaging>war</packaging>
 
     <name>hxqh-twodatasource</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Twodatasource Project base on SpringBoot</description>
+
+
+    <organization>
+        <name>HXQH Corporation</name>
+        <url>http://www.bjhxqh.com/</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <name>HXQH Overseas Development Department</name>
+            <organization>HXQH Corporation</organization>
+        </developer>
+    </developers>
+
 
     <parent>
         <groupId>org.springframework.boot</groupId>

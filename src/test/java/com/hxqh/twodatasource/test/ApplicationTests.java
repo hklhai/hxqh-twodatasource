@@ -33,25 +33,26 @@ public class ApplicationTests {
         Assert.assertTrue(1 == 1);
     }
 
-    // 圣诞节测试
-    // sipete_v_is_tg_ss_daily--->TB_ENTERPRISE_PROACTIVE
-    @Test
-    public void iocConsumerVoiceSourceForChristmas() throws Exception {
-        // 1. 获取最大MYSQL中最大ID  1~509017
-        Long mysqlMaxId = systemService.getVIsTgSsDailyMaxId();
-        Long start = 1l;
-        Long end = 500l;
-        if (mysqlMaxId > 0) {
-            int k = (int) (mysqlMaxId / 1000) + 1;
-            for (int i = 0; i < k; i++) {
-                // 获取mysql数据id范围内数据插入Oracle
-                List<IocConsumerVoiceSourceChristmas> voiceSourceList = systemService.getSaveList(start, end);
-                systemService.iocConsumerVoiceSourceForChristmas(voiceSourceList);
-                start = start + 500l;
-                end = end + 500l;
-            }
-        }
-    }
+//    // 圣诞节测试
+//    // 改为Oracle与Oracle数据迁移，不需要使用 2017-12-23 07:41:59
+//    // sipete_v_is_tg_ss_daily--->TB_ENTERPRISE_PROACTIVE
+//    @Test
+//    public void iocConsumerVoiceSourceForChristmas() throws Exception {
+//        // 1. 获取最大MYSQL中最大ID  1~509017
+//        Long mysqlMaxId = systemService.getVIsTgSsDailyMaxId();
+//        Long start = 1l;
+//        Long end = 500l;
+//        if (mysqlMaxId > 0) {
+//            int k = (int) (mysqlMaxId / 1000) + 1;
+//            for (int i = 0; i < k; i++) {
+//                // 获取mysql数据id范围内数据插入Oracle
+//                List<IocConsumerVoiceSourceChristmas> voiceSourceList = systemService.getSaveList(start, end);
+//                systemService.iocConsumerVoiceSourceForChristmas(voiceSourceList);
+//                start = start + 500l;
+//                end = end + 500l;
+//            }
+//        }
+//    }
 
 
     // v_enterprise_proactive--->TB_ENTERPRISE_PROACTIVE

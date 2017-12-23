@@ -5,9 +5,9 @@ import com.hxqh.twodatasource.pojo.GroupNode;
 import com.hxqh.twodatasource.repository.primary.TbIocConsumerVoiceTrafficRepository;
 import com.hxqh.twodatasource.repository.primary.TbIocMobileIpTransit;
 import com.hxqh.twodatasource.repository.second.TIxtsel4ioc;
-import org.apache.commons.beanutils.BeanUtils;
 import com.hxqh.twodatasource.repository.second.TIxtsel4iocRepository;
 import com.hxqh.twodatasource.service.SystemService;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -61,7 +61,6 @@ public class HxqhTimer {
     }
 
 
-
     //每天早八点到晚八点，间隔5分钟执行任务
     //T_LVL_ENTERPRISE_CUST             tb_IOCCUSTOMERUSER
     @Scheduled(cron = "0 */5 * * * * ")
@@ -107,7 +106,6 @@ public class HxqhTimer {
             e.printStackTrace();
         }
     }
-
 
 
     // v_enterprise_proactive            TB_ENTERPRISE_PROACTIVE
@@ -181,14 +179,13 @@ public class HxqhTimer {
 //        try {
 ////            systemService.saveSipeteVIsTgSsDailyRepository();
 ////            systemService.analysis_source_ent_4tioc1();
-//            //TODO
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
 //    }
 
 
-//    todo
+//    // 改为Oracle与Oracle数据迁移，不需要使用 2017-12-23 07:41:59
 //    // 每6小时刷新
 //    @Scheduled(cron = "0 */360 * * * * ")
 //    public void iocConsumerVoiceSource() {
@@ -200,7 +197,9 @@ public class HxqhTimer {
 //        }
 //    }
 //
-//
+
+
+//    // 改为Oracle与Oracle数据迁移，不需要使用 2017-12-23 07:41:59
 //    // 每6小时刷新 圣诞节新增
 //    @Scheduled(cron = "0 */360 * * * * ")
 //    public void iocConsumerVoiceSourceForChristmas() {
@@ -211,7 +210,6 @@ public class HxqhTimer {
 //            e.printStackTrace();
 //        }
 //    }
-
 
 
     @Scheduled(cron = "0 */60 * * * * ")
@@ -270,7 +268,7 @@ public class HxqhTimer {
             }
 
 
-          // systemService.save_mobile_ip_transitRepository();
+            // systemService.save_mobile_ip_transitRepository();
             //TODO
             //  systemService.analysis_source_ent_4tioc1();
         } catch (Exception e) {
