@@ -119,47 +119,47 @@ public class HxqhTimer {
         }
     }
 
-
-    //v_perf_enterprise_4tioc1             TB_IOC_ENT_4TIOC
-    @Scheduled(cron = "0 */6 * * * * ")
-    public void execPerfEnterprise4tiocRepository() {
-        try {
-
-            GroupNode node = systemService.getEnterprise4tiocMax();
-            //确保数据源中包含数据
-            if (null != node.getMysqlStart() && null != node.getMysqlEnd()) {
-
-                if (null == node.getOracleEnd())
-                    node.setOracleEnd(node.getMysqlStart());
-                if (node.getMysqlStart().compareTo(node.getOracleEnd()) > 0)
-                    node.setOracleEnd(node.getMysqlStart());
-
-                //如果mysql数据源没有更新数据不必迁移
-                if (node.getMysqlEnd().compareTo(node.getOracleEnd()) > 0) {
-                    //如果迁移数据大于100000则分批次迁移
-                    BigDecimal arangeValue = node.getOracleEnd().add(new BigDecimal(9000));
-                    if (node.getMysqlEnd().compareTo(arangeValue) > 0) {
-                        BigDecimal tmp = node.getOracleEnd();
-                        int i = 0;
-                        while (node.getMysqlEnd().compareTo(tmp) > 0 && i < 200000) {
-                            BigDecimal addVal = tmp.add(new BigDecimal(1000));
-                            systemService.saveTPerfEnterprise4tiocRepository(tmp, addVal);
-                            //获取实际List长度
-                            Long enterprise4tiocLength = systemService.getEnterprise4tiocLength(tmp, addVal);
-
-                            tmp = tmp.add(new BigDecimal(1000));
-                            i = enterprise4tiocLength.intValue() + i;
-                        }
-                    } else {
-                        systemService.saveTPerfEnterprise4tiocRepository(node.getOracleEnd(), node.getMysqlEnd());
-                    }
-                }
-            }
-            systemService.analysis_source_ent_4tioc1();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+// todo 2018-12-5 16:26:59 注释
+//    //v_perf_enterprise_4tioc1             TB_IOC_ENT_4TIOC
+//    @Scheduled(cron = "0 */6 * * * * ")
+//    public void execPerfEnterprise4tiocRepository() {
+//        try {
+//
+//            GroupNode node = systemService.getEnterprise4tiocMax();
+//            //确保数据源中包含数据
+//            if (null != node.getMysqlStart() && null != node.getMysqlEnd()) {
+//
+//                if (null == node.getOracleEnd())
+//                    node.setOracleEnd(node.getMysqlStart());
+//                if (node.getMysqlStart().compareTo(node.getOracleEnd()) > 0)
+//                    node.setOracleEnd(node.getMysqlStart());
+//
+//                //如果mysql数据源没有更新数据不必迁移
+//                if (node.getMysqlEnd().compareTo(node.getOracleEnd()) > 0) {
+//                    //如果迁移数据大于100000则分批次迁移
+//                    BigDecimal arangeValue = node.getOracleEnd().add(new BigDecimal(9000));
+//                    if (node.getMysqlEnd().compareTo(arangeValue) > 0) {
+//                        BigDecimal tmp = node.getOracleEnd();
+//                        int i = 0;
+//                        while (node.getMysqlEnd().compareTo(tmp) > 0 && i < 200000) {
+//                            BigDecimal addVal = tmp.add(new BigDecimal(1000));
+//                            systemService.saveTPerfEnterprise4tiocRepository(tmp, addVal);
+//                            //获取实际List长度
+//                            Long enterprise4tiocLength = systemService.getEnterprise4tiocLength(tmp, addVal);
+//
+//                            tmp = tmp.add(new BigDecimal(1000));
+//                            i = enterprise4tiocLength.intValue() + i;
+//                        }
+//                    } else {
+//                        systemService.saveTPerfEnterprise4tiocRepository(node.getOracleEnd(), node.getMysqlEnd());
+//                    }
+//                }
+//            }
+//            systemService.analysis_source_ent_4tioc1();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     //v_perf_enterprise_4tioc1             TB_IOC_ENT_4TIOC
